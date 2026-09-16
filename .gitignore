@@ -16,6 +16,8 @@ dist
 dist-ssr
 *.local
 
+supabase/.temp/
+
 # Claude Code local settings
 .claude/settings.local.json
 
