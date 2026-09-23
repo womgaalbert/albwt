@@ -117,7 +117,7 @@ export default function Sandbox() {
             System Architecture
           </span>
           <h1 className="text-4xl md:text-5xl font-black mt-3 text-white">AI Executive Dashboard</h1>
-          <p className="text-gray-400 mt-4 max-w-3xl mx-auto text-lg leading-relaxed">
+          <p className="text-gray-300 mt-4 max-w-3xl mx-auto text-lg leading-relaxed">
             A modular, agent-based platform where a central <span style={{ color: "#00d4b8" }} className="font-semibold">Orchestrator Agent</span> manages a team of
             specialized sub-agents to automate professional content and project workflows.
           </p>
@@ -140,7 +140,7 @@ export default function Sandbox() {
                   transition={{ delay: i * 0.08 }}
                   onClick={() => setActiveAgent(agent.id)}
                   className={`p-5 rounded-2xl border text-left transition-all ${
-                    isActive ? "border-opacity-60 bg-[#111827]" : "border-[#1e2a3a] bg-[#111827] hover:border-gray-600"
+                    isActive ? "border-opacity-60 bg-[#1a2947]" : "border-[#2d4166] bg-[#1a2947] hover:border-gray-500"
                   }`}
                   style={{ borderColor: isActive ? agent.color : undefined }}
                 >
@@ -165,7 +165,7 @@ export default function Sandbox() {
               key={selected.id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-[#111827] border border-[#1e2a3a] rounded-2xl p-6 grid md:grid-cols-3 gap-6"
+              className="bg-[#1a2947] border border-[#2d4166] rounded-2xl p-6 grid md:grid-cols-3 gap-6"
               style={{ borderColor: `${selected.color}30` }}
             >
               <div className="md:col-span-2">
@@ -178,13 +178,13 @@ export default function Sandbox() {
                     <h3 className="text-white font-bold">{selected.name}</h3>
                   </div>
                 </div>
-                <p className="text-gray-400 text-sm leading-relaxed">{selected.description}</p>
+                <p className="text-gray-300 text-sm leading-relaxed">{selected.description}</p>
               </div>
               <div>
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Tech Stack</p>
+                <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">Tech Stack</p>
                 <div className="flex flex-wrap gap-2">
                   {selected.tech.map(t => (
-                    <span key={t} className="px-3 py-1 rounded-full text-xs font-medium bg-[#0a0f1e] border border-[#1e2a3a] text-gray-300">{t}</span>
+                    <span key={t} className="px-3 py-1 rounded-full text-xs font-medium bg-[#101b33] border border-[#2d4166] text-gray-200">{t}</span>
                   ))}
                 </div>
               </div>
@@ -212,7 +212,7 @@ export default function Sandbox() {
                   </div>
                   <div className="pb-4 md:pb-0 md:text-center md:px-2">
                     <p className="text-white font-semibold text-sm">{step.label}</p>
-                    <p className="text-gray-500 text-xs mt-1">{step.desc}</p>
+                    <p className="text-gray-400 text-xs mt-1">{step.desc}</p>
                   </div>
                 </div>
               );
@@ -234,14 +234,14 @@ export default function Sandbox() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + i * 0.08 }}
-                  className="bg-[#111827] border border-[#1e2a3a] rounded-2xl p-6 flex gap-4"
+                  className="bg-[#1a2947] border border-[#2d4166] rounded-2xl p-6 flex gap-4"
                 >
                   <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${f.color}15` }}>
                     <Icon className="w-5 h-5" style={{ color: f.color }} />
                   </div>
                   <div>
                     <h3 className="text-white font-bold mb-1">{f.title}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">{f.description}</p>
+                    <p className="text-gray-400 text-sm leading-relaxed">{f.description}</p>
                   </div>
                 </motion.div>
               );
@@ -263,15 +263,15 @@ export default function Sandbox() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.4 + i * 0.07 }}
-                  className="bg-[#111827] border border-[#1e2a3a] rounded-2xl p-5 text-center"
+                  className="bg-[#1a2947] border border-[#2d4166] rounded-2xl p-5 text-center"
                 >
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ background: `${layer.color}15` }}>
                     <Icon className="w-5 h-5" style={{ color: layer.color }} />
                   </div>
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-2">{layer.layer}</p>
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">{layer.layer}</p>
                   <div className="flex flex-wrap justify-center gap-1.5">
                     {layer.tools.map(t => (
-                      <span key={t} className="text-xs text-white font-medium bg-[#0a0f1e] px-2 py-0.5 rounded-full border border-[#1e2a3a]">{t}</span>
+                      <span key={t} className="text-xs text-white font-medium bg-[#101b33] px-2 py-0.5 rounded-full border border-[#2d4166]">{t}</span>
                     ))}
                   </div>
                 </motion.div>
@@ -285,7 +285,7 @@ export default function Sandbox() {
           <h2 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
             <MessageSquare className="w-5 h-5" style={{ color: "#00d4b8" }} /> Interactive AI Consultant
           </h2>
-          <p className="text-gray-500 text-sm mb-6">Ask anything about Albert's background, projects, or services — powered by a RAG-style knowledge base.</p>
+          <p className="text-gray-400 text-sm mb-6">Ask anything about Albert's background, projects, or services — powered by a RAG-style knowledge base.</p>
           <AIConsultantChat />
         </motion.div>
 
@@ -294,13 +294,13 @@ export default function Sandbox() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-[#111827] border border-[#1e2a3a] rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6"
+          className="bg-[#1a2947] border border-[#2d4166] rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6"
           style={{ borderColor: "#00d4b830" }}
         >
           <div>
             <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: "#00d4b8" }}>MVP Roadmap</p>
             <h3 className="text-white font-black text-xl mb-2">Starting with the Core</h3>
-            <p className="text-gray-400 text-sm max-w-xl">
+            <p className="text-gray-300 text-sm max-w-xl">
               Phase 1 focuses on the <strong className="text-white">Orchestrator + Content Studio + GitHub Project Analyzer</strong> using LangGraph —
               deployed with Docker on AWS. Iterate from there.
             </p>

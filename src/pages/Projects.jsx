@@ -169,7 +169,7 @@ export default function Projects() {
             {t.projects.badge}
           </span>
           <h1 className="text-4xl md:text-5xl font-black mt-3 text-white">{t.projects.title}</h1>
-          <p className="text-gray-500 mt-4 max-w-2xl mx-auto text-lg">{t.projects.subtitle}</p>
+          <p className="text-gray-400 mt-4 max-w-2xl mx-auto text-lg">{t.projects.subtitle}</p>
         </motion.div>
 
         {/* Filter */}
@@ -180,9 +180,9 @@ export default function Projects() {
               onClick={() => setActiveCategory(cat)}
               className="px-4 py-2 rounded-full text-sm font-medium transition-all"
               style={{
-                background: activeCategory === cat ? "linear-gradient(135deg,#00d4b8,#0066ff)" : "#111827",
-                color: activeCategory === cat ? "white" : "#9ca3af",
-                border: activeCategory === cat ? "none" : "1px solid #1e2a3a",
+                background: activeCategory === cat ? "linear-gradient(135deg,#00d4b8,#0066ff)" : "#1a2947",
+                color: activeCategory === cat ? "white" : "#d1d5db",
+                border: activeCategory === cat ? "none" : "1px solid #2d4166",
               }}
             >
               {categoryLabels[cat]}
@@ -199,7 +199,7 @@ export default function Projects() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.2, delay: i * 0.04 }}
-              className="card-hover bg-[#111827] border border-[#1e2a3a] rounded-2xl overflow-hidden flex flex-col"
+              className="card-hover bg-[#1a2947] border border-[#2d4166] rounded-2xl overflow-hidden flex flex-col"
             >
               {/* Image */}
               <div className="relative h-52 overflow-hidden">
@@ -208,7 +208,7 @@ export default function Projects() {
                   alt={p.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-[#111827]/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1a2947] via-[#1a2947]/40 to-transparent" />
                 <div className="absolute top-4 left-4 flex items-center gap-2">
                   <span
                     className="text-xs font-semibold px-2.5 py-1 rounded-full border"
@@ -217,7 +217,7 @@ export default function Projects() {
                     {lang === "fr" ? p.categoryFr : p.category}
                   </span>
                 </div>
-                <div className="absolute top-4 right-4 text-gray-400 text-xs font-mono">{p.year}</div>
+                <div className="absolute top-4 right-4 text-gray-300 text-xs font-mono">{p.year}</div>
               </div>
 
               {/* Content */}
@@ -225,14 +225,14 @@ export default function Projects() {
                 <h3 className="text-white font-bold text-xl mb-2">
                   {lang === "fr" ? p.titleFr : p.title}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                <p className="text-gray-400 text-sm leading-relaxed mb-4">
                   {lang === "fr" ? p.descFr : p.desc}
                 </p>
 
                 {/* Highlights */}
                 <ul className="space-y-1.5 mb-5">
                   {(lang === "fr" ? p.highlightsFr : p.highlights).map((h, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-xs text-gray-400">
+                    <li key={idx} className="flex items-start gap-2 text-xs text-gray-300">
                       <ChevronRight className="w-3 h-3 mt-0.5 flex-shrink-0" style={{ color: p.color }} />
                       {h}
                     </li>
@@ -241,12 +241,12 @@ export default function Projects() {
 
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {p.tags.map(tag => (
-                    <span key={tag} className="bg-[#0a0f1e] border border-[#1e2a3a] text-gray-400 text-xs px-2 py-0.5 rounded-full">{tag}</span>
+                    <span key={tag} className="bg-[#101b33] border border-[#2d4166] text-gray-300 text-xs px-2 py-0.5 rounded-full">{tag}</span>
                   ))}
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-[#1e2a3a] mt-auto">
-                  <div className="flex items-center gap-3 text-xs text-gray-600">
+                <div className="flex items-center justify-between pt-4 border-t border-[#2d4166] mt-auto">
+                  <div className="flex items-center gap-3 text-xs text-gray-500">
                     <span className="flex items-center gap-1"><Star className="w-3 h-3" /> {p.stars}</span>
                     <span className="flex items-center gap-1"><GitBranch className="w-3 h-3" /> {p.lang}</span>
                   </div>
@@ -254,7 +254,7 @@ export default function Projects() {
                     <button
                       onClick={() => toggleComments(p.slug)}
                       className="text-xs font-medium transition-colors"
-                      style={{ color: expandedComments[p.slug] ? p.color : "#6b7280" }}
+                      style={{ color: expandedComments[p.slug] ? p.color : "#9ca3af" }}
                     >
                       {expandedComments[p.slug] ? "Hide comments" : "Comments"}
                     </button>

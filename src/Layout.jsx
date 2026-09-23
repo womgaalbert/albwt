@@ -29,16 +29,16 @@ export default function Layout({ children, currentPageName }) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0f1e] text-white font-sans">
+    <div className="min-h-screen bg-[#101b33] text-white font-sans">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         * { font-family: 'Inter', sans-serif; }
         :root {
           --teal: #00d4b8;
           --teal-dark: #00b09b;
-          --navy: #0a0f1e;
-          --navy-card: #111827;
-          --navy-border: #1e2a3a;
+          --navy: #101b33;
+          --navy-card: #1a2947;
+          --navy-border: #2d4166;
         }
         .teal-gradient { background: linear-gradient(135deg, #00d4b8, #0066ff); }
         .teal-text { color: #00d4b8; }
@@ -51,7 +51,7 @@ export default function Layout({ children, currentPageName }) {
         }
         .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
         .card-hover { transition: transform 0.3s, box-shadow 0.3s; }
-        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,212,184,0.15); }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,212,184,0.25); }
         .animate-float {
           animation: float 6s ease-in-out infinite;
         }
@@ -60,20 +60,20 @@ export default function Layout({ children, currentPageName }) {
           50% { transform: translateY(-15px); }
         }
         .grid-bg {
-          background-image: linear-gradient(rgba(0,212,184,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,212,184,0.03) 1px, transparent 1px);
+          background-image: linear-gradient(rgba(0,212,184,0.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,212,184,0.06) 1px, transparent 1px);
           background-size: 60px 60px;
         }
         .section-divider {
           border-color: rgba(0,212,184,0.2);
         }
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0a0f1e; }
+        ::-webkit-scrollbar-track { background: #101b33; }
         ::-webkit-scrollbar-thumb { background: #00d4b8; border-radius: 3px; }
       `}</style>
 
       {/* Navbar */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-[#0a0f1e]/95 backdrop-blur-md shadow-lg shadow-black/30 border-b border-[#1e2a3a]" : "bg-transparent"}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-[#101b33]/95 backdrop-blur-md shadow-lg shadow-black/30 border-b border-[#2d4166]" : "bg-transparent"}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link to={createPageUrl("Home")} className="flex items-center gap-2 group">
             <img src={AWT_LOGO} alt="AWT" className="w-10 h-10 object-contain" />
@@ -89,7 +89,7 @@ export default function Layout({ children, currentPageName }) {
               <Link
                 key={link.page}
                 to={createPageUrl(link.page)}
-                className={`nav-link text-sm font-medium ${currentPageName === link.page ? "active" : "text-gray-300"}`}
+                className={`nav-link text-sm font-medium ${currentPageName === link.page ? "active" : "text-gray-200"}`}
               >
                 {link.label}
               </Link>
@@ -108,12 +108,12 @@ export default function Layout({ children, currentPageName }) {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="md:hidden bg-[#111827] border-t border-[#1e2a3a] px-6 py-4 flex flex-col gap-4">
+          <div className="md:hidden bg-[#1a2947] border-t border-[#2d4166] px-6 py-4 flex flex-col gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.page}
                 to={createPageUrl(link.page)}
-                className={`nav-link text-sm font-medium ${currentPageName === link.page ? "active" : "text-gray-300"}`}
+                className={`nav-link text-sm font-medium ${currentPageName === link.page ? "active" : "text-gray-200"}`}
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}
@@ -131,21 +131,21 @@ export default function Layout({ children, currentPageName }) {
       <main>{children}</main>
 
       {/* Footer */}
-      <footer className="bg-[#060b16] border-t border-[#1e2a3a] py-10 mt-0">
+      <footer className="bg-[#0c1428] border-t border-[#2d4166] py-10 mt-0">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <img src={AWT_LOGO} alt="AWT" className="w-9 h-9 object-contain" />
             <span className="font-bold text-white">Albert Womga</span>
-            <span className="text-gray-500 text-sm ml-2">— Data Scientist & AI Specialist</span>
+            <span className="text-gray-400 text-sm ml-2">— Data Scientist & AI Specialist</span>
           </div>
-          <div className="flex gap-6 text-sm text-gray-500">
+          <div className="flex gap-6 text-sm text-gray-400">
             {navLinks.map((link) => (
               <Link key={link.page} to={createPageUrl(link.page)} className="hover:text-teal-400 transition-colors" style={{color: "inherit"}}>
                 {link.label}
               </Link>
             ))}
           </div>
-          <p className="text-gray-600 text-sm">{t.footer.rights}</p>
+          <p className="text-gray-500 text-sm">{t.footer.rights}</p>
         </div>
       </footer>
     </div>

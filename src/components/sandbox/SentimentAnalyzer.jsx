@@ -110,53 +110,53 @@ export default function SentimentAnalyzer() {
       case "negative":
         return <ThumbsDown className="w-6 h-6 text-red-400" />;
       default:
-        return <Minus className="w-6 h-6 text-gray-400" />;
+        return <Minus className="w-6 h-6 text-gray-300" />;
     }
   };
 
   const getSentimentColor = () => {
-    if (!result) return "#6b7280";
+    if (!result) return "#9ca3af";
     switch (result.sentiment.toLowerCase()) {
       case "positive":
         return "#10b981";
       case "negative":
         return "#ef4444";
       default:
-        return "#6b7280";
+        return "#9ca3af";
     }
   };
 
   return (
-    <div className="bg-[#111827] border border-[#1e2a3a] rounded-2xl p-8">
+    <div className="bg-[#1a2947] border border-[#2d4166] rounded-2xl p-8">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center">
           <MessageSquare className="w-5 h-5 text-blue-400" />
         </div>
         <div>
           <h2 className="text-white font-bold text-xl">Sentiment Analyzer</h2>
-          <p className="text-gray-500 text-sm">Demo mode · Lexical keyword analysis</p>
+          <p className="text-gray-400 text-sm">Demo mode · Lexical keyword analysis</p>
         </div>
       </div>
 
       <div className="space-y-4 mb-6">
         <div>
-          <label className="block text-sm text-gray-400 mb-2">Text to Analyze</label>
+          <label className="block text-sm text-gray-300 mb-2">Text to Analyze</label>
           <Textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Enter text to analyze sentiment..."
-            className="min-h-32 bg-[#0a0f1e] border-[#1e2a3a] text-white resize-none"
+            className="min-h-32 bg-[#101b33] border-[#2d4166] text-white resize-none"
             maxLength={MAX_INPUT_LENGTHS.sentimentText}
           />
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <span className="text-xs text-gray-500">Examples:</span>
+          <span className="text-xs text-gray-400">Examples:</span>
           {examples.map((ex, i) => (
             <button
               key={i}
               onClick={() => setText(ex)}
-              className="text-xs bg-[#0a0f1e] border border-[#1e2a3a] text-gray-400 px-3 py-1 rounded-full hover:border-blue-500 hover:text-blue-400 transition-colors"
+              className="text-xs bg-[#101b33] border border-[#2d4166] text-gray-300 px-3 py-1 rounded-full hover:border-blue-500 hover:text-blue-400 transition-colors"
             >
               {ex}
             </button>
@@ -181,15 +181,15 @@ export default function SentimentAnalyzer() {
       </div>
 
       {result && (
-        <div className="bg-[#0a0f1e] border border-[#1e2a3a] rounded-xl p-6">
+        <div className="bg-[#101b33] border border-[#2d4166] rounded-xl p-6">
           <div className="flex items-center gap-3 mb-4">
             {getSentimentIcon()}
             <div className="flex-1">
               <h3 className="text-white font-semibold capitalize">{result.sentiment}</h3>
-              <p className="text-gray-500 text-sm">Confidence: {result.confidence}%</p>
+              <p className="text-gray-400 text-sm">Confidence: {result.confidence}%</p>
             </div>
           </div>
-          <div className="w-full bg-[#111827] rounded-full h-2 mb-4">
+          <div className="w-full bg-[#1a2947] rounded-full h-2 mb-4">
             <div
               className="h-2 rounded-full transition-all"
               style={{
@@ -198,7 +198,7 @@ export default function SentimentAnalyzer() {
               }}
             />
           </div>
-          <p className="text-gray-400 text-sm leading-relaxed">{result.explanation}</p>
+          <p className="text-gray-300 text-sm leading-relaxed">{result.explanation}</p>
         </div>
       )}
     </div>

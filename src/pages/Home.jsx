@@ -21,13 +21,13 @@ export default function Home() {
         
         {/* Animated background blobs */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-blue-600/5 rounded-full blur-3xl" style={{animationDelay:"3s"}} />
+          <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-teal-500/15 rounded-full blur-3xl animate-float" />
+          <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl" style={{animationDelay:"3s"}} />
           {/* Floating data nodes */}
           {[...Array(12)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-1.5 h-1.5 rounded-full opacity-30"
+              className="absolute w-1.5 h-1.5 rounded-full opacity-50"
               style={{
                 backgroundColor: "#00d4b8",
                 top: `${10 + (i * 7.5) % 80}%`,
@@ -55,20 +55,20 @@ export default function Home() {
                 AI Specialist
               </span>
             </h1>
-            <p className="text-gray-400 text-lg leading-relaxed mb-8 max-w-xl">
+            <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-xl">
               Hi, I'm <strong className="text-white">Albert Womga</strong> — Data Scientist with a <strong className="text-teal-400">Master's in Applied Statistics</strong> and 15+ years of experience across government, healthcare, and legal tech. Based in Ottawa, serving clients in <strong className="text-white">Canada & Cameroon</strong>.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to={createPageUrl("Contact")} className="btn-primary flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white">
                 Work With Me <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link to={createPageUrl("Projects")} className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-gray-300 border border-gray-700 hover:border-teal-500 hover:text-teal-400 transition-colors">
+              <Link to={createPageUrl("Projects")} className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-gray-200 border border-gray-600 hover:border-teal-500 hover:text-teal-400 transition-colors">
                 View Projects
               </Link>
             </div>
             <div className="flex flex-wrap gap-3 mt-8">
               {["Python", "TensorFlow", "Scikit-learn", "SQL", "NLP", "Deep Learning"].map(tag => (
-                <span key={tag} className="bg-[#111827] border border-[#1e2a3a] text-gray-400 text-xs px-3 py-1 rounded-full">{tag}</span>
+                <span key={tag} className="bg-[#1a2947] border border-[#2d4166] text-gray-300 text-xs px-3 py-1 rounded-full">{tag}</span>
               ))}
             </div>
           </motion.div>
@@ -85,7 +85,7 @@ export default function Home() {
               <div className="absolute inset-6 rounded-full border border-blue-500/15 animate-spin" style={{animationDuration:"15s", animationDirection:"reverse"}} />
               <div className="absolute inset-12 rounded-full border border-teal-500/10" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-[#111827] border border-[#1e2a3a] rounded-2xl p-8 shadow-2xl">
+                <div className="bg-[#1a2947] border border-[#2d4166] rounded-2xl p-8 shadow-2xl">
                   <Brain className="w-20 h-20" style={{color:"#00d4b8"}} />
                 </div>
               </div>
@@ -103,7 +103,7 @@ export default function Home() {
                 return (
                   <div
                     key={i}
-                    className="absolute w-10 h-10 bg-[#111827] border border-[#1e2a3a] rounded-xl flex items-center justify-center"
+                    className="absolute w-10 h-10 bg-[#1a2947] border border-[#2d4166] rounded-xl flex items-center justify-center"
                     style={{ left: x, top: y }}
                   >
                     <Icon className="w-5 h-5" style={{color:"#00d4b8"}} />
@@ -115,7 +115,7 @@ export default function Home() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-gray-600">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-gray-500">
           <span className="text-xs">Scroll</span>
           <ChevronDown className="w-4 h-4 animate-bounce" />
         </div>

@@ -3,15 +3,6 @@ import { Quote, Star } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "We needed a forecasting model to optimize our energy procurement. Albert delivered an ARIMA-based solution that outperformed our previous vendor's tool. Highly recommend for any data science engagement.",
-    name: "Sarah Okonkwo",
-    title: "Head of Analytics",
-    company: "Nexen Energy Corp",
-    country: "🇨🇦 Canada",
-    initials: "SO",
-    color: "#0066ff",
-  },
-  {
     quote: "Albert built an analytics dashboard for our government ministry that transformed how we track education outcomes across 5,000+ schools. The insights now directly inform our policy and budget decisions.",
     name: "Dr. Angèle Otou",
     title: "Senior Director",
@@ -42,7 +33,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-24 bg-[#060b16]">
+    <section className="py-24 bg-[#0c1428]">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -56,7 +47,7 @@ export default function Testimonials() {
           <h2 className="text-3xl md:text-4xl font-black mt-3 text-white">
             Trusted by Teams Across the Globe
           </h2>
-          <p className="text-gray-500 mt-4 max-w-xl mx-auto text-lg">
+          <p className="text-gray-400 mt-4 max-w-xl mx-auto text-lg">
             From startups to enterprises — here's what clients say about working with me.
           </p>
         </motion.div>
@@ -69,7 +60,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="card-hover bg-[#111827] border border-[#1e2a3a] rounded-2xl p-6 flex flex-col gap-4 relative"
+              className="card-hover bg-[#1a2947] border border-[#2d4166] rounded-2xl p-6 flex flex-col gap-4 relative"
             >
               {/* Quote icon */}
               <div
@@ -87,12 +78,12 @@ export default function Testimonials() {
               </div>
 
               {/* Quote */}
-              <p className="text-gray-400 text-sm leading-relaxed flex-1">
+              <p className="text-gray-300 text-sm leading-relaxed flex-1">
                 "{t.quote}"
               </p>
 
               {/* Divider */}
-              <div className="border-t border-[#1e2a3a]" />
+              <div className="border-t border-[#2d4166]" />
 
               {/* Author */}
               <div className="flex items-center gap-3">
@@ -104,7 +95,7 @@ export default function Testimonials() {
                 </div>
                 <div>
                   <p className="text-white font-semibold text-sm">{t.name}</p>
-                  <p className="text-gray-500 text-xs">{t.title} · {t.company}</p>
+                  <p className="text-gray-400 text-xs">{t.title} · {t.company}</p>
                 </div>
                 <span className="ml-auto text-base" title={t.country}>{t.country.split(" ")[0]}</span>
               </div>

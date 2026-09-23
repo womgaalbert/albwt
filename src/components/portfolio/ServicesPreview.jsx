@@ -47,7 +47,7 @@ export default function ServicesPreview() {
       >
         <span className="text-sm font-semibold tracking-widest uppercase" style={{color:"#00d4b8"}}>What I Offer</span>
         <h2 className="text-3xl md:text-4xl font-black mt-3 text-white">My Services</h2>
-        <p className="text-gray-500 mt-4 max-w-xl mx-auto">
+        <p className="text-gray-400 mt-4 max-w-xl mx-auto">
           End-to-end data science and AI solutions for businesses ready to compete in the modern economy.
         </p>
       </motion.div>
@@ -60,13 +60,13 @@ export default function ServicesPreview() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08 }}
-            className="card-hover bg-[#111827] border border-[#1e2a3a] rounded-2xl p-6 group"
+            className="card-hover bg-[#1a2947] border border-[#2d4166] rounded-2xl p-6 group"
           >
             <div className="w-12 h-12 rounded-xl mb-4 flex items-center justify-center" style={{background:"rgba(0,212,184,0.1)"}}>
               <s.Icon className="w-6 h-6" style={{color:"#00d4b8"}} />
             </div>
             <h3 className="text-white font-bold text-lg mb-2">{s.title}</h3>
-            <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
+            <p className="text-gray-400 text-sm leading-relaxed">{s.desc}</p>
           </motion.div>
         ))}
       </div>

@@ -44,7 +44,7 @@ const projects = [
 
 export default function FeaturedProjects() {
   return (
-    <section className="py-24 bg-[#060b16]">
+    <section className="py-24 bg-[#0c1428]">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -54,7 +54,7 @@ export default function FeaturedProjects() {
         >
           <span className="text-sm font-semibold tracking-widest uppercase" style={{color:"#00d4b8"}}>Portfolio</span>
           <h2 className="text-3xl md:text-4xl font-black mt-3 text-white">Featured Projects</h2>
-          <p className="text-gray-500 mt-4 max-w-xl mx-auto">
+          <p className="text-gray-400 mt-4 max-w-xl mx-auto">
             Real-world AI and data science projects showcasing expertise in forecasting, NLP, and computer vision.
           </p>
         </motion.div>
@@ -67,22 +67,22 @@ export default function FeaturedProjects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="card-hover bg-[#111827] border border-[#1e2a3a] rounded-2xl p-6"
+              className="card-hover bg-[#1a2947] border border-[#2d4166] rounded-2xl p-6"
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="w-3 h-3 rounded-full mt-1" style={{backgroundColor: p.color}} />
-                <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-white transition-colors">
+                <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors">
                   <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
               <h3 className="text-white font-bold text-lg mb-2">{p.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed mb-4">{p.desc}</p>
+              <p className="text-gray-400 text-sm leading-relaxed mb-4">{p.desc}</p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {p.tags.map(tag => (
-                  <span key={tag} className="bg-[#0a0f1e] border border-[#1e2a3a] text-gray-400 text-xs px-2 py-0.5 rounded-full">{tag}</span>
+                  <span key={tag} className="bg-[#101b33] border border-[#2d4166] text-gray-300 text-xs px-2 py-0.5 rounded-full">{tag}</span>
                 ))}
               </div>
-              <div className="flex items-center gap-4 text-xs text-gray-600">
+              <div className="flex items-center gap-4 text-xs text-gray-500">
                 <span className="flex items-center gap-1"><Star className="w-3 h-3" /> {p.stars}</span>
                 <span>{p.lang}</span>
               </div>

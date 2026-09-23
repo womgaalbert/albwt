@@ -162,22 +162,22 @@ export default function AIConsultantChat() {
   };
 
   return (
-    <div className="bg-[#111827] border border-[#1e2a3a] rounded-2xl overflow-hidden flex flex-col" style={{ height: "600px" }}>
+    <div className="bg-[#1a2947] border border-[#2d4166] rounded-2xl overflow-hidden flex flex-col" style={{ height: "600px" }}>
       {/* Header */}
-      <div className="flex items-center justify-between px-5 py-4 border-b border-[#1e2a3a]" style={{ background: "#0a0f1e" }}>
+      <div className="flex items-center justify-between px-5 py-4 border-b border-[#2d4166]" style={{ background: "#101b33" }}>
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "#00d4b820" }}>
             <Bot className="w-5 h-5" style={{ color: "#00d4b8" }} />
           </div>
           <div>
             <p className="text-white font-bold text-sm">Albert's AI Consultant</p>
-            <p className="text-gray-500 text-xs flex items-center gap-1">
+            <p className="text-gray-400 text-xs flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse inline-block" />
               Demo mode · Keyword-based responses
             </p>
           </div>
         </div>
-        <button onClick={reset} className="text-gray-500 hover:text-white transition-colors p-2 rounded-lg hover:bg-[#1e2a3a]" title="Reset chat">
+        <button onClick={reset} className="text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-[#2d4166]" title="Reset chat">
           <RotateCcw className="w-4 h-4" />
         </button>
       </div>
@@ -190,7 +190,7 @@ export default function AIConsultantChat() {
               <button
                 key={q}
                 onClick={() => sendMessage(q)}
-                className="text-xs px-3 py-1.5 rounded-full border border-[#1e2a3a] text-gray-400 hover:text-white hover:border-teal-500/50 transition-all bg-[#0a0f1e]"
+                className="text-xs px-3 py-1.5 rounded-full border border-[#2d4166] text-gray-300 hover:text-white hover:border-teal-500/50 transition-all bg-[#101b33]"
               >
                 {q}
               </button>
@@ -222,7 +222,7 @@ export default function AIConsultantChat() {
                 className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
                   msg.role === "user"
                     ? "bg-[#0066ff15] border border-[#0066ff30] text-gray-200 rounded-tr-sm"
-                    : "bg-[#0a0f1e] border border-[#1e2a3a] text-gray-300 rounded-tl-sm"
+                    : "bg-[#101b33] border border-[#2d4166] text-gray-200 rounded-tl-sm"
                 }`}
               >
                 {msg.role === "assistant"
@@ -254,7 +254,7 @@ export default function AIConsultantChat() {
             <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "#00d4b820" }}>
               <Sparkles className="w-4 h-4" style={{ color: "#00d4b8" }} />
             </div>
-            <div className="bg-[#0a0f1e] border border-[#1e2a3a] px-4 py-3 rounded-2xl rounded-tl-sm flex items-center gap-1.5">
+            <div className="bg-[#101b33] border border-[#2d4166] px-4 py-3 rounded-2xl rounded-tl-sm flex items-center gap-1.5">
               {[0, 1, 2].map(i => (
                 <span key={i} className="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
               ))}
@@ -266,7 +266,7 @@ export default function AIConsultantChat() {
       </div>
 
       {/* Input */}
-      <div className="px-5 py-4 border-t border-[#1e2a3a]" style={{ background: "#0a0f1e" }}>
+      <div className="px-5 py-4 border-t border-[#2d4166]" style={{ background: "#101b33" }}>
         <div className="flex gap-3 items-end">
           <textarea
             value={input}
@@ -274,7 +274,7 @@ export default function AIConsultantChat() {
             onKeyDown={handleKeyDown}
             placeholder="Ask about Albert's skills, projects, or services..."
             rows={1}
-            className="flex-1 bg-[#111827] border border-[#1e2a3a] text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-500 transition-colors resize-none placeholder-gray-600"
+            className="flex-1 bg-[#1a2947] border border-[#2d4166] text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-500 transition-colors resize-none placeholder-gray-600"
             maxLength={MAX_INPUT_LENGTHS.chatMessage}
             style={{ maxHeight: "100px" }}
           />
@@ -287,7 +287,7 @@ export default function AIConsultantChat() {
             <Send className="w-4 h-4 text-white" />
           </button>
         </div>
-        <p className="text-gray-600 text-xs mt-2 text-center">Press Enter to send · Shift+Enter for new line · Demo mode</p>
+        <p className="text-gray-500 text-xs mt-2 text-center">Press Enter to send · Shift+Enter for new line · Demo mode</p>
       </div>
     </div>
   );

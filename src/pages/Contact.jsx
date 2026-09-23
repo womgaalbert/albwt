@@ -68,7 +68,7 @@ export default function Contact() {
         >
           <span className="text-sm font-semibold tracking-widest uppercase" style={{color:"#00d4b8"}}>Get In Touch</span>
           <h1 className="text-4xl md:text-5xl font-black mt-3 text-white">Let's Work Together</h1>
-          <p className="text-gray-500 mt-4 max-w-xl mx-auto text-lg">
+          <p className="text-gray-400 mt-4 max-w-xl mx-auto text-lg">
             Ready to transform your data into competitive advantage? I'm available for projects across North America and Africa.
           </p>
         </motion.div>
@@ -81,9 +81,9 @@ export default function Contact() {
             transition={{ delay: 0.2 }}
             className="lg:col-span-2 space-y-6"
           >
-            <div className="bg-[#111827] border border-[#1e2a3a] rounded-2xl p-6">
+            <div className="bg-[#1a2947] border border-[#2d4166] rounded-2xl p-6">
               <h3 className="text-white font-bold mb-4">Contact Info</h3>
-              <div className="space-y-4 text-sm text-gray-400">
+              <div className="space-y-4 text-sm text-gray-300">
                 <div className="flex items-center gap-3">
                   <Mail className="w-4 h-4 flex-shrink-0" style={{color:"#00d4b8"}} />
                   <span>contact@albwt.com</span>
@@ -99,14 +99,14 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="bg-[#111827] border border-[#1e2a3a] rounded-2xl p-6">
+            <div className="bg-[#1a2947] border border-[#2d4166] rounded-2xl p-6">
               <h3 className="text-white font-bold mb-4">Connect</h3>
               <div className="flex flex-col gap-3">
                 <a
                   href="https://github.com/womgaalbert"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 bg-[#0a0f1e] border border-[#1e2a3a] rounded-xl text-gray-300 hover:text-white hover:border-gray-600 transition-colors text-sm"
+                  className="flex items-center gap-3 p-3 bg-[#101b33] border border-[#2d4166] rounded-xl text-gray-200 hover:text-white hover:border-gray-500 transition-colors text-sm"
                 >
                   <Github className="w-5 h-5" /> github.com/womgaalbert
                 </a>
@@ -114,20 +114,20 @@ export default function Contact() {
                   href="https://www.linkedin.com/in/albert-womga-009a7931/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 bg-[#0a0f1e] border border-[#1e2a3a] rounded-xl text-gray-300 hover:text-white hover:border-gray-600 transition-colors text-sm"
+                  className="flex items-center gap-3 p-3 bg-[#101b33] border border-[#2d4166] rounded-xl text-gray-200 hover:text-white hover:border-gray-500 transition-colors text-sm"
                 >
                   <Linkedin className="w-5 h-5" style={{color:"#0a66c2"}} /> albert-womga-009a7931
                 </a>
               </div>
             </div>
 
-            <div className="bg-[#111827] border border-[#1e2a3a] rounded-2xl p-6">
+            <div className="bg-[#1a2947] border border-[#2d4166] rounded-2xl p-6">
               <h3 className="text-white font-bold mb-3">Availability</h3>
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                 <span className="text-green-400 text-sm font-medium">Available for new projects</span>
               </div>
-              <p className="text-gray-500 text-sm mb-4">Response time: within 24 hours</p>
+              <p className="text-gray-400 text-sm mb-4">Response time: within 24 hours</p>
               <a
                 href="https://calendly.com/womga-albert"
                 target="_blank"
@@ -149,67 +149,67 @@ export default function Contact() {
             className="lg:col-span-3"
           >
             {sent ? (
-              <div className="bg-[#111827] border border-teal-500/30 rounded-2xl p-12 text-center h-full flex flex-col items-center justify-center">
+              <div className="bg-[#1a2947] border border-teal-500/30 rounded-2xl p-12 text-center h-full flex flex-col items-center justify-center">
                 <CheckCircle className="w-16 h-16 mb-4" style={{color:"#00d4b8"}} />
                 <h3 className="text-white font-bold text-xl mb-2">Message Sent!</h3>
-                <p className="text-gray-400">Thank you for reaching out. I'll get back to you within 24 hours.</p>
+                <p className="text-gray-300">Thank you for reaching out. I'll get back to you within 24 hours.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-[#111827] border border-[#1e2a3a] rounded-2xl p-8 space-y-5">
+              <form onSubmit={handleSubmit} className="bg-[#1a2947] border border-[#2d4166] rounded-2xl p-8 space-y-5">
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-sm text-gray-400 mb-2">Full Name *</label>
+                    <label className="block text-sm text-gray-300 mb-2">Full Name *</label>
                     <input
                       required
                       value={form.name}
                       onChange={e => setForm({...form, name: e.target.value})}
-                      className="w-full bg-[#0a0f1e] border border-[#1e2a3a] text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-500 transition-colors"
+                      className="w-full bg-[#101b33] border border-[#2d4166] text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-500 transition-colors"
                       placeholder="John Doe"
                       maxLength={MAX_INPUT_LENGTHS.name}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm text-gray-400 mb-2">Email Address *</label>
+                    <label className="block text-sm text-gray-300 mb-2">Email Address *</label>
                     <input
                       required
                       type="email"
                       value={form.email}
                       onChange={e => setForm({...form, email: e.target.value})}
-                      className="w-full bg-[#0a0f1e] border border-[#1e2a3a] text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-500 transition-colors"
+                      className="w-full bg-[#101b33] border border-[#2d4166] text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-500 transition-colors"
                       placeholder="john@company.com"
                       maxLength={MAX_INPUT_LENGTHS.email}
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-2">Company / Organization</label>
+                  <label className="block text-sm text-gray-300 mb-2">Company / Organization</label>
                   <input
                     value={form.company}
                     onChange={e => setForm({...form, company: e.target.value})}
-                    className="w-full bg-[#0a0f1e] border border-[#1e2a3a] text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-500 transition-colors"
+                    className="w-full bg-[#101b33] border border-[#2d4166] text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-500 transition-colors"
                     placeholder="Your company name"
                     maxLength={MAX_INPUT_LENGTHS.company}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-2">Service Needed</label>
+                  <label className="block text-sm text-gray-300 mb-2">Service Needed</label>
                   <select
                     value={form.service}
                     onChange={e => setForm({...form, service: e.target.value})}
-                    className="w-full bg-[#0a0f1e] border border-[#1e2a3a] text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-500 transition-colors"
+                    className="w-full bg-[#101b33] border border-[#2d4166] text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-500 transition-colors"
                   >
                     <option value="">Select a service...</option>
                     {services.map(s => <option key={s} value={s}>{s}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-gray-400 mb-2">Message *</label>
+                  <label className="block text-sm text-gray-300 mb-2">Message *</label>
                   <textarea
                     required
                     value={form.message}
                     onChange={e => setForm({...form, message: e.target.value})}
                     rows={5}
-                    className="w-full bg-[#0a0f1e] border border-[#1e2a3a] text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-500 transition-colors resize-none"
+                    className="w-full bg-[#101b33] border border-[#2d4166] text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-500 transition-colors resize-none"
                     placeholder="Describe your project, goals, and timeline..."
                     maxLength={MAX_INPUT_LENGTHS.contactMessage}
                   />

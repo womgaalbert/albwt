@@ -45,7 +45,7 @@ export default function Blog() {
             Thought Leadership
           </span>
           <h1 className="text-4xl md:text-5xl font-black mt-3 text-white">AI & Data Science Blog</h1>
-          <p className="text-gray-500 mt-4 max-w-2xl mx-auto text-lg">
+          <p className="text-gray-400 mt-4 max-w-2xl mx-auto text-lg">
             Insights, tutorials, and case studies on Machine Learning, AI, and Data Science.
           </p>
         </motion.div>
@@ -58,13 +58,13 @@ export default function Blog() {
           className="max-w-xl mx-auto mb-10"
         >
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             <input
               type="text"
               placeholder="Search articles..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-[#111827] border border-[#1e2a3a] text-white rounded-xl pl-12 pr-4 py-3 text-sm focus:outline-none focus:border-teal-500 transition-colors"
+              className="w-full bg-[#1a2947] border border-[#2d4166] text-white rounded-xl pl-12 pr-4 py-3 text-sm focus:outline-none focus:border-teal-500 transition-colors"
             />
           </div>
         </motion.div>
@@ -77,9 +77,9 @@ export default function Blog() {
               onClick={() => setActiveCategory(cat)}
               className="px-4 py-2 rounded-full text-sm font-medium transition-all"
               style={{
-                background: activeCategory === cat ? "linear-gradient(135deg,#00d4b8,#0066ff)" : "#111827",
-                color: activeCategory === cat ? "white" : "#9ca3af",
-                border: activeCategory === cat ? "none" : "1px solid #1e2a3a",
+                background: activeCategory === cat ? "linear-gradient(135deg,#00d4b8,#0066ff)" : "#1a2947",
+                color: activeCategory === cat ? "white" : "#d1d5db",
+                border: activeCategory === cat ? "none" : "1px solid #2d4166",
               }}
             >
               {cat}
@@ -94,7 +94,7 @@ export default function Blog() {
           </div>
         ) : filteredPosts.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-gray-500 text-lg">No articles found.</p>
+            <p className="text-gray-400 text-lg">No articles found.</p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -106,9 +106,9 @@ export default function Blog() {
                 transition={{ delay: i * 0.05 }}
               >
                 <Link to={`/BlogPost?id=${post.id}`}>
-                  <div className="card-hover bg-[#111827] border border-[#1e2a3a] rounded-2xl overflow-hidden h-full flex flex-col">
+                  <div className="card-hover bg-[#1a2947] border border-[#2d4166] rounded-2xl overflow-hidden h-full flex flex-col">
                     {post.cover_image && (
-                      <div className="h-48 overflow-hidden bg-[#0a0f1e]">
+                      <div className="h-48 overflow-hidden bg-[#101b33]">
                         <img
                           src={post.cover_image}
                           alt={post.title}
@@ -125,16 +125,16 @@ export default function Blog() {
                           {post.category}
                         </span>
                         {post.read_time && (
-                          <span className="text-xs text-gray-500 flex items-center gap-1">
+                          <span className="text-xs text-gray-400 flex items-center gap-1">
                             <Clock className="w-3 h-3" /> {post.read_time} min read
                           </span>
                         )}
                       </div>
                       <h3 className="text-white font-bold text-lg mb-2 line-clamp-2">{post.title}</h3>
-                      <p className="text-gray-500 text-sm leading-relaxed mb-4 flex-1 line-clamp-3">
+                      <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-1 line-clamp-3">
                         {post.excerpt}
                       </p>
-                      <div className="flex items-center justify-between pt-4 border-t border-[#1e2a3a] text-xs text-gray-600">
+                      <div className="flex items-center justify-between pt-4 border-t border-[#2d4166] text-xs text-gray-500">
                         {post.published_date && (
                           <span className="flex items-center gap-1">
                             <Calendar className="w-3 h-3" />

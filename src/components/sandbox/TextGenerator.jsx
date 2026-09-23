@@ -52,36 +52,36 @@ The generated content would appear here with proper formatting, code blocks, lis
   };
 
   return (
-    <div className="bg-[#111827] border border-[#1e2a3a] rounded-2xl p-8">
+    <div className="bg-[#1a2947] border border-[#2d4166] rounded-2xl p-8">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-10 h-10 rounded-xl bg-teal-500/20 flex items-center justify-center">
           <Sparkles className="w-5 h-5 text-teal-400" />
         </div>
         <div>
           <h2 className="text-white font-bold text-xl">AI Text Generator</h2>
-          <p className="text-gray-500 text-sm">Demo mode · Simulated language model</p>
+          <p className="text-gray-400 text-sm">Demo mode · Simulated language model</p>
         </div>
       </div>
 
       <div className="space-y-4 mb-6">
         <div>
-          <label className="block text-sm text-gray-400 mb-2">Your Prompt</label>
+          <label className="block text-sm text-gray-300 mb-2">Your Prompt</label>
           <Textarea
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="Enter your prompt here..."
-            className="min-h-32 bg-[#0a0f1e] border-[#1e2a3a] text-white resize-none"
+            className="min-h-32 bg-[#101b33] border-[#2d4166] text-white resize-none"
             maxLength={MAX_INPUT_LENGTHS.textGenPrompt}
           />
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <span className="text-xs text-gray-500">Try:</span>
+          <span className="text-xs text-gray-400">Try:</span>
           {examples.map((ex, i) => (
             <button
               key={i}
               onClick={() => setPrompt(ex)}
-              className="text-xs bg-[#0a0f1e] border border-[#1e2a3a] text-gray-400 px-3 py-1 rounded-full hover:border-teal-500 hover:text-teal-400 transition-colors"
+              className="text-xs bg-[#101b33] border border-[#2d4166] text-gray-300 px-3 py-1 rounded-full hover:border-teal-500 hover:text-teal-400 transition-colors"
             >
               {ex}
             </button>
@@ -106,11 +106,11 @@ The generated content would appear here with proper formatting, code blocks, lis
       </div>
 
       {result && (
-        <div className="bg-[#0a0f1e] border border-[#1e2a3a] rounded-xl p-6">
+        <div className="bg-[#101b33] border border-[#2d4166] rounded-xl p-6">
           <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-teal-400" /> Generated Result
           </h3>
-          <p className="text-gray-300 leading-relaxed whitespace-pre-wrap">{result}</p>
+          <p className="text-gray-200 leading-relaxed whitespace-pre-wrap">{result}</p>
         </div>
       )}
     </div>

@@ -120,24 +120,24 @@ export default function ImageClassifier() {
   };
 
   return (
-    <div className="bg-[#111827] border border-[#1e2a3a] rounded-2xl p-8">
+    <div className="bg-[#1a2947] border border-[#2d4166] rounded-2xl p-8">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center">
           <ImageIcon className="w-5 h-5 text-purple-400" />
         </div>
         <div>
           <h2 className="text-white font-bold text-xl">Image Classifier</h2>
-          <p className="text-gray-500 text-sm">Demo mode · Filename-based classification</p>
+          <p className="text-gray-400 text-sm">Demo mode · Filename-based classification</p>
         </div>
       </div>
 
       <div className="space-y-4 mb-6">
         {!preview ? (
           <label className="block cursor-pointer">
-            <div className="border-2 border-dashed border-[#1e2a3a] rounded-xl p-12 text-center hover:border-purple-500 transition-colors">
-              <Upload className="w-12 h-12 text-gray-600 mx-auto mb-3" />
-              <p className="text-gray-400 mb-1">Click to upload an image</p>
-              <p className="text-gray-600 text-xs">Supports JPG, PNG, WebP</p>
+            <div className="border-2 border-dashed border-[#2d4166] rounded-xl p-12 text-center hover:border-purple-500 transition-colors">
+              <Upload className="w-12 h-12 text-gray-500 mx-auto mb-3" />
+              <p className="text-gray-300 mb-1">Click to upload an image</p>
+              <p className="text-gray-500 text-xs">Supports JPG, PNG, WebP</p>
             </div>
             <input
               type="file"
@@ -151,7 +151,7 @@ export default function ImageClassifier() {
             <img
               src={preview}
               alt="Preview"
-              className="w-full max-h-96 object-contain bg-[#0a0f1e] rounded-xl"
+              className="w-full max-h-96 object-contain bg-[#101b33] rounded-xl"
             />
             <button
               onClick={clearFile}
@@ -182,7 +182,7 @@ export default function ImageClassifier() {
       </div>
 
       {result && (
-        <div className="bg-[#0a0f1e] border border-[#1e2a3a] rounded-xl p-6 space-y-4">
+        <div className="bg-[#101b33] border border-[#2d4166] rounded-xl p-6 space-y-4">
           <div>
             <h3 className="text-white font-semibold mb-1">Main Object</h3>
             <p className="text-teal-400 text-lg font-medium">{result.main_object}</p>
@@ -190,7 +190,7 @@ export default function ImageClassifier() {
 
           <div>
             <h3 className="text-white font-semibold mb-2">Description</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">{result.description}</p>
+            <p className="text-gray-300 text-sm leading-relaxed">{result.description}</p>
           </div>
 
           {result.categories && result.categories.length > 0 && (
@@ -213,7 +213,7 @@ export default function ImageClassifier() {
             <h3 className="text-white font-semibold mb-2">
               Confidence: {result.confidence}%
             </h3>
-            <div className="w-full bg-[#111827] rounded-full h-2">
+            <div className="w-full bg-[#1a2947] rounded-full h-2">
               <div
                 className="h-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 transition-all"
                 style={{ width: `${result.confidence}%` }}

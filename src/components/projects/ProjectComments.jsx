@@ -59,7 +59,7 @@ export default function ProjectComments({ projectSlug, accentColor }) {
     new Date(dateStr).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 
   return (
-    <div className="mt-6 pt-6 border-t border-[#1e2a3a]">
+    <div className="mt-6 pt-6 border-t border-[#2d4166]">
       <div className="flex items-center gap-2 mb-4">
         <MessageSquare className="w-4 h-4" style={{ color: accentColor }} />
         <span className="text-white font-semibold text-sm">
@@ -74,7 +74,7 @@ export default function ProjectComments({ projectSlug, accentColor }) {
           onChange={e => setForm({ ...form, author_name: e.target.value })}
           placeholder="Your name"
           maxLength={MAX_INPUT_LENGTHS.commentAuthor}
-          className="w-full bg-[#0a0f1e] border border-[#1e2a3a] text-white rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-teal-500 transition-colors placeholder-gray-600"
+          className="w-full bg-[#101b33] border border-[#2d4166] text-white rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-teal-500 transition-colors placeholder-gray-600"
         />
         <div className="flex gap-2">
           <textarea
@@ -83,7 +83,7 @@ export default function ProjectComments({ projectSlug, accentColor }) {
             placeholder="Share your thoughts on this project..."
             rows={2}
             maxLength={MAX_INPUT_LENGTHS.commentContent}
-            className="flex-1 bg-[#0a0f1e] border border-[#1e2a3a] text-white rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-teal-500 transition-colors resize-none placeholder-gray-600"
+            className="flex-1 bg-[#101b33] border border-[#2d4166] text-white rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-teal-500 transition-colors resize-none placeholder-gray-600"
           />
           <button
             type="submit"
@@ -104,7 +104,7 @@ export default function ProjectComments({ projectSlug, accentColor }) {
 
       {/* Comments list */}
       {loading ? (
-        <div className="text-gray-600 text-xs">Loading comments...</div>
+        <div className="text-gray-500 text-xs">Loading comments...</div>
       ) : error ? (
         <div className="text-red-400 text-xs">{error}</div>
       ) : (
@@ -117,17 +117,17 @@ export default function ProjectComments({ projectSlug, accentColor }) {
               >
                 {c.author_name.charAt(0).toUpperCase()}
               </div>
-              <div className="flex-1 bg-[#0a0f1e] border border-[#1e2a3a] rounded-xl px-3 py-2.5">
+              <div className="flex-1 bg-[#101b33] border border-[#2d4166] rounded-xl px-3 py-2.5">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-white text-xs font-semibold">{c.author_name}</span>
-                  <span className="text-gray-600 text-xs">{formatDate(c.created_at)}</span>
+                  <span className="text-gray-500 text-xs">{formatDate(c.created_at)}</span>
                 </div>
-                <p className="text-gray-400 text-xs leading-relaxed">{c.content}</p>
+                <p className="text-gray-300 text-xs leading-relaxed">{c.content}</p>
               </div>
             </div>
           ))}
           {comments.length === 0 && (
-            <p className="text-gray-600 text-xs">Be the first to comment on this project.</p>
+            <p className="text-gray-500 text-xs">Be the first to comment on this project.</p>
           )}
         </div>
       )}

@@ -61,7 +61,7 @@ export default function Services() {
           
           <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#00d4b8" }}>What I Do</span>
           <h1 className="text-4xl md:text-5xl font-black mt-3 text-white">Services</h1>
-          <p className="text-gray-500 mt-4 max-w-2xl mx-auto text-lg">
+          <p className="text-gray-400 mt-4 max-w-2xl mx-auto text-lg">
             Comprehensive data science and AI solutions grounded in 15+ years of real-world delivery across government, healthcare, and legal tech — in Canada and Cameroon.
           </p>
         </motion.div>
@@ -74,16 +74,16 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08 }}
-            className="card-hover bg-[#111827] border border-[#1e2a3a] rounded-2xl p-6">
+            className="card-hover bg-[#1a2947] border border-[#2d4166] rounded-2xl p-6">
             
               <div className="w-12 h-12 rounded-xl mb-5 flex items-center justify-center" style={{ background: `${s.color}15` }}>
                 <s.Icon className="w-6 h-6" style={{ color: s.color }} />
               </div>
               <h3 className="text-white font-bold text-lg mb-3">{s.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed mb-5">{s.desc}</p>
+              <p className="text-gray-400 text-sm leading-relaxed mb-5">{s.desc}</p>
               <ul className="space-y-2">
                 {s.features.map((f) =>
-              <li key={f} className="flex items-start gap-2 text-sm text-gray-400">
+              <li key={f} className="flex items-start gap-2 text-sm text-gray-300">
                     <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: s.color }} />
                     {f}
                   </li>
