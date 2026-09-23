@@ -6,6 +6,9 @@ import path from 'path'
 export default defineConfig({
   logLevel: 'error', // Suppress warnings, only show errors
   plugins: [react()],
+  server: {
+    host: true, // Bind all interfaces (IPv4 + IPv6) so localhost always resolves
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
