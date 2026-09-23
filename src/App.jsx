@@ -40,9 +40,23 @@ function App() {
                 }
               />
             ))}
+            {Object.entries(Pages).map(([path, Page]) => (
+              <Route
+                key={`lower-${path}`}
+                path={`/${path.toLowerCase()}`}
+                element={
+                  <LayoutWrapper currentPageName={path}>
+                    <Page />
+                  </LayoutWrapper>
+                }
+              />
+            ))}
             <Route path="/Blog" element={<LayoutWrapper currentPageName="Blog"><Blog /></LayoutWrapper>} />
+            <Route path="/blog" element={<LayoutWrapper currentPageName="Blog"><Blog /></LayoutWrapper>} />
             <Route path="/BlogPost" element={<LayoutWrapper currentPageName="Blog"><BlogPost /></LayoutWrapper>} />
+            <Route path="/blogpost" element={<LayoutWrapper currentPageName="Blog"><BlogPost /></LayoutWrapper>} />
             <Route path="/Sandbox" element={<LayoutWrapper currentPageName="Sandbox"><Sandbox /></LayoutWrapper>} />
+            <Route path="/sandbox" element={<LayoutWrapper currentPageName="Sandbox"><Sandbox /></LayoutWrapper>} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           <Toaster />

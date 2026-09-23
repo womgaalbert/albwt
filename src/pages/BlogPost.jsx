@@ -211,13 +211,13 @@ export default function BlogPost() {
                   {children}
                 </a>
               ),
-              code: ({ inline, children }) =>
-                inline ? (
-                  <code className="bg-card text-primary px-1.5 py-0.5 rounded text-sm">{children}</code>
-                ) : (
+              code: ({ className, children }) =>
+                /language-/.test(className || "") ? (
                   <code className="block bg-card text-foreground/80 p-4 rounded-lg overflow-x-auto mb-4">
                     {children}
                   </code>
+                ) : (
+                  <code className="bg-card text-primary px-1.5 py-0.5 rounded text-sm">{children}</code>
                 ),
               blockquote: ({ children }) => (
                 <blockquote className="border-l-4 border-primary pl-4 italic text-muted-foreground my-4">

@@ -6,25 +6,27 @@ Data Scientist & AI/ML Specialist portfolio website.
 
 ## About
 
-This is a React + Vite portfolio showcasing data science projects, blog posts, an AI sandbox, and contact information.
+A React + Vite portfolio showcasing data science projects, blog posts, an AI sandbox, and contact information. Bilingual (English/French) with light/dark themes.
 
 ## Tech Stack
 
 - **Frontend:** React 18, Vite 6, Tailwind CSS
-- **UI:** shadcn/ui (Radix UI), Framer Motion
-- **Charts:** Recharts
+- **UI:** shadcn/ui, Framer Motion
+- **Theming:** next-themes (light/dark toggle)
+- **i18n:** Custom FR/EN context (`src/lib/LanguageContext.jsx`)
 - **Routing:** React Router v6
-- **Backend:** Supabase (blog, comments, auth)
-- **Payments:** Stripe
+- **Backend:** Supabase (blog posts, project comments, contact messages)
 - **Icons:** Lucide React
 
 ## Features
 
-- Project showcase with interactive demos
-- Blog with CMS-backed posts and comments
-- AI sandbox playground
-- Contact form & newsletter
-- Responsive design with dark mode
+- Bilingual FR/EN with persisted language preference
+- Light/dark theme toggle (dark navy by default)
+- Project showcase with per-project comments
+- Blog backed by Supabase with search + category filters
+- AI sandbox playground (mock demos)
+- Contact form with rate limiting, input sanitization, and mailto fallback
+- Responsive design
 
 ## Development
 
@@ -36,15 +38,29 @@ npm run preview   # Preview production build
 npm run lint      # Run ESLint
 ```
 
+## Environment
+
+Create `.env.local` with your Supabase credentials:
+
+```
+VITE_SUPABASE_URL=...
+VITE_SUPABASE_ANON_KEY=...
+```
+
+## Supabase Migrations
+
+Run the SQL files in `supabase/migrations/` in order (schema, seed, blog cover update) via the Supabase dashboard SQL editor.
+
 ## Project Structure
 
 ```
 src/
-  components/     # UI components (shadcn) + portfolio components
+  components/     # portfolio, sandbox, projects + minimal ui components
   pages/          # Page components (Home, About, Services, etc.)
-  data/           # Static data (blog posts, comment store)
-  lib/            # Utilities, context, sanitization
-  hooks/          # Custom hooks
+  lib/            # Utilities, contexts, sanitization
+  utils/          # URL helpers
+public/images/    # Generated brand covers (projects + blog)
+supabase/         # SQL migrations
 ```
 
 ## Deployment

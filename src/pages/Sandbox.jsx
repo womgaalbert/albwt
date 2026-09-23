@@ -140,7 +140,7 @@ export default function Sandbox() {
                   transition={{ delay: i * 0.08 }}
                   onClick={() => setActiveAgent(agent.id)}
                   className={`p-5 rounded-2xl border text-left transition-all ${
-                    isActive ? "border-opacity-60 bg-card" : "border-border bg-card hover:border-gray-500"
+                    isActive ? "border-opacity-60 bg-card" : "border-border bg-card hover:border-primary/50"
                   }`}
                   style={{ borderColor: isActive ? agent.color : undefined }}
                 >
