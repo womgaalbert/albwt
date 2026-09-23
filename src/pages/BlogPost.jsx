@@ -113,7 +113,7 @@ export default function BlogPost() {
             className="mb-8 rounded-2xl overflow-hidden"
           >
             <img
-              src={post.cover_image}
+              src={post.cover_image?.includes("placehold.co") ? `/images/blog/${post.slug}.svg` : post.cover_image}
               alt={post.title}
               className="w-full h-64 md:h-96 object-cover"
             />

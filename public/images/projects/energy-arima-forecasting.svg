@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <defs>
+    <radialGradient id="g1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00d4b8" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#00d4b8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0066ff" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#0066ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#101b33" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#101b33" stop-opacity="0.85"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#00d4b8" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="400" fill="#101b33"/>
+  <rect width="600" height="400" fill="url(#grid)"/>
+  <ellipse cx="491.99999999999994" cy="80" rx="228" ry="220.00000000000003" fill="url(#g1)"/>
+  <ellipse cx="90" cy="340" rx="210" ry="200" fill="url(#g2)"/>
+  <path d="M 0 300 L 0 272.9 L 10 272.6 L 20 271.1 L 30 268.4 L 40 264.6 L 50 259.9 L 60 254.7 L 70 249.3 L 80 244.0 L 90 239.1 L 100 234.9 L 110 231.7 L 120 229.5 L 130 228.4 L 140 228.2 L 150 228.9 L 160 230.2 L 170 231.8 L 180 233.5 L 190 234.9 L 200 236.1 L 210 236.7 L 220 236.9 L 230 236.7 L 240 236.2 L 250 235.7 L 260 235.3 L 270 235.4 L 280 236.1 L 290 237.6 L 300 240.1 L 310 243.3 L 320 247.4 L 330 252.1 L 340 257.0 L 350 261.9 L 360 266.5 L 370 270.4 L 380 273.3 L 390 275.1 L 400 275.7 L 410 274.9 L 420 273.0 L 430 270.1 L 440 266.5 L 450 262.5 L 460 258.4 L 470 254.5 L 480 251.1 L 490 248.3 L 500 246.2 L 510 244.8 L 520 244.0 L 530 243.6 L 540 243.5 L 550 243.3 L 560 243.0 L 570 242.1 L 580 240.8 L 590 238.9 L 600 236.5" fill="none" stroke="#0066ff" stroke-opacity="0.5" stroke-width="2"/>
+  <path d="M 0 280 L 0 220.0 L 10 228.9 L 20 236.9 L 30 243.1 L 40 247.1 L 50 248.7 L 60 248.1 L 70 245.8 L 80 242.5 L 90 239.0 L 100 235.9 L 110 233.7 L 120 232.5 L 130 232.3 L 140 232.6 L 150 232.8 L 160 232.2 L 170 230.3 L 180 226.6 L 190 221.2 L 200 214.3 L 210 206.6 L 220 198.9 L 230 192.1 L 240 187.1 L 250 184.4 L 260 184.5 L 270 187.1 L 280 192.0 L 290 198.4 L 300 205.4 L 310 212.2 L 320 218.1 L 330 222.5 L 340 225.4 L 350 226.8 L 360 227.3 L 370 227.5 L 380 228.0 L 390 229.3 L 400 231.8 L 410 235.4 L 420 239.8 L 430 244.5 L 440 248.5 L 450 251.2 L 460 251.8 L 470 250.0 L 480 245.7 L 490 239.2 L 500 231.0 L 510 222.1 L 520 213.4 L 530 205.9 L 540 200.1 L 550 196.5 L 560 195.1 L 570 195.6 L 580 197.4 L 590 199.9 L 600 202.3" fill="none" stroke="#00d4b8" stroke-width="2.5"/>
+  <circle cx="300" cy="200.8376682837083" r="5" fill="#00d4b8"/><rect width="600" height="400" fill="url(#fade)" style="mix-blend-mode:multiply"/></svg>

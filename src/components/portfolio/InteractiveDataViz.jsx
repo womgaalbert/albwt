@@ -8,6 +8,8 @@ export default function InteractiveDataViz() {
   const mouseY = useMotionValue(0);
   const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
   const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+  const followX = useSpring(mouseX, { stiffness: 100, damping: 30 });
+  const followY = useSpring(mouseY, { stiffness: 100, damping: 30 });
 
   // Generate network nodes
   useEffect(() => {
@@ -129,8 +131,8 @@ export default function InteractiveDataViz() {
       <motion.div
         className="absolute top-1/4 right-1/4 w-32 h-32"
         style={{
-          x: useSpring(mouseX, { stiffness: 100, damping: 30 }),
-          y: useSpring(mouseY, { stiffness: 100, damping: 30 }),
+          x: followX,
+          y: followY,
         }}
       >
         <svg viewBox="0 0 100 100" className="w-full h-full opacity-20">

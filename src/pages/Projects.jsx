@@ -20,7 +20,7 @@ const projects = [
     color: "hsl(var(--primary))",
     category: "Forecasting",
     categoryFr: "Prévision",
-    image: `https://placehold.co/600x400/1e2a3a/00d4b8?text=${encodeURIComponent("Energy ARIMA")}`,
+    image: "/images/projects/energy-arima-forecasting.svg",
     year: "2024",
   },
   {
@@ -38,7 +38,7 @@ const projects = [
     color: "hsl(var(--brand-blue))",
     category: "Deep Learning",
     categoryFr: "Deep Learning",
-    image: `https://placehold.co/600x400/1e2a3a/0066ff?text=${encodeURIComponent("BFRB Sensor Fusion")}`,
+    image: "/images/projects/bfrb-sensor-fusion.svg",
     year: "2025",
   },
   {
@@ -56,7 +56,7 @@ const projects = [
     color: "#8b5cf6",
     category: "Deep Learning",
     categoryFr: "Deep Learning",
-    image: `https://placehold.co/600x400/1e2a3a/8b5cf6?text=${encodeURIComponent("Transformer Time Series")}`,
+    image: "/images/projects/transformer-time-series.svg",
     year: "2024",
   },
   {
@@ -74,7 +74,7 @@ const projects = [
     color: "#f59e0b",
     category: "Computer Vision",
     categoryFr: "Vision par Ordinateur",
-    image: `https://placehold.co/600x400/1e2a3a/f59e0b?text=${encodeURIComponent("ConvNet CIFAR-10")}`,
+    image: "/images/projects/convnet-cifar10.svg",
     year: "2023",
   },
   {
@@ -92,7 +92,7 @@ const projects = [
     color: "#10b981",
     category: "Machine Learning",
     categoryFr: "Machine Learning",
-    image: `https://placehold.co/600x400/1e2a3a/10b981?text=${encodeURIComponent("Student Plurilingual")}`,
+    image: "/images/projects/student-plurilingual.svg",
     year: "2025 🔄",
   },
   {
@@ -110,7 +110,7 @@ const projects = [
     color: "#ef4444",
     category: "Web",
     categoryFr: "Web",
-    image: `https://placehold.co/600x400/1e2a3a/ef4444?text=${encodeURIComponent("Portfolio Website")}`,
+    image: "/images/projects/portfolio-website.svg",
     year: "2023",
   },
   {
@@ -128,7 +128,7 @@ const projects = [
     color: "#6366f1",
     category: "Web",
     categoryFr: "Web",
-    image: `https://placehold.co/600x400/1e2a3a/6366f1?text=${encodeURIComponent("CM Avocate")}`,
+    image: "/images/projects/cm-avocats-platform.svg",
     year: "2024",
   },
 ];

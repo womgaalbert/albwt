@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <defs>
+    <radialGradient id="g1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00d4b8" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#00d4b8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#101b33" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#101b33" stop-opacity="0.85"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6366f1" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="400" fill="#101b33"/>
+  <rect width="600" height="400" fill="url(#grid)"/>
+  <ellipse cx="491.99999999999994" cy="80" rx="228" ry="220.00000000000003" fill="url(#g1)"/>
+  <ellipse cx="90" cy="340" rx="210" ry="200" fill="url(#g2)"/><line x1="300" y1="80" x2="300" y2="312" stroke="#6366f1" stroke-width="3"/><line x1="132" y1="152" x2="468" y2="152" stroke="#6366f1" stroke-width="3"/><circle cx="300" cy="152" r="6" fill="#6366f1"/><line x1="132" y1="152" x2="132" y2="192" stroke="#00d4b8" stroke-width="2"/><path d="M 104 192 Q 132 224 160 192 Z" fill="#00d4b8" fill-opacity="0.35" stroke="#00d4b8" stroke-width="2"/><line x1="468" y1="152" x2="468" y2="192" stroke="#6366f1" stroke-width="2"/><path d="M 440 192 Q 468 224 496 192 Z" fill="#6366f1" fill-opacity="0.35" stroke="#6366f1" stroke-width="2"/><rect x="266" y="312" width="68" height="10" rx="4" fill="#6366f1" fill-opacity="0.7"/><rect width="600" height="400" fill="url(#fade)" style="mix-blend-mode:multiply"/></svg>

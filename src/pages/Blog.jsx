@@ -113,7 +113,7 @@ export default function Blog() {
                     {post.cover_image && (
                       <div className="h-48 overflow-hidden bg-background">
                         <img
-                          src={post.cover_image}
+                          src={post.cover_image?.includes("placehold.co") ? `/images/blog/${post.slug}.svg` : post.cover_image}
                           alt={post.title}
                           className="w-full h-full object-cover"
                         />
