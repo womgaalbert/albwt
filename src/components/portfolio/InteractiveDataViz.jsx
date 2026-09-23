@@ -61,8 +61,8 @@ export default function InteractiveDataViz() {
       <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="nodeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#00d4b8" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#0066ff" stopOpacity="0.4" />
+            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
+            <stop offset="100%" stopColor="hsl(var(--brand-blue))" stopOpacity="0.4" />
           </linearGradient>
           <filter id="glow">
             <feGaussianBlur stdDeviation="2" result="coloredBlur" />
@@ -140,7 +140,7 @@ export default function InteractiveDataViz() {
               cx={10 + (i * 6) % 80}
               cy={10 + ((i * 13) % 80)}
               r={1 + (i % 3)}
-              fill="#00d4b8"
+              fill="hsl(var(--primary))"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 0.6, scale: 1 }}
               transition={{
@@ -188,7 +188,7 @@ export default function InteractiveDataViz() {
         {[...Array(3)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute rounded-full border border-teal-500"
+            className="absolute rounded-full border border-primary"
             style={{
               width: 40 + i * 20,
               height: 40 + i * 20,

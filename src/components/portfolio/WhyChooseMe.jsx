@@ -43,9 +43,9 @@ export default function WhyChooseMe() {
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <span className="text-sm font-semibold tracking-widest uppercase" style={{color:"#00d4b8"}}>Differentiators</span>
-        <h2 className="text-3xl md:text-4xl font-black mt-3 text-white">Why Choose Me?</h2>
-        <p className="text-gray-400 mt-4 max-w-xl mx-auto">
+        <span className="text-sm font-semibold tracking-widest uppercase" style={{color:"hsl(var(--primary))"}}>Differentiators</span>
+        <h2 className="text-3xl md:text-4xl font-black mt-3 text-foreground">Why Choose Me?</h2>
+        <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
           Chez Kamarange — a dedicated partner who combines technical excellence with strategic business thinking.
         </p>
       </motion.div>
@@ -58,14 +58,14 @@ export default function WhyChooseMe() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08 }}
-            className="flex gap-4 p-6 bg-[#1a2947] border border-[#2d4166] rounded-2xl card-hover"
+            className="flex gap-4 p-6 bg-card border border-border rounded-2xl card-hover"
           >
             <div className="w-11 h-11 rounded-xl flex-shrink-0 flex items-center justify-center" style={{background:"rgba(0,212,184,0.1)"}}>
-              <r.Icon className="w-5 h-5" style={{color:"#00d4b8"}} />
+              <r.Icon className="w-5 h-5" style={{color:"hsl(var(--primary))"}} />
             </div>
             <div>
-              <h3 className="text-white font-semibold mb-1">{r.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">{r.desc}</p>
+              <h3 className="text-foreground font-semibold mb-1">{r.title}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">{r.desc}</p>
             </div>
           </motion.div>
         ))}

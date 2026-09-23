@@ -41,11 +41,11 @@ export default function Blog() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#00d4b8" }}>
+          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "hsl(var(--primary))" }}>
             Thought Leadership
           </span>
-          <h1 className="text-4xl md:text-5xl font-black mt-3 text-white">AI & Data Science Blog</h1>
-          <p className="text-gray-400 mt-4 max-w-2xl mx-auto text-lg">
+          <h1 className="text-4xl md:text-5xl font-black mt-3 text-foreground">AI & Data Science Blog</h1>
+          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg">
             Insights, tutorials, and case studies on Machine Learning, AI, and Data Science.
           </p>
         </motion.div>
@@ -58,13 +58,13 @@ export default function Blog() {
           className="max-w-xl mx-auto mb-10"
         >
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <input
               type="text"
               placeholder="Search articles..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-[#1a2947] border border-[#2d4166] text-white rounded-xl pl-12 pr-4 py-3 text-sm focus:outline-none focus:border-teal-500 transition-colors"
+              className="w-full bg-card border border-border text-foreground rounded-xl pl-12 pr-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
             />
           </div>
         </motion.div>
@@ -77,9 +77,9 @@ export default function Blog() {
               onClick={() => setActiveCategory(cat)}
               className="px-4 py-2 rounded-full text-sm font-medium transition-all"
               style={{
-                background: activeCategory === cat ? "linear-gradient(135deg,#00d4b8,#0066ff)" : "#1a2947",
+                background: activeCategory === cat ? "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))" : "hsl(var(--card))",
                 color: activeCategory === cat ? "white" : "#d1d5db",
-                border: activeCategory === cat ? "none" : "1px solid #2d4166",
+                border: activeCategory === cat ? "none" : "1px solid hsl(var(--border))",
               }}
             >
               {cat}
@@ -94,7 +94,7 @@ export default function Blog() {
           </div>
         ) : filteredPosts.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-gray-400 text-lg">No articles found.</p>
+            <p className="text-muted-foreground text-lg">No articles found.</p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -106,9 +106,9 @@ export default function Blog() {
                 transition={{ delay: i * 0.05 }}
               >
                 <Link to={`/BlogPost?id=${post.id}`}>
-                  <div className="card-hover bg-[#1a2947] border border-[#2d4166] rounded-2xl overflow-hidden h-full flex flex-col">
+                  <div className="card-hover bg-card border border-border rounded-2xl overflow-hidden h-full flex flex-col">
                     {post.cover_image && (
-                      <div className="h-48 overflow-hidden bg-[#101b33]">
+                      <div className="h-48 overflow-hidden bg-background">
                         <img
                           src={post.cover_image}
                           alt={post.title}
@@ -120,28 +120,28 @@ export default function Blog() {
                       <div className="flex items-center gap-2 mb-3">
                         <span
                           className="text-xs font-medium px-2 py-1 rounded-full"
-                          style={{ background: "#00d4b815", color: "#00d4b8" }}
+                          style={{ background: "hsl(var(--primary) / 0.08)", color: "hsl(var(--primary))" }}
                         >
                           {post.category}
                         </span>
                         {post.read_time && (
-                          <span className="text-xs text-gray-400 flex items-center gap-1">
+                          <span className="text-xs text-muted-foreground flex items-center gap-1">
                             <Clock className="w-3 h-3" /> {post.read_time} min read
                           </span>
                         )}
                       </div>
-                      <h3 className="text-white font-bold text-lg mb-2 line-clamp-2">{post.title}</h3>
-                      <p className="text-gray-400 text-sm leading-relaxed mb-4 flex-1 line-clamp-3">
+                      <h3 className="text-foreground font-bold text-lg mb-2 line-clamp-2">{post.title}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1 line-clamp-3">
                         {post.excerpt}
                       </p>
-                      <div className="flex items-center justify-between pt-4 border-t border-[#2d4166] text-xs text-gray-500">
+                      <div className="flex items-center justify-between pt-4 border-t border-border text-xs text-muted-foreground/70">
                         {post.published_date && (
                           <span className="flex items-center gap-1">
                             <Calendar className="w-3 h-3" />
                             {format(new Date(post.published_date), "MMM d, yyyy")}
                           </span>
                         )}
-                        <span className="text-teal-400 flex items-center gap-1 font-medium">
+                        <span className="text-primary flex items-center gap-1 font-medium">
                           Read More <ArrowRight className="w-3 h-3" />
                         </span>
                       </div>

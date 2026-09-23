@@ -11,7 +11,7 @@ const projects = [
     stars: 1,
     lang: "Jupyter Notebook",
     url: "https://github.com/womgaalbert/Energy-ARIMA-Forecasting",
-    color: "#00d4b8",
+    color: "hsl(var(--primary))",
   },
   {
     title: "Behavior Detection (Sensors)",
@@ -20,7 +20,7 @@ const projects = [
     stars: 0,
     lang: "Jupyter Notebook",
     url: "https://github.com/womgaalbert/Detect-Behavior-with-Sensor-Data",
-    color: "#0066ff",
+    color: "hsl(var(--brand-blue))",
   },
   {
     title: "Transformer Time Series Prediction",
@@ -44,7 +44,7 @@ const projects = [
 
 export default function FeaturedProjects() {
   return (
-    <section className="py-24 bg-[#0c1428]">
+    <section className="py-24 bg-footer">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -52,9 +52,9 @@ export default function FeaturedProjects() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-semibold tracking-widest uppercase" style={{color:"#00d4b8"}}>Portfolio</span>
-          <h2 className="text-3xl md:text-4xl font-black mt-3 text-white">Featured Projects</h2>
-          <p className="text-gray-400 mt-4 max-w-xl mx-auto">
+          <span className="text-sm font-semibold tracking-widest uppercase" style={{color:"hsl(var(--primary))"}}>Portfolio</span>
+          <h2 className="text-3xl md:text-4xl font-black mt-3 text-foreground">Featured Projects</h2>
+          <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
             Real-world AI and data science projects showcasing expertise in forecasting, NLP, and computer vision.
           </p>
         </motion.div>
@@ -67,22 +67,22 @@ export default function FeaturedProjects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="card-hover bg-[#1a2947] border border-[#2d4166] rounded-2xl p-6"
+              className="card-hover bg-card border border-border rounded-2xl p-6"
             >
               <div className="flex items-start justify-between mb-3">
                 <div className="w-3 h-3 rounded-full mt-1" style={{backgroundColor: p.color}} />
-                <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors">
+                <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-muted-foreground/70 hover:text-foreground transition-colors">
                   <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
-              <h3 className="text-white font-bold text-lg mb-2">{p.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed mb-4">{p.desc}</p>
+              <h3 className="text-foreground font-bold text-lg mb-2">{p.title}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4">{p.desc}</p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {p.tags.map(tag => (
-                  <span key={tag} className="bg-[#101b33] border border-[#2d4166] text-gray-300 text-xs px-2 py-0.5 rounded-full">{tag}</span>
+                  <span key={tag} className="bg-background border border-border text-muted-foreground text-xs px-2 py-0.5 rounded-full">{tag}</span>
                 ))}
               </div>
-              <div className="flex items-center gap-4 text-xs text-gray-500">
+              <div className="flex items-center gap-4 text-xs text-muted-foreground/70">
                 <span className="flex items-center gap-1"><Star className="w-3 h-3" /> {p.stars}</span>
                 <span>{p.lang}</span>
               </div>
@@ -91,7 +91,7 @@ export default function FeaturedProjects() {
         </div>
 
         <div className="text-center mt-12">
-          <Link to={createPageUrl("Projects")} className="inline-flex items-center gap-2 font-semibold hover:gap-3 transition-all" style={{color:"#00d4b8"}}>
+          <Link to={createPageUrl("Projects")} className="inline-flex items-center gap-2 font-semibold hover:gap-3 transition-all" style={{color:"hsl(var(--primary))"}}>
             View All Projects <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

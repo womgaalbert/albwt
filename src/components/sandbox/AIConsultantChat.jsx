@@ -162,22 +162,22 @@ export default function AIConsultantChat() {
   };
 
   return (
-    <div className="bg-[#1a2947] border border-[#2d4166] rounded-2xl overflow-hidden flex flex-col" style={{ height: "600px" }}>
+    <div className="bg-card border border-border rounded-2xl overflow-hidden flex flex-col" style={{ height: "600px" }}>
       {/* Header */}
-      <div className="flex items-center justify-between px-5 py-4 border-b border-[#2d4166]" style={{ background: "#101b33" }}>
+      <div className="flex items-center justify-between px-5 py-4 border-b border-border" style={{ background: "hsl(var(--background))" }}>
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "#00d4b820" }}>
-            <Bot className="w-5 h-5" style={{ color: "#00d4b8" }} />
+          <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "hsl(var(--primary) / 0.13)" }}>
+            <Bot className="w-5 h-5" style={{ color: "hsl(var(--primary))" }} />
           </div>
           <div>
-            <p className="text-white font-bold text-sm">Albert's AI Consultant</p>
-            <p className="text-gray-400 text-xs flex items-center gap-1">
+            <p className="text-foreground font-bold text-sm">Albert's AI Consultant</p>
+            <p className="text-muted-foreground text-xs flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse inline-block" />
               Demo mode · Keyword-based responses
             </p>
           </div>
         </div>
-        <button onClick={reset} className="text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-[#2d4166]" title="Reset chat">
+        <button onClick={reset} className="text-muted-foreground hover:text-foreground transition-colors p-2 rounded-lg hover:bg-muted" title="Reset chat">
           <RotateCcw className="w-4 h-4" />
         </button>
       </div>
@@ -190,7 +190,7 @@ export default function AIConsultantChat() {
               <button
                 key={q}
                 onClick={() => sendMessage(q)}
-                className="text-xs px-3 py-1.5 rounded-full border border-[#2d4166] text-gray-300 hover:text-white hover:border-teal-500/50 transition-all bg-[#101b33]"
+                className="text-xs px-3 py-1.5 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-primary/50 transition-all bg-background"
               >
                 {q}
               </button>
@@ -210,27 +210,27 @@ export default function AIConsultantChat() {
               <div
                 className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
                 style={{
-                  background: msg.role === "user" ? "#0066ff20" : "#00d4b820",
+                  background: msg.role === "user" ? "hsl(var(--brand-blue) / 0.13)" : "hsl(var(--primary) / 0.13)",
                 }}
               >
                 {msg.role === "user"
-                  ? <User className="w-4 h-4" style={{ color: "#0066ff" }} />
-                  : <Sparkles className="w-4 h-4" style={{ color: "#00d4b8" }} />
+                  ? <User className="w-4 h-4" style={{ color: "hsl(var(--brand-blue))" }} />
+                  : <Sparkles className="w-4 h-4" style={{ color: "hsl(var(--primary))" }} />
                 }
               </div>
               <div
                 className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
                   msg.role === "user"
-                    ? "bg-[#0066ff15] border border-[#0066ff30] text-gray-200 rounded-tr-sm"
-                    : "bg-[#101b33] border border-[#2d4166] text-gray-200 rounded-tl-sm"
+                    ? "bg-brand-blue/10 border border-brand-blue/25 text-foreground/80 rounded-tr-sm"
+                    : "bg-background border border-border text-foreground/80 rounded-tl-sm"
                 }`}
               >
                 {msg.role === "assistant"
                   ? <ReactMarkdown
-                      className="prose prose-sm prose-invert max-w-none"
+                      className="prose prose-sm max-w-none"
                       components={{
                         a: ({ children, href }) => (
-                          <a href={sanitizeUrl(href) || "#"} target="_blank" rel="noopener noreferrer" style={{color: "#00d4b8"}}>
+                          <a href={sanitizeUrl(href) || "#"} target="_blank" rel="noopener noreferrer" style={{color: "hsl(var(--primary))"}}>
                             {children}
                           </a>
                         ),
@@ -251,12 +251,12 @@ export default function AIConsultantChat() {
 
         {loading && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-3">
-            <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "#00d4b820" }}>
-              <Sparkles className="w-4 h-4" style={{ color: "#00d4b8" }} />
+            <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "hsl(var(--primary) / 0.13)" }}>
+              <Sparkles className="w-4 h-4" style={{ color: "hsl(var(--primary))" }} />
             </div>
-            <div className="bg-[#101b33] border border-[#2d4166] px-4 py-3 rounded-2xl rounded-tl-sm flex items-center gap-1.5">
+            <div className="bg-background border border-border px-4 py-3 rounded-2xl rounded-tl-sm flex items-center gap-1.5">
               {[0, 1, 2].map(i => (
-                <span key={i} className="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
+                <span key={i} className="w-2 h-2 rounded-full bg-muted-foreground/60 animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
               ))}
             </div>
           </motion.div>
@@ -266,7 +266,7 @@ export default function AIConsultantChat() {
       </div>
 
       {/* Input */}
-      <div className="px-5 py-4 border-t border-[#2d4166]" style={{ background: "#101b33" }}>
+      <div className="px-5 py-4 border-t border-border" style={{ background: "hsl(var(--background))" }}>
         <div className="flex gap-3 items-end">
           <textarea
             value={input}
@@ -274,7 +274,7 @@ export default function AIConsultantChat() {
             onKeyDown={handleKeyDown}
             placeholder="Ask about Albert's skills, projects, or services..."
             rows={1}
-            className="flex-1 bg-[#1a2947] border border-[#2d4166] text-white rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-teal-500 transition-colors resize-none placeholder-gray-600"
+            className="flex-1 bg-card border border-border text-foreground rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors resize-none placeholder-muted-foreground/60"
             maxLength={MAX_INPUT_LENGTHS.chatMessage}
             style={{ maxHeight: "100px" }}
           />
@@ -282,12 +282,12 @@ export default function AIConsultantChat() {
             onClick={() => sendMessage()}
             disabled={!input.trim() || loading}
             className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
-            style={{ background: "linear-gradient(135deg, #00d4b8, #0066ff)" }}
+            style={{ background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))" }}
           >
             <Send className="w-4 h-4 text-white" />
           </button>
         </div>
-        <p className="text-gray-500 text-xs mt-2 text-center">Press Enter to send · Shift+Enter for new line · Demo mode</p>
+        <p className="text-muted-foreground/70 text-xs mt-2 text-center">Press Enter to send · Shift+Enter for new line · Demo mode</p>
       </div>
     </div>
   );

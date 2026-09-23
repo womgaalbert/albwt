@@ -110,7 +110,7 @@ export default function SentimentAnalyzer() {
       case "negative":
         return <ThumbsDown className="w-6 h-6 text-red-400" />;
       default:
-        return <Minus className="w-6 h-6 text-gray-300" />;
+        return <Minus className="w-6 h-6 text-muted-foreground" />;
     }
   };
 
@@ -127,36 +127,36 @@ export default function SentimentAnalyzer() {
   };
 
   return (
-    <div className="bg-[#1a2947] border border-[#2d4166] rounded-2xl p-8">
+    <div className="bg-card border border-border rounded-2xl p-8">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center">
           <MessageSquare className="w-5 h-5 text-blue-400" />
         </div>
         <div>
-          <h2 className="text-white font-bold text-xl">Sentiment Analyzer</h2>
-          <p className="text-gray-400 text-sm">Demo mode · Lexical keyword analysis</p>
+          <h2 className="text-foreground font-bold text-xl">Sentiment Analyzer</h2>
+          <p className="text-muted-foreground text-sm">Demo mode · Lexical keyword analysis</p>
         </div>
       </div>
 
       <div className="space-y-4 mb-6">
         <div>
-          <label className="block text-sm text-gray-300 mb-2">Text to Analyze</label>
+          <label className="block text-sm text-muted-foreground mb-2">Text to Analyze</label>
           <Textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Enter text to analyze sentiment..."
-            className="min-h-32 bg-[#101b33] border-[#2d4166] text-white resize-none"
+            className="min-h-32 bg-background border-border text-foreground resize-none"
             maxLength={MAX_INPUT_LENGTHS.sentimentText}
           />
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <span className="text-xs text-gray-400">Examples:</span>
+          <span className="text-xs text-muted-foreground">Examples:</span>
           {examples.map((ex, i) => (
             <button
               key={i}
               onClick={() => setText(ex)}
-              className="text-xs bg-[#101b33] border border-[#2d4166] text-gray-300 px-3 py-1 rounded-full hover:border-blue-500 hover:text-blue-400 transition-colors"
+              className="text-xs bg-background border border-border text-muted-foreground px-3 py-1 rounded-full hover:border-primary/50 hover:text-primary transition-colors"
             >
               {ex}
             </button>
@@ -181,15 +181,15 @@ export default function SentimentAnalyzer() {
       </div>
 
       {result && (
-        <div className="bg-[#101b33] border border-[#2d4166] rounded-xl p-6">
+        <div className="bg-background border border-border rounded-xl p-6">
           <div className="flex items-center gap-3 mb-4">
             {getSentimentIcon()}
             <div className="flex-1">
-              <h3 className="text-white font-semibold capitalize">{result.sentiment}</h3>
-              <p className="text-gray-400 text-sm">Confidence: {result.confidence}%</p>
+              <h3 className="text-foreground font-semibold capitalize">{result.sentiment}</h3>
+              <p className="text-muted-foreground text-sm">Confidence: {result.confidence}%</p>
             </div>
           </div>
-          <div className="w-full bg-[#1a2947] rounded-full h-2 mb-4">
+          <div className="w-full bg-card rounded-full h-2 mb-4">
             <div
               className="h-2 rounded-full transition-all"
               style={{
@@ -198,7 +198,7 @@ export default function SentimentAnalyzer() {
               }}
             />
           </div>
-          <p className="text-gray-300 text-sm leading-relaxed">{result.explanation}</p>
+          <p className="text-muted-foreground text-sm leading-relaxed">{result.explanation}</p>
         </div>
       )}
     </div>

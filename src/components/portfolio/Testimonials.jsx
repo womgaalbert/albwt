@@ -33,7 +33,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-24 bg-[#0c1428]">
+    <section className="py-24 bg-footer">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -41,13 +41,13 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#00d4b8" }}>
+          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "hsl(var(--primary))" }}>
             Client Testimonials
           </span>
-          <h2 className="text-3xl md:text-4xl font-black mt-3 text-white">
+          <h2 className="text-3xl md:text-4xl font-black mt-3 text-foreground">
             Trusted by Teams Across the Globe
           </h2>
-          <p className="text-gray-400 mt-4 max-w-xl mx-auto text-lg">
+          <p className="text-muted-foreground mt-4 max-w-xl mx-auto text-lg">
             From startups to enterprises — here's what clients say about working with me.
           </p>
         </motion.div>
@@ -60,7 +60,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="card-hover bg-[#1a2947] border border-[#2d4166] rounded-2xl p-6 flex flex-col gap-4 relative"
+              className="card-hover bg-card border border-border rounded-2xl p-6 flex flex-col gap-4 relative"
             >
               {/* Quote icon */}
               <div
@@ -78,12 +78,12 @@ export default function Testimonials() {
               </div>
 
               {/* Quote */}
-              <p className="text-gray-300 text-sm leading-relaxed flex-1">
+              <p className="text-muted-foreground text-sm leading-relaxed flex-1">
                 "{t.quote}"
               </p>
 
               {/* Divider */}
-              <div className="border-t border-[#2d4166]" />
+              <div className="border-t border-border" />
 
               {/* Author */}
               <div className="flex items-center gap-3">
@@ -94,8 +94,8 @@ export default function Testimonials() {
                   {t.initials}
                 </div>
                 <div>
-                  <p className="text-white font-semibold text-sm">{t.name}</p>
-                  <p className="text-gray-400 text-xs">{t.title} · {t.company}</p>
+                  <p className="text-foreground font-semibold text-sm">{t.name}</p>
+                  <p className="text-muted-foreground text-xs">{t.title} · {t.company}</p>
                 </div>
                 <span className="ml-auto text-base" title={t.country}>{t.country.split(" ")[0]}</span>
               </div>

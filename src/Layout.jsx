@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 const AWT_LOGO = "/logo-awt.png";
 import { useLang } from "@/lib/LanguageContext";
 import LanguageSwitcher from "@/components/portfolio/LanguageSwitcher";
+import ThemeToggle from "@/components/portfolio/ThemeToggle";
 
 export default function Layout({ children, currentPageName }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,71 +30,30 @@ export default function Layout({ children, currentPageName }) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#101b33] text-white font-sans">
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        * { font-family: 'Inter', sans-serif; }
-        :root {
-          --teal: #00d4b8;
-          --teal-dark: #00b09b;
-          --navy: #101b33;
-          --navy-card: #1a2947;
-          --navy-border: #2d4166;
-        }
-        .teal-gradient { background: linear-gradient(135deg, #00d4b8, #0066ff); }
-        .teal-text { color: #00d4b8; }
-        .nav-link { transition: color 0.2s; }
-        .nav-link:hover { color: #00d4b8; }
-        .nav-link.active { color: #00d4b8; }
-        .btn-primary {
-          background: linear-gradient(135deg, #00d4b8, #0066ff);
-          transition: opacity 0.2s, transform 0.2s;
-        }
-        .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
-        .card-hover { transition: transform 0.3s, box-shadow 0.3s; }
-        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,212,184,0.25); }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-15px); }
-        }
-        .grid-bg {
-          background-image: linear-gradient(rgba(0,212,184,0.06) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,212,184,0.06) 1px, transparent 1px);
-          background-size: 60px 60px;
-        }
-        .section-divider {
-          border-color: rgba(0,212,184,0.2);
-        }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #101b33; }
-        ::-webkit-scrollbar-thumb { background: #00d4b8; border-radius: 3px; }
-      `}</style>
-
+    <div className="min-h-screen bg-background text-foreground font-sans">
       {/* Navbar */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-[#101b33]/95 backdrop-blur-md shadow-lg shadow-black/30 border-b border-[#2d4166]" : "bg-transparent"}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-background/95 backdrop-blur-md shadow-lg shadow-black/5 dark:shadow-black/30 border-b border-border" : "bg-transparent"}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link to={createPageUrl("Home")} className="flex items-center gap-2 group">
             <img src={AWT_LOGO} alt="AWT" className="w-10 h-10 object-contain" />
             <div>
-              <span className="font-bold text-lg text-white">Albert</span>
+              <span className="font-bold text-lg text-foreground">Albert</span>
               <span className="teal-text font-bold text-lg"> Womga</span>
             </div>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-5">
             {navLinks.map((link) => (
               <Link
                 key={link.page}
                 to={createPageUrl(link.page)}
-                className={`nav-link text-sm font-medium ${currentPageName === link.page ? "active" : "text-gray-200"}`}
+                className={`nav-link text-sm font-medium ${currentPageName === link.page ? "active" : "text-muted-foreground"}`}
               >
                 {link.label}
               </Link>
             ))}
+            <ThemeToggle />
             <LanguageSwitcher />
             <Link to={createPageUrl("Contact")} className="btn-primary px-5 py-2 rounded-full text-sm font-semibold text-white">
               {t.nav.hire}
@@ -101,19 +61,22 @@ export default function Layout({ children, currentPageName }) {
           </div>
 
           {/* Mobile toggle */}
-          <button className="md:hidden text-white" onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          <div className="md:hidden flex items-center gap-3">
+            <ThemeToggle />
+            <button className="text-foreground" onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="md:hidden bg-[#1a2947] border-t border-[#2d4166] px-6 py-4 flex flex-col gap-4">
+          <div className="md:hidden bg-card border-t border-border px-6 py-4 flex flex-col gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.page}
                 to={createPageUrl(link.page)}
-                className={`nav-link text-sm font-medium ${currentPageName === link.page ? "active" : "text-gray-200"}`}
+                className={`nav-link text-sm font-medium ${currentPageName === link.page ? "active" : "text-muted-foreground"}`}
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}
@@ -131,21 +94,21 @@ export default function Layout({ children, currentPageName }) {
       <main>{children}</main>
 
       {/* Footer */}
-      <footer className="bg-[#0c1428] border-t border-[#2d4166] py-10 mt-0">
+      <footer className="bg-footer border-t border-border py-10 mt-0">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <img src={AWT_LOGO} alt="AWT" className="w-9 h-9 object-contain" />
-            <span className="font-bold text-white">Albert Womga</span>
-            <span className="text-gray-400 text-sm ml-2">— Data Scientist & AI Specialist</span>
+            <span className="font-bold text-footer-foreground">Albert Womga</span>
+            <span className="text-footer-foreground/60 text-sm ml-2">— Data Scientist & AI Specialist</span>
           </div>
-          <div className="flex gap-6 text-sm text-gray-400">
+          <div className="flex gap-6 text-sm text-footer-foreground/60">
             {navLinks.map((link) => (
-              <Link key={link.page} to={createPageUrl(link.page)} className="hover:text-teal-400 transition-colors" style={{color: "inherit"}}>
+              <Link key={link.page} to={createPageUrl(link.page)} className="hover:text-primary transition-colors" style={{color: "inherit"}}>
                 {link.label}
               </Link>
             ))}
           </div>
-          <p className="text-gray-500 text-sm">{t.footer.rights}</p>
+          <p className="text-footer-foreground/50 text-sm">{t.footer.rights}</p>
         </div>
       </footer>
     </div>

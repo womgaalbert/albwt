@@ -9,14 +9,14 @@ const services = [
   title: "Machine Learning Solutions",
   desc: "Custom end-to-end ML pipelines tailored to your business challenges. From data preparation to model deployment.",
   features: ["Supervised & Unsupervised Learning", "Model Selection & Hyperparameter Tuning", "Feature Engineering", "MLOps & Deployment", "Model Monitoring & Retraining"],
-  color: "#00d4b8"
+  color: "hsl(var(--primary))"
 },
 {
   Icon: TrendingUp,
   title: "Predictive Analytics & Forecasting",
   desc: "Time series analysis and forecasting models to predict demand, energy, markets, and operational metrics.",
   features: ["ARIMA / SARIMA Models", "LSTM Neural Networks", "Transformer-based Forecasting", "Anomaly Detection", "U.S. Federal Reserve Data Integration"],
-  color: "#0066ff"
+  color: "hsl(var(--brand-blue))"
 },
 {
   Icon: MessageSquare,
@@ -59,9 +59,9 @@ export default function Services() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16">
           
-          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "#00d4b8" }}>What I Do</span>
-          <h1 className="text-4xl md:text-5xl font-black mt-3 text-white">Services</h1>
-          <p className="text-gray-400 mt-4 max-w-2xl mx-auto text-lg">
+          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "hsl(var(--primary))" }}>What I Do</span>
+          <h1 className="text-4xl md:text-5xl font-black mt-3 text-foreground">Services</h1>
+          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg">
             Comprehensive data science and AI solutions grounded in 15+ years of real-world delivery across government, healthcare, and legal tech — in Canada and Cameroon.
           </p>
         </motion.div>
@@ -74,16 +74,16 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08 }}
-            className="card-hover bg-[#1a2947] border border-[#2d4166] rounded-2xl p-6">
+            className="card-hover bg-card border border-border rounded-2xl p-6">
             
               <div className="w-12 h-12 rounded-xl mb-5 flex items-center justify-center" style={{ background: `${s.color}15` }}>
                 <s.Icon className="w-6 h-6" style={{ color: s.color }} />
               </div>
-              <h3 className="text-white font-bold text-lg mb-3">{s.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed mb-5">{s.desc}</p>
+              <h3 className="text-foreground font-bold text-lg mb-3">{s.title}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-5">{s.desc}</p>
               <ul className="space-y-2">
                 {s.features.map((f) =>
-              <li key={f} className="flex items-start gap-2 text-sm text-gray-300">
+              <li key={f} className="flex items-start gap-2 text-sm text-muted-foreground">
                     <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: s.color }} />
                     {f}
                   </li>

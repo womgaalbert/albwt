@@ -12,6 +12,11 @@ module.exports = {
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
+  			'brand-blue': 'hsl(var(--brand-blue))',
+  			footer: {
+  				DEFAULT: 'hsl(var(--footer-bg))',
+  				foreground: 'hsl(var(--footer-foreground))'
+  			},
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
@@ -85,5 +90,5 @@ module.exports = {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 }

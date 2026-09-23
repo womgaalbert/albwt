@@ -66,7 +66,7 @@ export default function BlogPost() {
           <p className="text-red-400 text-lg mb-4">Failed to load post</p>
           <button
             onClick={() => navigate("/Blog")}
-            className="text-teal-400 hover:underline"
+            className="text-primary hover:underline"
           >
             Back to Blog
           </button>
@@ -79,10 +79,10 @@ export default function BlogPost() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-400 text-lg mb-4">Post not found</p>
+          <p className="text-muted-foreground text-lg mb-4">Post not found</p>
           <button
             onClick={() => navigate("/Blog")}
-            className="text-teal-400 hover:underline"
+            className="text-primary hover:underline"
           >
             Back to Blog
           </button>
@@ -99,7 +99,7 @@ export default function BlogPost() {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           onClick={() => navigate("/Blog")}
-          className="flex items-center gap-2 text-gray-300 hover:text-teal-400 transition-colors mb-8"
+          className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Blog
@@ -129,12 +129,12 @@ export default function BlogPost() {
         >
           <span
             className="inline-block text-sm font-medium px-3 py-1 rounded-full mb-4"
-            style={{ background: "#00d4b815", color: "#00d4b8" }}
+            style={{ background: "hsl(var(--primary) / 0.08)", color: "hsl(var(--primary))" }}
           >
             {post.category}
           </span>
-          <h1 className="text-4xl md:text-5xl font-black text-white mb-4">{post.title}</h1>
-          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
+          <h1 className="text-4xl md:text-5xl font-black text-foreground mb-4">{post.title}</h1>
+          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
             {post.published_date && (
               <span className="flex items-center gap-1">
                 <Calendar className="w-4 h-4" />
@@ -155,38 +155,38 @@ export default function BlogPost() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="flex items-center gap-3 mb-8 pb-8 border-b border-[#2d4166]"
+          className="flex items-center gap-3 mb-8 pb-8 border-b border-border"
         >
-          <span className="text-sm text-gray-400 flex items-center gap-2">
+          <span className="text-sm text-muted-foreground flex items-center gap-2">
             <Share2 className="w-4 h-4" /> Share:
           </span>
           <button
             onClick={() => handleShare("twitter")}
-            className="w-9 h-9 rounded-lg bg-[#1a2947] border border-[#2d4166] flex items-center justify-center hover:border-teal-500 transition-colors"
+            className="w-9 h-9 rounded-lg bg-card border border-border flex items-center justify-center hover:border-primary transition-colors"
             title="Share on Twitter"
           >
-            <Twitter className="w-4 h-4 text-gray-300" />
+            <Twitter className="w-4 h-4 text-muted-foreground" />
           </button>
           <button
             onClick={() => handleShare("linkedin")}
-            className="w-9 h-9 rounded-lg bg-[#1a2947] border border-[#2d4166] flex items-center justify-center hover:border-teal-500 transition-colors"
+            className="w-9 h-9 rounded-lg bg-card border border-border flex items-center justify-center hover:border-primary transition-colors"
             title="Share on LinkedIn"
           >
-            <Linkedin className="w-4 h-4 text-gray-300" />
+            <Linkedin className="w-4 h-4 text-muted-foreground" />
           </button>
           <button
             onClick={() => handleShare("facebook")}
-            className="w-9 h-9 rounded-lg bg-[#1a2947] border border-[#2d4166] flex items-center justify-center hover:border-teal-500 transition-colors"
+            className="w-9 h-9 rounded-lg bg-card border border-border flex items-center justify-center hover:border-primary transition-colors"
             title="Share on Facebook"
           >
-            <Facebook className="w-4 h-4 text-gray-300" />
+            <Facebook className="w-4 h-4 text-muted-foreground" />
           </button>
           <button
             onClick={copyLink}
-            className="w-9 h-9 rounded-lg bg-[#1a2947] border border-[#2d4166] flex items-center justify-center hover:border-teal-500 transition-colors"
+            className="w-9 h-9 rounded-lg bg-card border border-border flex items-center justify-center hover:border-primary transition-colors"
             title="Copy link"
           >
-            <LinkIcon className="w-4 h-4 text-gray-300" />
+            <LinkIcon className="w-4 h-4 text-muted-foreground" />
           </button>
         </motion.div>
 
@@ -195,32 +195,32 @@ export default function BlogPost() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="prose prose-invert prose-lg max-w-none"
+          className="prose prose-lg max-w-none"
         >
           <ReactMarkdown
             components={{
-              h1: ({ children }) => <h1 className="text-3xl font-bold text-white mt-8 mb-4">{children}</h1>,
-              h2: ({ children }) => <h2 className="text-2xl font-bold text-white mt-6 mb-3">{children}</h2>,
-              h3: ({ children }) => <h3 className="text-xl font-bold text-white mt-5 mb-2">{children}</h3>,
-              p: ({ children }) => <p className="text-gray-300 leading-relaxed mb-4">{children}</p>,
-              ul: ({ children }) => <ul className="list-disc list-inside text-gray-300 mb-4 space-y-2">{children}</ul>,
-              ol: ({ children }) => <ol className="list-decimal list-inside text-gray-300 mb-4 space-y-2">{children}</ol>,
-              li: ({ children }) => <li className="text-gray-300">{children}</li>,
+              h1: ({ children }) => <h1 className="text-3xl font-bold text-foreground mt-8 mb-4">{children}</h1>,
+              h2: ({ children }) => <h2 className="text-2xl font-bold text-foreground mt-6 mb-3">{children}</h2>,
+              h3: ({ children }) => <h3 className="text-xl font-bold text-foreground mt-5 mb-2">{children}</h3>,
+              p: ({ children }) => <p className="text-muted-foreground leading-relaxed mb-4">{children}</p>,
+              ul: ({ children }) => <ul className="list-disc list-inside text-muted-foreground mb-4 space-y-2">{children}</ul>,
+              ol: ({ children }) => <ol className="list-decimal list-inside text-muted-foreground mb-4 space-y-2">{children}</ol>,
+              li: ({ children }) => <li className="text-muted-foreground">{children}</li>,
               a: ({ children, href }) => (
-                <a href={sanitizeUrl(href) || "#"} className="text-teal-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                <a href={sanitizeUrl(href) || "#"} className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
                   {children}
                 </a>
               ),
               code: ({ inline, children }) =>
                 inline ? (
-                  <code className="bg-[#1a2947] text-teal-400 px-1.5 py-0.5 rounded text-sm">{children}</code>
+                  <code className="bg-card text-primary px-1.5 py-0.5 rounded text-sm">{children}</code>
                 ) : (
-                  <code className="block bg-[#1a2947] text-gray-200 p-4 rounded-lg overflow-x-auto mb-4">
+                  <code className="block bg-card text-foreground/80 p-4 rounded-lg overflow-x-auto mb-4">
                     {children}
                   </code>
                 ),
               blockquote: ({ children }) => (
-                <blockquote className="border-l-4 border-teal-500 pl-4 italic text-gray-400 my-4">
+                <blockquote className="border-l-4 border-primary pl-4 italic text-muted-foreground my-4">
                   {children}
                 </blockquote>
               ),
@@ -236,12 +236,12 @@ export default function BlogPost() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="flex flex-wrap gap-2 mt-10 pt-8 border-t border-[#2d4166]"
+            className="flex flex-wrap gap-2 mt-10 pt-8 border-t border-border"
           >
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="bg-[#1a2947] border border-[#2d4166] text-gray-300 text-xs px-3 py-1 rounded-full"
+                className="bg-card border border-border text-muted-foreground text-xs px-3 py-1 rounded-full"
               >
                 #{tag}
               </span>
