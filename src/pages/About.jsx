@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, MapPin, Calendar, Award, Quote } from "lucide-react";
+import { useLang, renderRich } from "@/lib/LanguageContext";
 
 const skills = [
   "Python", "SQL", "R", "Git/GitHub", "REST APIs",
@@ -8,33 +9,6 @@ const skills = [
   "ARIMA/SARIMA", "Hypothesis Testing", "Statistical Modelling", "Stochastic Analysis",
   "PySpark", "Spark", "ETL", "Data Pipelines",
   "Power BI", "Tableau", "Matplotlib", "Seaborn", "Jupyter",
-];
-
-const experiences = [
-  {
-    period: "2024 – Present",
-    role: "AI Assistance / Data Scientist",
-    company: "CM Avocats — Gatineau, QC, Canada",
-    desc: "Led end-to-end conception, development, and launch of cmavocats.ca. Built a two-stage NLP classification pipeline (DistilBERT + XGBoost) to automate legal document categorisation across 6 classes — reducing routing time from 3–4 min to under 2 seconds. Integrated RAG + LangChain document querying into the production platform.",
-  },
-  {
-    period: "2011 – 2024",
-    role: "Senior Data Scientist / Business Insights Lead",
-    company: "Ministry of Secondary Education — Cameroon",
-    desc: "Managed a large-scale analytics portfolio covering 5,000+ institutions. Translated complex government objectives into predictive models, dashboards, and insight reports informing policy, budget, and operational strategy at the senior level.",
-  },
-  {
-    period: "2010 – 2018",
-    role: "Biostatistician",
-    company: "Faculty of Medicine, University of Yaoundé I — Cameroon",
-    desc: "Delivered statistical advisory to medical researchers. Designed predictive clinical models, multivariate analyses, and data mining pipelines for large-scale healthcare research. Mentored graduate students in statistical methodology.",
-  },
-];
-
-const education = [
-  { title: "Post-Graduate Diploma — AI & Machine Learning", org: "CIMT College, Ottawa", year: "2025–2026" },
-  { title: "Master's Degree — Applied Statistics", org: "National Advanced School of Engineering, Cameroon", year: "2006–2007" },
-  { title: "Diploma in Mathematics", org: "University of Yaoundé", year: "2005–2006" },
 ];
 
 const linkedInEndorsements = [
@@ -76,13 +50,9 @@ const linkedInEndorsements = [
   },
 ];
 
-const certifications = [
-  { title: "Programming for Data Science with Python", org: "Udacity", year: "2021" },
-  { title: "Python for Data Science", org: "DataQuest", year: "2021" },
-  { title: "Claude Code — AI-Assisted Development", org: "Anthropic", year: "2026" },
-];
-
 export default function About() {
+  const { t } = useLang();
+
   return (
     <div className="pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-6">
@@ -92,10 +62,10 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-semibold tracking-widest uppercase" style={{color:"hsl(var(--primary))"}}>About Me</span>
-          <h1 className="text-4xl md:text-5xl font-black mt-3 text-foreground">Albert Tchaptchet Womga</h1>
+          <span className="text-sm font-semibold tracking-widest uppercase" style={{color:"hsl(var(--primary))"}}>{t.about.badge}</span>
+          <h1 className="text-4xl md:text-5xl font-black mt-3 text-foreground">{t.about.title}</h1>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg">
-            Data Scientist III · Business Insights & Analytics · AI/ML Specialist
+            {t.about.subtitle}
           </p>
         </motion.div>
 
@@ -104,45 +74,45 @@ export default function About() {
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
             <div className="bg-card border border-border rounded-2xl p-8 mb-6">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl font-black" style={{background:"linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))"}}>
+                <div className="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl font-black text-white" style={{background:"linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))"}}>
                   AW
                 </div>
                 <div>
                   <h2 className="text-foreground font-bold text-xl">Albert Womga</h2>
-                  <p className="text-muted-foreground text-sm">Data Scientist & AI/ML Specialist</p>
+                  <p className="text-muted-foreground text-sm">{t.about.role}</p>
                   <div className="flex items-center gap-1 text-muted-foreground/70 text-xs mt-1">
                     <MapPin className="w-3 h-3" />
-                    <span>Toronto / Ottawa, Canada (Hybrid)</span>
+                    <span>{t.about.location}</span>
                   </div>
                 </div>
               </div>
 
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Results-driven Data Scientist with <strong className="text-foreground">15+ years of experience</strong> managing complex analytics portfolios, translating business objectives into data-driven solutions, and providing consultative insight to senior stakeholders.
+                {renderRich(t.about.bio1)}
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Master's degree in Applied Statistics. Proven track record leading end-to-end analytical initiatives — from business requirements through model development, platform deployment, and stakeholder communication — across <strong className="text-foreground">government, healthcare, and legal tech</strong> environments.
+                {renderRich(t.about.bio2)}
               </p>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Currently completing a Post-Graduate Diploma in AI & Machine Learning at CIMT College, Ottawa.
+                {t.about.bio3}
               </p>
 
               <div className="flex flex-wrap gap-3">
                 <a href="https://github.com/womgaalbert" target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-background border border-border text-foreground/80 hover:text-foreground hover:border-gray-500 transition-colors px-4 py-2 rounded-xl text-sm">
+                  className="flex items-center gap-2 bg-background border border-border text-foreground/80 hover:text-foreground hover:border-primary/50 transition-colors px-4 py-2 rounded-xl text-sm">
                   <Github className="w-4 h-4" /> GitHub
                 </a>
                 <a href="https://www.linkedin.com/in/albert-womga-009a7931/" target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-background border border-border text-foreground/80 hover:text-foreground hover:border-gray-500 transition-colors px-4 py-2 rounded-xl text-sm">
+                  className="flex items-center gap-2 bg-background border border-border text-foreground/80 hover:text-foreground hover:border-primary/50 transition-colors px-4 py-2 rounded-xl text-sm">
                   <Linkedin className="w-4 h-4" /> LinkedIn
                 </a>
               </div>
             </div>
 
             {/* Experience */}
-            <h3 className="text-foreground font-bold text-lg mb-4">Experience</h3>
+            <h3 className="text-foreground font-bold text-lg mb-4">{t.about.experienceLabel}</h3>
             <div className="space-y-4">
-              {experiences.map((exp, i) => (
+              {t.about.experiences.map((exp, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 10 }}
@@ -167,7 +137,7 @@ export default function About() {
             <div className="bg-card border border-border rounded-2xl p-8 mb-6">
               <h3 className="text-foreground font-bold text-lg mb-6 flex items-center gap-2">
                 <Award className="w-5 h-5" style={{color:"hsl(var(--primary))"}} />
-                Technical Skills
+                {t.about.skillsLabel}
               </h3>
               <div className="flex flex-wrap gap-2">
                 {skills.map((skill) => (
@@ -180,8 +150,8 @@ export default function About() {
 
             {/* Education */}
             <div className="bg-card border border-border rounded-2xl p-8 mb-6">
-              <h3 className="text-foreground font-bold text-lg mb-4">Education</h3>
-              {education.map((ed, i) => (
+              <h3 className="text-foreground font-bold text-lg mb-4">{t.about.educationLabel}</h3>
+              {t.about.education.map((ed, i) => (
                 <div key={i} className="flex items-start gap-3 mb-4 last:mb-0">
                   <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{backgroundColor:"hsl(var(--primary))"}} />
                   <div>
@@ -194,8 +164,8 @@ export default function About() {
 
             {/* Certifications */}
             <div className="bg-card border border-border rounded-2xl p-8">
-              <h3 className="text-foreground font-bold text-lg mb-4">Certifications</h3>
-              {certifications.map((cert, i) => (
+              <h3 className="text-foreground font-bold text-lg mb-4">{t.about.certsLabel}</h3>
+              {t.about.certifications.map((cert, i) => (
                 <div key={i} className="flex items-start gap-3 mb-4 last:mb-0">
                   <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{backgroundColor:"hsl(var(--brand-blue))"}} />
                   <div>
@@ -217,16 +187,16 @@ export default function About() {
         >
           <div className="flex items-center justify-between mb-8">
             <div>
-              <span className="text-sm font-semibold tracking-widest uppercase" style={{color:"hsl(var(--primary))"}}>Professional Endorsements</span>
-              <h2 className="text-2xl font-black text-foreground mt-1">LinkedIn Recommendations</h2>
+              <span className="text-sm font-semibold tracking-widest uppercase" style={{color:"hsl(var(--primary))"}}>{t.about.endorsementsBadge}</span>
+              <h2 className="text-2xl font-black text-foreground mt-1">{t.about.endorsementsTitle}</h2>
             </div>
             <a
               href="https://www.linkedin.com/in/albert-womga-009a7931/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground border border-border hover:border-gray-500 px-4 py-2 rounded-xl transition-colors"
+              className="hidden md:flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground border border-border hover:border-primary/50 px-4 py-2 rounded-xl transition-colors"
             >
-              <Linkedin className="w-4 h-4" style={{color:"#0a66c2"}} /> View on LinkedIn
+              <Linkedin className="w-4 h-4" style={{color:"#0a66c2"}} /> {t.about.viewLinkedIn}
             </a>
           </div>
 
@@ -269,7 +239,7 @@ export default function About() {
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               <Linkedin className="w-4 h-4" style={{color:"#0a66c2"}} />
-              See all recommendations on LinkedIn →
+              {t.about.seeAll}
             </a>
           </div>
         </motion.div>

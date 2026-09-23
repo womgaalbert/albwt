@@ -5,11 +5,14 @@ import { useQuery } from "@tanstack/react-query";
 import { Calendar, Clock, ArrowRight, Search } from "lucide-react";
 import { format } from "date-fns";
 import { supabase } from "@/lib/supabase";
+import { useLang } from "@/lib/LanguageContext";
 
-const categories = ["All", "Tutorials", "Opinion", "Case Studies", "Research", "Industry Insights"];
+const categoryKeys = ["all", "tutorials", "opinion", "caseStudies", "research", "industry"];
+const categoryDbValues = { all: "All", tutorials: "Tutorials", opinion: "Opinion", caseStudies: "Case Studies", research: "Research", industry: "Industry Insights" };
 
 export default function Blog() {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const { t } = useLang();
+  const [activeCategory, setActiveCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
   const { data: posts = [], isLoading } = useQuery({
@@ -26,7 +29,7 @@ export default function Blog() {
   });
 
   const filteredPosts = posts.filter((post) => {
-    const matchesCategory = activeCategory === "All" || post.category === activeCategory;
+    const matchesCategory = activeCategory === "all" || post.category === categoryDbValues[activeCategory];
     const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
@@ -42,11 +45,11 @@ export default function Blog() {
           className="text-center mb-12"
         >
           <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "hsl(var(--primary))" }}>
-            Thought Leadership
+            {t.blog.badge}
           </span>
-          <h1 className="text-4xl md:text-5xl font-black mt-3 text-foreground">AI & Data Science Blog</h1>
+          <h1 className="text-4xl md:text-5xl font-black mt-3 text-foreground">{t.blog.title}</h1>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg">
-            Insights, tutorials, and case studies on Machine Learning, AI, and Data Science.
+            {t.blog.subtitle}
           </p>
         </motion.div>
 
@@ -61,7 +64,7 @@ export default function Blog() {
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <input
               type="text"
-              placeholder="Search articles..."
+              placeholder={t.blog.search}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full bg-card border border-border text-foreground rounded-xl pl-12 pr-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
@@ -71,18 +74,18 @@ export default function Blog() {
 
         {/* Category Filter */}
         <div className="flex flex-wrap gap-2 justify-center mb-12">
-          {categories.map((cat) => (
+          {categoryKeys.map((key) => (
             <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
+              key={key}
+              onClick={() => setActiveCategory(key)}
               className="px-4 py-2 rounded-full text-sm font-medium transition-all"
               style={{
-                background: activeCategory === cat ? "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))" : "hsl(var(--card))",
-                color: activeCategory === cat ? "white" : "#d1d5db",
-                border: activeCategory === cat ? "none" : "1px solid hsl(var(--border))",
+                background: activeCategory === key ? "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))" : "hsl(var(--card))",
+                color: activeCategory === key ? "white" : "hsl(var(--muted-foreground))",
+                border: activeCategory === key ? "none" : "1px solid hsl(var(--border))",
               }}
             >
-              {cat}
+              {t.blog.categories[key]}
             </button>
           ))}
         </div>
@@ -90,11 +93,11 @@ export default function Blog() {
         {/* Posts Grid */}
         {isLoading ? (
           <div className="flex justify-center py-20">
-            <div className="w-8 h-8 border-4 border-slate-200 border-t-teal-500 rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-border border-t-primary rounded-full animate-spin" />
           </div>
         ) : filteredPosts.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-muted-foreground text-lg">No articles found.</p>
+            <p className="text-muted-foreground text-lg">{t.blog.noResults}</p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -126,7 +129,7 @@ export default function Blog() {
                         </span>
                         {post.read_time && (
                           <span className="text-xs text-muted-foreground flex items-center gap-1">
-                            <Clock className="w-3 h-3" /> {post.read_time} min read
+                            <Clock className="w-3 h-3" /> {post.read_time} {t.blog.minRead}
                           </span>
                         )}
                       </div>
@@ -142,7 +145,7 @@ export default function Blog() {
                           </span>
                         )}
                         <span className="text-primary flex items-center gap-1 font-medium">
-                          Read More <ArrowRight className="w-3 h-3" />
+                          {t.blog.readMore} <ArrowRight className="w-3 h-3" />
                         </span>
                       </div>
                     </div>

@@ -1,14 +1,16 @@
 import { motion } from "framer-motion";
-
-const stats = [
-  { value: "15+", label: "Years Experience" },
-  { value: "500+", label: "Institutions Analyzed" },
-  { value: "2", label: "Countries Served" },
-  { value: "6", label: "GitHub Repositories" },
-  { value: "M.Sc.", label: "Applied Statistics" },
-];
+import { useLang } from "@/lib/LanguageContext";
 
 export default function StatsBar() {
+  const { t } = useLang();
+  const stats = [
+    { value: "15+", label: t.stats.years },
+    { value: "500+", label: t.stats.institutions },
+    { value: "2", label: t.stats.countries },
+    { value: "6", label: t.stats.repos },
+    { value: "M.Sc.", label: t.stats.degree },
+  ];
+
   return (
     <section className="bg-footer border-y border-border py-8">
       <div className="max-w-7xl mx-auto px-6">

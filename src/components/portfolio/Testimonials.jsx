@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Quote, Star } from "lucide-react";
+import { useLang } from "@/lib/LanguageContext";
 
 const testimonials = [
   {
@@ -32,6 +33,7 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
+  const { t } = useLang();
   return (
     <section className="py-24 bg-footer">
       <div className="max-w-7xl mx-auto px-6">
@@ -42,13 +44,13 @@ export default function Testimonials() {
           className="text-center mb-16"
         >
           <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "hsl(var(--primary))" }}>
-            Client Testimonials
+            {t.testimonials.badge}
           </span>
           <h2 className="text-3xl md:text-4xl font-black mt-3 text-foreground">
-            Trusted by Teams Across the Globe
+            {t.testimonials.title}
           </h2>
           <p className="text-muted-foreground mt-4 max-w-xl mx-auto text-lg">
-            From startups to enterprises — here's what clients say about working with me.
+            {t.testimonials.subtitle}
           </p>
         </motion.div>
 

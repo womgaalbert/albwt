@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { motion } from "framer-motion";
 import { ExternalLink, Star, ArrowRight } from "lucide-react";
+import { useLang } from "@/lib/LanguageContext";
 
 const projects = [
   {
@@ -43,6 +44,7 @@ const projects = [
 ];
 
 export default function FeaturedProjects() {
+  const { t } = useLang();
   return (
     <section className="py-24 bg-footer">
       <div className="max-w-7xl mx-auto px-6">
@@ -52,10 +54,10 @@ export default function FeaturedProjects() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-semibold tracking-widest uppercase" style={{color:"hsl(var(--primary))"}}>Portfolio</span>
-          <h2 className="text-3xl md:text-4xl font-black mt-3 text-foreground">Featured Projects</h2>
+          <span className="text-sm font-semibold tracking-widest uppercase" style={{color:"hsl(var(--primary))"}}>{t.featured.badge}</span>
+          <h2 className="text-3xl md:text-4xl font-black mt-3 text-foreground">{t.featured.title}</h2>
           <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
-            Real-world AI and data science projects showcasing expertise in forecasting, NLP, and computer vision.
+            {t.featured.subtitle}
           </p>
         </motion.div>
 
@@ -92,7 +94,7 @@ export default function FeaturedProjects() {
 
         <div className="text-center mt-12">
           <Link to={createPageUrl("Projects")} className="inline-flex items-center gap-2 font-semibold hover:gap-3 transition-all" style={{color:"hsl(var(--primary))"}}>
-            View All Projects <ArrowRight className="w-4 h-4" />
+            {t.featured.viewAll} <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>

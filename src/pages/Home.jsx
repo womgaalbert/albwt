@@ -10,8 +10,10 @@ import CTABanner from "@/components/portfolio/CTABanner";
 import Testimonials from "@/components/portfolio/Testimonials";
 import InteractiveDataViz from "@/components/portfolio/InteractiveDataViz";
 import RegionalExpertise from "@/components/portfolio/RegionalExpertise";
+import { useLang, renderRich } from "@/lib/LanguageContext";
 
 export default function Home() {
+  const { t } = useLang();
   return (
     <div>
       {/* HERO */}
@@ -47,23 +49,23 @@ export default function Home() {
           >
             <div className="inline-flex items-center gap-2 bg-teal-500/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6">
               <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-              <span className="text-primary text-sm font-medium">Available for Freelance Projects</span>
+              <span className="text-primary text-sm font-medium">{t.home.badge}</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6">
-              Data Scientist &<br />
+              {t.home.title1}<br />
               <span style={{background:"linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent"}}>
-                AI Specialist
+                {t.home.title2}
               </span>
             </h1>
             <p className="text-muted-foreground text-lg leading-relaxed mb-8 max-w-xl">
-              Hi, I'm <strong className="text-foreground">Albert Womga</strong> — Data Scientist with a <strong className="text-primary">Master's in Applied Statistics</strong> and 15+ years of experience across government, healthcare, and legal tech. Based in Ottawa, serving clients in <strong className="text-foreground">Canada & Cameroon</strong>.
+              {renderRich(t.home.description)}
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to={createPageUrl("Contact")} className="btn-primary flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white">
-                Work With Me <ArrowRight className="w-4 h-4" />
+                {t.home.cta} <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link to={createPageUrl("Projects")} className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-foreground/80 border border-gray-600 hover:border-primary hover:text-primary transition-colors">
-                View Projects
+              <Link to={createPageUrl("Projects")} className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-foreground/80 border border-border hover:border-primary hover:text-primary transition-colors">
+                {t.home.viewProjects}
               </Link>
             </div>
             <div className="flex flex-wrap gap-3 mt-8">
@@ -116,7 +118,7 @@ export default function Home() {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-muted-foreground/70">
-          <span className="text-xs">Scroll</span>
+          <span className="text-xs">{t.home.scroll}</span>
           <ChevronDown className="w-4 h-4 animate-bounce" />
         </div>
       </section>

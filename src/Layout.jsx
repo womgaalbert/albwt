@@ -99,7 +99,7 @@ export default function Layout({ children, currentPageName }) {
           <div className="flex items-center gap-2">
             <img src={AWT_LOGO} alt="AWT" className="w-9 h-9 object-contain" />
             <span className="font-bold text-footer-foreground">Albert Womga</span>
-            <span className="text-footer-foreground/60 text-sm ml-2">— Data Scientist & AI Specialist</span>
+            <span className="text-footer-foreground/60 text-sm ml-2">— {t.footer.tagline}</span>
           </div>
           <div className="flex gap-6 text-sm text-footer-foreground/60">
             {navLinks.map((link) => (

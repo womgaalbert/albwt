@@ -181,7 +181,7 @@ export default function Projects() {
               className="px-4 py-2 rounded-full text-sm font-medium transition-all"
               style={{
                 background: activeCategory === cat ? "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))" : "hsl(var(--card))",
-                color: activeCategory === cat ? "white" : "#d1d5db",
+                color: activeCategory === cat ? "white" : "hsl(var(--muted-foreground))",
                 border: activeCategory === cat ? "none" : "1px solid hsl(var(--border))",
               }}
             >
