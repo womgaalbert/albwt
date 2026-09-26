@@ -8,13 +8,14 @@ import { GOOGLE_PROFILE_URL } from "@/lib/google";
 import { MAX_INPUT_LENGTHS } from "@/lib/sanitize";
 import { supabase } from "@/lib/supabase";
 import { useLang } from "@/lib/LanguageContext";
+import { trackEvent } from "@/lib/analytics";
 import Seo from "@/components/Seo";
 
 const RATE_LIMIT_MS = 10000; // 10 seconds between submissions
 
 export default function Contact() {
-  const { t } = useLang();
-  const [form, setForm] = useState({ name: "", email: "", company: "", service: "", message: "" });
+  const { t, lang } = useLang();
+  const [form, setForm] = useState({ name: "", email: "", company: "", service: "", message: "", website: "" });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [lastSubmitTime, setLastSubmitTime] = useState(0);
@@ -35,21 +36,29 @@ export default function Contact() {
     setSending(true);
     setLastSubmitTime(now);
     try {
-      const { error: insertError } = await supabase
-        .from('contact_messages')
-        .insert({
+      const { error: fnError } = await supabase.functions.invoke("submit-contact", {
+        body: {
           name: form.name,
           email: form.email,
           company: form.company,
           service: form.service,
           message: form.message,
-        });
-      if (insertError) throw insertError;
+          lang,
+          website: form.website, // honeypot — always empty for humans
+        },
+      });
+      if (fnError) {
+        const status = fnError.context?.status;
+        setRateLimitError(status === 429 ? t.contact.rateLimited : t.contact.failed);
+        return;
+      }
+      trackEvent("contact_submitted");
       setSent(true);
-    } catch (err) {
+    } catch {
       setRateLimitError(t.contact.failed);
+    } finally {
+      setSending(false);
     }
-    setSending(false);
   };
 
   // Build a mailto: fallback URL from form data
@@ -153,6 +162,7 @@ export default function Contact() {
               <p className="text-muted-foreground text-sm mb-4">{t.contact.response}</p>
               <Link
                 to="/booking"
+                onClick={() => trackEvent("cta_click", { source: "contact_sidebar" })}
                 className="flex items-center justify-center gap-2 w-full py-3 rounded-xl font-semibold text-white text-sm transition-opacity hover:opacity-90"
                 style={{background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))"}}
               >
@@ -177,6 +187,10 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="bg-card border border-border rounded-2xl p-8 space-y-5">
+                {/* Honeypot — invisible to humans, bots fill it */}
+                <div aria-hidden="true" className="absolute -left-[9999px] h-0 overflow-hidden">
+                  <label>Website<input tabIndex={-1} autoComplete="off" value={form.website} onChange={e => setForm({...form, website: e.target.value})} /></label>
+                </div>
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="contact-name" className="block text-sm text-muted-foreground mb-2">{t.contact.fullName} *</label>

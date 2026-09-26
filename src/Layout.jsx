@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Menu, X } from "lucide-react";
 import { useLang } from "@/lib/LanguageContext";
+import { trackEvent } from "@/lib/analytics";
 import LanguageSwitcher from "@/components/portfolio/LanguageSwitcher";
 import ThemeToggle from "@/components/portfolio/ThemeToggle";
 import InkFilterDefs from "@/components/media/InkFilterDefs";
 import { SocialLinks } from "@/components/SocialIcons";
+import LeadWidget from "@/components/portfolio/LeadWidget";
 
 const AWT_LOGO = "/logo-awt-96.webp";
 const AWT_LOGO_2X = "/logo-awt-192.webp";
@@ -33,6 +35,8 @@ export default function Layout({ children, currentPageName }) {
     { label: t.nav.contact, page: "Contact" },
     { label: t.nav.booking, page: "Booking" },
   ];
+  // Header nav: the "Book a call" button replaces the plain Booking link.
+  const headerLinks = navLinks.filter((link) => link.page !== "Booking");
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
@@ -53,7 +57,7 @@ export default function Layout({ children, currentPageName }) {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-5">
-            {navLinks.map((link) => (
+            {headerLinks.map((link) => (
               <Link
                 key={link.page}
                 to={createPageUrl(link.page)}
@@ -64,8 +68,12 @@ export default function Layout({ children, currentPageName }) {
             ))}
             <ThemeToggle />
             <LanguageSwitcher />
-            <Link to={createPageUrl("Contact")} className="btn-primary px-5 py-2 rounded-full text-sm font-semibold text-white">
-              {t.nav.hire}
+            <Link
+              to={createPageUrl("Booking")}
+              onClick={() => trackEvent("cta_click", { source: "nav" })}
+              className="btn-primary px-5 py-2 rounded-full text-sm font-semibold text-white"
+            >
+              {t.nav.booking}
             </Link>
           </div>
 
@@ -88,7 +96,7 @@ export default function Layout({ children, currentPageName }) {
         {/* Mobile menu */}
         {menuOpen && (
           <div id="mobile-menu" className="md:hidden bg-card border-t border-border px-6 py-4 flex flex-col gap-4">
-            {navLinks.map((link) => (
+            {headerLinks.map((link) => (
               <Link
                 key={link.page}
                 to={createPageUrl(link.page)}
@@ -99,8 +107,15 @@ export default function Layout({ children, currentPageName }) {
               </Link>
             ))}
             <LanguageSwitcher />
-            <Link to={createPageUrl("Contact")} className="btn-primary px-5 py-2.5 rounded-full text-sm font-semibold text-white text-center">
-              {t.nav.hire}
+            <Link
+              to={createPageUrl("Booking")}
+              onClick={() => {
+                setMenuOpen(false);
+                trackEvent("cta_click", { source: "nav" });
+              }}
+              className="btn-primary px-5 py-2.5 rounded-full text-sm font-semibold text-white text-center"
+            >
+              {t.nav.booking}
             </Link>
           </div>
         )}
@@ -130,6 +145,8 @@ export default function Layout({ children, currentPageName }) {
           </div>
         </div>
       </footer>
+
+      <LeadWidget currentPageName={currentPageName} />
     </div>
   );
 }

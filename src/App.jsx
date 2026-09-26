@@ -3,11 +3,12 @@ import { Toaster as SonnerToaster } from "@/components/ui/sonner"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
 import { pagesConfig } from './pages.config'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { LanguageProvider } from '@/lib/LanguageContext';
 import { AuthProvider } from '@/lib/AuthContext';
-import { lazy, Suspense } from 'react';
+import { trackPageView } from '@/lib/analytics';
+import { lazy, Suspense, useEffect } from 'react';
 
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
@@ -18,6 +19,15 @@ const PageFallback = () => (
     <div role="status" aria-label="Loading / Chargement" className="w-8 h-8 border-4 border-border border-t-primary rounded-full animate-spin" />
   </div>
 );
+
+// GA4 page_view on every SPA route change.
+function PageViewTracker() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    trackPageView(pathname);
+  }, [pathname]);
+  return null;
+}
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
@@ -33,6 +43,7 @@ function App() {
       <AuthProvider>
       <QueryClientProvider client={queryClientInstance}>
         <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+          <PageViewTracker />
           <Routes>
             <Route path="/" element={
               <LayoutWrapper currentPageName={mainPageKey}>
@@ -70,7 +81,7 @@ function App() {
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           <Toaster />
-          <SonnerToaster position="bottom-right" />
+          <SonnerToaster position="top-center" />
         </Router>
       </QueryClientProvider>
       </AuthProvider>

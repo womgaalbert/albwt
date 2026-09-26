@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Brain, TrendingUp, MessageSquare, Search, BarChart2, Users, CheckCircle, ArrowRight, MapPin } from "lucide-react";
 import { useLang } from "@/lib/LanguageContext";
+import { trackEvent } from "@/lib/analytics";
 import Seo from "@/components/Seo";
 
 const serviceIcons = [Brain, TrendingUp, MessageSquare, BarChart2, Search, Users];
@@ -123,7 +124,11 @@ export default function Services() {
 
         {/* CTA */}
         <div className="text-center">
-          <Link to={createPageUrl("Contact")} className="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-white text-lg">
+          <Link
+            to={createPageUrl("Booking")}
+            onClick={() => trackEvent("cta_click", { source: "services" })}
+            className="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-white text-lg"
+          >
             {t.services.cta} <ArrowRight className="w-5 h-5" />
           </Link>
         </div>

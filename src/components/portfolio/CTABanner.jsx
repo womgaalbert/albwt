@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { motion } from "framer-motion";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, CalendarDays, Mail } from "lucide-react";
 import { useLang } from "@/lib/LanguageContext";
+import { trackEvent } from "@/lib/analytics";
 
 export default function CTABanner() {
   const { t } = useLang();
@@ -24,17 +25,19 @@ export default function CTABanner() {
                 {t.cta.subtitle}
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
-                <Link to={createPageUrl("Contact")} className="btn-primary flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-white">
-                  <Mail className="w-4 h-4" /> {t.cta.getInTouch} <ArrowRight className="w-4 h-4" />
+                <Link
+                  to={createPageUrl("Booking")}
+                  onClick={() => trackEvent("cta_click", { source: "cta_banner" })}
+                  className="btn-primary flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-white"
+                >
+                  <CalendarDays className="w-4 h-4" /> {t.cta.bookCall} <ArrowRight className="w-4 h-4" />
                 </Link>
-                <a
-                  href="https://github.com/womgaalbert"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to={createPageUrl("Contact")}
                   className="flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-foreground/80 border border-border hover:border-primary hover:text-primary transition-colors"
                 >
-                  {t.cta.viewGitHub}
-                </a>
+                  <Mail className="w-4 h-4" /> {t.cta.getInTouch}
+                </Link>
               </div>
             </div>
           </div>

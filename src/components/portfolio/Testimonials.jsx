@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { Quote, Star } from "lucide-react";
+import { Quote, Star, ExternalLink } from "lucide-react";
 import { useLang } from "@/lib/LanguageContext";
 
-const testimonials = [
+export const testimonials = [
   {
     quote: {
       en: "Albert built an analytics dashboard for our government ministry that transformed how we track education outcomes across 5,000+ schools. The insights now directly inform our policy and budget decisions.",
@@ -63,6 +63,15 @@ export default function Testimonials() {
           <p className="text-muted-foreground mt-4 max-w-xl mx-auto text-lg">
             {t.testimonials.subtitle}
           </p>
+          <a
+            href="https://www.linkedin.com/in/albert-womga-009a7931/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm font-medium mt-4 hover:underline"
+            style={{ color: "hsl(var(--primary))" }}
+          >
+            {t.testimonials.seeAll} <ExternalLink className="w-3.5 h-3.5" />
+          </a>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

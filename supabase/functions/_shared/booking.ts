@@ -188,6 +188,7 @@ export async function sendEmail(
   subject: string,
   html: string,
   attachments?: { filename: string; content: string }[],
+  replyTo: string = REPLY_TO,
 ) {
   if (!RESEND_API_KEY) {
     console.warn("RESEND_API_KEY not set; skipped email:", subject);
@@ -197,7 +198,7 @@ export async function sendEmail(
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ from: FROM_EMAIL, reply_to: REPLY_TO, to: [to], subject, html, attachments }),
+      body: JSON.stringify({ from: FROM_EMAIL, reply_to: replyTo, to: [to], subject, html, attachments }),
     });
     if (!res.ok) {
       console.error("resend error", res.status, (await res.text()).slice(0, 300));

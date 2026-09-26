@@ -25,7 +25,10 @@ A React + Vite portfolio showcasing data science projects, blog posts, an AI san
 - Project showcase with per-project comments
 - Blog backed by Supabase with search + category filters
 - AI sandbox playground (mock demos)
-- Contact form with rate limiting, input sanitization, and mailto fallback
+- Discovery-call booking (own calendar, no Calendly) with email confirmations + reminders
+- Floating lead-capture chat widget with teaser bubble
+- Contact form with email notification, rate limiting, input sanitization, and mailto fallback
+- GA4-ready funnel analytics (optional — set `VITE_GA4_ID`)
 - Responsive design
 
 ## Development
@@ -45,11 +48,20 @@ Create `.env.local` with your Supabase credentials:
 ```
 VITE_SUPABASE_URL=...
 VITE_SUPABASE_ANON_KEY=...
+VITE_GA4_ID=G-XXXXXXX   # optional — GA4 measurement ID; analytics no-op when unset
 ```
 
-## Supabase Migrations
+## Supabase
 
 Run the SQL files in `supabase/migrations/` in order (schema, seed, blog cover update) via the Supabase dashboard SQL editor.
+
+Edge Functions (deploy with `supabase functions deploy <name>`):
+
+- `book-appointment` — free-slot calendar + booking (emails via Resend)
+- `submit-lead` — floating widget lead capture
+- `submit-contact` — contact form: stores the message and emails a notification
+- `appointment-reminders` — daily reminder cron
+- `google-reviews` — Google Business Profile rating + reviews
 
 ## Project Structure
 

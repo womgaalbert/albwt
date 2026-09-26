@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { CalendarDays, CalendarPlus, CheckCircle, ChevronLeft, ChevronRight, Clock, Globe, Phone, Video, AlertCircle } from "lucide-react";
+import { CalendarDays, CalendarPlus, CheckCircle, ChevronLeft, ChevronRight, Clock, Globe, Phone, Star, Video, AlertCircle } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useLang } from "@/lib/LanguageContext";
+import { trackEvent } from "@/lib/analytics";
+import { testimonials } from "@/components/portfolio/Testimonials";
 import Seo from "@/components/Seo";
 
 const OTTAWA_TZ = "America/Toronto";
@@ -41,6 +43,10 @@ export default function Booking() {
   const { t, lang } = useLang();
   const b = t.booking;
   const locale = lang === "fr" ? "fr-CA" : "en-CA";
+
+  // Mini social proof next to the booking form (CM Avocats — most recent consulting client).
+  const testimonial = testimonials[1];
+  const tr = (v) => (v && typeof v === "object" ? v[lang] || v.en : v);
 
   const [slots, setSlots] = useState(/** @type {string[]} */ ([]));
   const [status, setStatus] = useState("loading"); // loading | ready | error
@@ -132,6 +138,7 @@ export default function Booking() {
       return;
     }
     setBooked({ startsAt: data.startsAt, email: form.email });
+    trackEvent("booking_confirmed");
   };
 
   const stepTitle = (n, label) => (
@@ -153,6 +160,34 @@ export default function Booking() {
           <h1 className="text-4xl md:text-5xl font-black mt-3 text-foreground">{b.title}</h1>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto text-lg">{b.subtitle}</p>
         </motion.div>
+
+        {!booked && (
+          <div className="grid md:grid-cols-2 gap-6 mb-10 max-w-4xl mx-auto">
+            <div className="bg-card border border-border rounded-2xl p-6">
+              <h2 className="text-foreground font-bold mb-4">{b.agendaTitle}</h2>
+              <ul className="space-y-2.5">
+                {b.agenda.map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "hsl(var(--primary))" }} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-card border border-border rounded-2xl p-6 flex flex-col gap-3">
+              <div className="flex gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-700 dark:text-amber-400" />
+                ))}
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed flex-1">"{tr(testimonial.quote)}"</p>
+              <div className="mt-auto">
+                <p className="text-foreground font-semibold text-sm">{tr(testimonial.name)}</p>
+                <p className="text-muted-foreground text-xs">{tr(testimonial.title)} · {tr(testimonial.company)}</p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {booked ? (
           <div className="max-w-xl mx-auto bg-card border border-primary/30 rounded-2xl p-10 text-center">

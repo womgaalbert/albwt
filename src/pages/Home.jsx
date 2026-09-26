@@ -12,6 +12,7 @@ import GoogleReviews from "@/components/portfolio/GoogleReviews";
 import InteractiveDataViz from "@/components/portfolio/InteractiveDataViz";
 import RegionalExpertise from "@/components/portfolio/RegionalExpertise";
 import { useLang, renderRich } from "@/lib/LanguageContext";
+import { trackEvent } from "@/lib/analytics";
 import Seo from "@/components/Seo";
 
 export default function Home() {
@@ -74,8 +75,12 @@ export default function Home() {
               {renderRich(t.home.description)}
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link to={createPageUrl("Contact")} className="btn-primary flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white">
-                {t.home.cta} <ArrowRight className="w-4 h-4" />
+              <Link
+                to={createPageUrl("Booking")}
+                onClick={() => trackEvent("cta_click", { source: "hero" })}
+                className="btn-primary flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white"
+              >
+                {t.home.bookCta} <ArrowRight className="w-4 h-4" />
               </Link>
               <Link to={createPageUrl("Projects")} className="flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-foreground/80 border border-border hover:border-primary hover:text-primary transition-colors">
                 {t.home.viewProjects}
