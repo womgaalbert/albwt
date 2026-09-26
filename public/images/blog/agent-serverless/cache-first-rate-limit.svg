@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380" role="img" aria-labelledby="t d" font-family="Inter, system-ui, sans-serif"><title id="t">Cache-first rate limiting</title><desc id="d">A request first checks the cache. A hit returns the cached report in about 0.6 seconds and is not counted. A miss goes through the rate limiter: allowed requests run fresh in about 2.5 seconds, requests over 10 per hour get a 429 with a retry time.</desc>
+<defs>
+<pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#00d4b8" stroke-opacity="0.06"/></pattern>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#8fa3bf"/></marker>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#00d4b8"/></marker>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#f87171"/></marker>
+</defs>
+<rect width="800" height="380" fill="#101b33"/><rect width="800" height="380" fill="url(#grid)"/>
+
+<!-- request -->
+<rect x="30" y="160" width="110" height="40" rx="20" fill="#16243f" stroke="#8fa3bf" stroke-width="2"/><text x="85" y="185" font-size="14" fill="#e6edf7" text-anchor="middle" font-weight="700">Request</text>
+<path d="M140 180 H168" stroke="#8fa3bf" stroke-width="2" fill="none" marker-end="url(#a)"/>
+
+<!-- decision -->
+<polygon points="240,110 310,180 240,250 170,180" fill="#16243f" stroke="#4d8dff" stroke-width="2"/>
+<text x="240" y="176" font-size="13" fill="#e6edf7" text-anchor="middle" font-weight="700">In cache?</text>
+<text x="240" y="194" font-size="11" fill="#8fa3bf" text-anchor="middle">(24 h)</text>
+
+<!-- hit -->
+<path d="M240 110 V70 H358" stroke="#00d4b8" stroke-width="2" fill="none" marker-end="url(#ah)"/>
+<text x="250" y="96" font-size="12" fill="#00d4b8" font-weight="700">hit</text>
+<rect x="360" y="40" width="400" height="60" rx="12" fill="#0f2f33" stroke="#00d4b8" stroke-width="2"/>
+<text x="380" y="66" font-size="15" fill="#e6edf7" font-weight="700">Return cached report · ~0.6 s</text>
+<text x="380" y="86" font-size="12" fill="#7ee8d9">Not counted. Costs no GitHub calls and no tokens.</text>
+
+<!-- miss -->
+<path d="M310 180 H358" stroke="#8fa3bf" stroke-width="2" fill="none" marker-end="url(#a)"/>
+<text x="318" y="172" font-size="12" fill="#8fa3bf" font-weight="700">miss</text>
+<rect x="360" y="150" width="200" height="60" rx="12" fill="#16243f" stroke="#4d8dff" stroke-width="2"/>
+<text x="460" y="176" font-size="15" fill="#e6edf7" text-anchor="middle" font-weight="700">Rate limiter</text>
+<text x="460" y="196" font-size="11" fill="#8fa3bf" text-anchor="middle">count +1 · max 10 / h per IP</text>
+
+<!-- allowed -->
+<path d="M560 180 H598" stroke="#8fa3bf" stroke-width="2" fill="none" marker-end="url(#a)"/>
+<text x="563" y="170" font-size="11" fill="#8fa3bf">ok</text>
+<rect x="600" y="150" width="160" height="60" rx="12" fill="#2a2414" stroke="#f59e0b" stroke-width="2"/>
+<text x="680" y="176" font-size="15" fill="#fde68a" text-anchor="middle" font-weight="700">Fresh run</text>
+<text x="680" y="196" font-size="11" fill="#fcd34d" text-anchor="middle">GitHub + LLM · ~2.5 s</text>
+
+<!-- blocked -->
+<path d="M460 210 V258" stroke="#f87171" stroke-width="2" fill="none" stroke-dasharray="6 5" marker-end="url(#ar)"/>
+<text x="470" y="240" font-size="11" fill="#f87171">over limit</text>
+<rect x="360" y="260" width="200" height="56" rx="12" fill="#2d1720" stroke="#f87171" stroke-width="2"/>
+<text x="460" y="284" font-size="15" fill="#fecaca" text-anchor="middle" font-weight="700">429 · retry in N min</text>
+<text x="460" y="303" font-size="11" fill="#fca5a5" text-anchor="middle">friendly message in the UI</text>
+
+<text x="400" y="355" font-size="13" fill="#8fa3bf" text-anchor="middle">Check the cheap thing first: only runs that spend quota count toward the limit.</text>
+</svg>

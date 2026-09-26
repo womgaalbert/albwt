@@ -197,3 +197,63 @@
   --tw-prose-td-borders: hsl(var(--border));
   max-width: none;
 }
+
+/* ---------- Ink-drawing images (see components/media) ---------- */
+.ink-layer {
+  filter: url(#ink-filter);
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+/* Dark theme: warm paper inverts to night-blue, dark ink becomes light */
+.dark .ink-layer {
+  filter: url(#ink-filter) invert(0.92);
+}
+
+.ink-reveal:hover .ink-layer,
+.ink-reveal:focus-within .ink-layer {
+  opacity: 0;
+}
+
+.ink-reveal:hover .ink-zoom-hint,
+.ink-reveal:focus-within .ink-zoom-hint {
+  opacity: 1;
+}
+
+/* Only the unfiltered colour image zooms; the filtered ink layer is never
+   transformed, so the expensive SVG filter is rasterised once, not per frame. */
+.ink-image img:not(.ink-layer) {
+  transition: transform 0.6s ease;
+}
+
+.ink-reveal:hover .ink-image img:not(.ink-layer),
+.ink-image.ink-reveal:hover img:not(.ink-layer) {
+  transform: scale(1.04);
+}
+
+.lightbox::backdrop {
+  background: hsl(var(--background) / 0.85);
+  backdrop-filter: blur(6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ink-layer,
+  .ink-image img {
+    transition: none;
+  }
+
+  .ink-reveal:hover .ink-image img:not(.ink-layer),
+  .ink-image.ink-reveal:hover img:not(.ink-layer) {
+    transform: none;
+  }
+
+  .animate-float {
+    animation: none;
+  }
+
+  .aurora {
+    filter: blur(60px);
+    animation: none !important;
+  }
+}

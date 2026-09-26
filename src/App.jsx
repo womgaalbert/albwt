@@ -6,21 +6,31 @@ import { pagesConfig } from './pages.config'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { LanguageProvider } from '@/lib/LanguageContext';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import Sandbox from './pages/Sandbox';
+import { AuthProvider } from '@/lib/AuthContext';
+import { lazy, Suspense } from 'react';
+
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
+const Sandbox = lazy(() => import('./pages/Sandbox'));
+
+const PageFallback = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div role="status" aria-label="Loading / Chargement" className="w-8 h-8 border-4 border-border border-t-primary rounded-full animate-spin" />
+  </div>
+);
 
 const { Pages, Layout, mainPage } = pagesConfig;
 const mainPageKey = mainPage ?? Object.keys(Pages)[0];
 const MainPage = mainPageKey ? Pages[mainPageKey] : <></>;
 
 const LayoutWrapper = ({ children, currentPageName }) => Layout ?
-  <Layout currentPageName={currentPageName}>{children}</Layout>
-  : <>{children}</>;
+  <Layout currentPageName={currentPageName}><Suspense fallback={<PageFallback />}>{children}</Suspense></Layout>
+  : <Suspense fallback={<PageFallback />}>{children}</Suspense>;
 
 function App() {
   return (
     <LanguageProvider>
+      <AuthProvider>
       <QueryClientProvider client={queryClientInstance}>
         <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Routes>
@@ -63,6 +73,7 @@ function App() {
           <SonnerToaster position="bottom-right" />
         </Router>
       </QueryClientProvider>
+      </AuthProvider>
     </LanguageProvider>
   )
 }

@@ -2,11 +2,15 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Menu, X } from "lucide-react";
-
-const AWT_LOGO = "/logo-awt.png";
 import { useLang } from "@/lib/LanguageContext";
 import LanguageSwitcher from "@/components/portfolio/LanguageSwitcher";
 import ThemeToggle from "@/components/portfolio/ThemeToggle";
+import InkFilterDefs from "@/components/media/InkFilterDefs";
+import { SocialLinks } from "@/components/SocialIcons";
+
+const AWT_LOGO = "/logo-awt-96.webp";
+const AWT_LOGO_2X = "/logo-awt-192.webp";
+
 
 export default function Layout({ children, currentPageName }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -15,7 +19,7 @@ export default function Layout({ children, currentPageName }) {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -27,15 +31,20 @@ export default function Layout({ children, currentPageName }) {
     { label: t.nav.blog, page: "Blog" },
     { label: t.nav.sandbox, page: "Sandbox" },
     { label: t.nav.contact, page: "Contact" },
+    { label: t.nav.booking, page: "Booking" },
   ];
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
+      <InkFilterDefs />
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-card focus:text-foreground focus:ring-2 focus:ring-ring">
+        {t.layout.skipToContent}
+      </a>
       {/* Navbar */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-background/95 backdrop-blur-md shadow-lg shadow-black/5 dark:shadow-black/30 border-b border-border" : "bg-transparent"}`}>
+      <nav aria-label={t.layout.mainNav} className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-background/95 backdrop-blur-md shadow-lg shadow-black/5 dark:shadow-black/30 border-b border-border" : "bg-transparent"}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link to={createPageUrl("Home")} className="flex items-center gap-2 group">
-            <img src={AWT_LOGO} alt="AWT" className="w-10 h-10 object-contain" />
+            <img src={AWT_LOGO} srcSet={`${AWT_LOGO} 1x, ${AWT_LOGO_2X} 2x`} alt={t.layout.logoAlt} width="40" height="40" className="w-10 h-10 object-contain" />
             <div>
               <span className="font-bold text-lg text-foreground">Albert</span>
               <span className="teal-text font-bold text-lg"> Womga</span>
@@ -63,7 +72,14 @@ export default function Layout({ children, currentPageName }) {
           {/* Mobile toggle */}
           <div className="md:hidden flex items-center gap-3">
             <ThemeToggle />
-            <button className="text-foreground" onClick={() => setMenuOpen(!menuOpen)}>
+            <button
+              type="button"
+              className="text-foreground rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? t.layout.closeMenu : t.layout.openMenu}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+            >
               {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
@@ -71,7 +87,7 @@ export default function Layout({ children, currentPageName }) {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="md:hidden bg-card border-t border-border px-6 py-4 flex flex-col gap-4">
+          <div id="mobile-menu" className="md:hidden bg-card border-t border-border px-6 py-4 flex flex-col gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.page}
@@ -91,13 +107,13 @@ export default function Layout({ children, currentPageName }) {
       </nav>
 
       {/* Main content */}
-      <main>{children}</main>
+      <main id="main">{children}</main>
 
       {/* Footer */}
       <footer className="bg-footer border-t border-border py-10 mt-0">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <img src={AWT_LOGO} alt="AWT" className="w-9 h-9 object-contain" />
+            <img src={AWT_LOGO} srcSet={`${AWT_LOGO} 1x, ${AWT_LOGO_2X} 2x`} alt="" aria-hidden="true" width="36" height="36" loading="lazy" className="w-9 h-9 object-contain" />
             <span className="font-bold text-footer-foreground">Albert Womga</span>
             <span className="text-footer-foreground/60 text-sm ml-2">— {t.footer.tagline}</span>
           </div>
@@ -108,7 +124,10 @@ export default function Layout({ children, currentPageName }) {
               </Link>
             ))}
           </div>
-          <p className="text-footer-foreground/50 text-sm">{t.footer.rights}</p>
+          <div className="flex items-center gap-4">
+            <SocialLinks className="text-footer-foreground/60" />
+            <p className="text-footer-foreground/50 text-sm">{t.footer.rights}</p>
+          </div>
         </div>
       </footer>
     </div>

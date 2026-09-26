@@ -8,14 +8,22 @@ import FeaturedProjects from "@/components/portfolio/FeaturedProjects";
 import WhyChooseMe from "@/components/portfolio/WhyChooseMe";
 import CTABanner from "@/components/portfolio/CTABanner";
 import Testimonials from "@/components/portfolio/Testimonials";
+import GoogleReviews from "@/components/portfolio/GoogleReviews";
 import InteractiveDataViz from "@/components/portfolio/InteractiveDataViz";
 import RegionalExpertise from "@/components/portfolio/RegionalExpertise";
 import { useLang, renderRich } from "@/lib/LanguageContext";
+import Seo from "@/components/Seo";
 
 export default function Home() {
   const { t } = useLang();
   return (
     <div>
+      <Seo
+        description={{
+          en: "Freelance AI/ML engineer & data scientist in Ottawa, serving Canada & Cameroon. LLM agents, MLOps, NLP, forecasting and computer vision — built for production.",
+          fr: "Ingénieur IA/ML et data scientist indépendant à Ottawa, au service du Canada et du Cameroun. Agents LLM, MLOps, NLP, prévision et vision par ordinateur — prêts pour la production.",
+        }}
+      />
       {/* HERO */}
       <section className="relative min-h-screen flex items-center grid-bg overflow-hidden">
         {/* Interactive Data Visualization */}
@@ -136,6 +144,7 @@ export default function Home() {
       <FeaturedProjects />
       <WhyChooseMe />
       <Testimonials />
+      <GoogleReviews />
       <CTABanner />
     </div>
   );

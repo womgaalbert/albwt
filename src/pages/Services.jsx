@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Brain, TrendingUp, MessageSquare, Search, BarChart2, Users, CheckCircle, ArrowRight, MapPin } from "lucide-react";
 import { useLang } from "@/lib/LanguageContext";
+import Seo from "@/components/Seo";
 
 const serviceIcons = [Brain, TrendingUp, MessageSquare, BarChart2, Search, Users];
 const serviceColors = [
@@ -23,6 +24,13 @@ export default function Services() {
 
   return (
     <div className="pt-24 pb-20">
+      <Seo
+        title={{ en: "AI/ML Services", fr: "Services IA/ML" }}
+        description={{
+          en: "Hire a freelance AI/ML engineer: LLM agents & RAG, ML model development, MLOps deployment, NLP, forecasting and data-science consulting.",
+          fr: "Engagez un ingénieur IA/ML indépendant : agents LLM & RAG, développement de modèles ML, déploiement MLOps, NLP, prévision et conseil en data science.",
+        }}
+      />
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -49,7 +57,7 @@ export default function Services() {
                 transition={{ delay: i * 0.08 }}
                 className="card-hover bg-card border border-border rounded-2xl p-6">
 
-                <div className="w-12 h-12 rounded-xl mb-5 flex items-center justify-center" style={{ background: `${color}15` }}>
+                <div className="w-12 h-12 rounded-xl mb-5 flex items-center justify-center" style={{ background: `color-mix(in srgb, ${color} 8%, transparent)` }}>
                   <Icon className="w-6 h-6" style={{ color }} />
                 </div>
                 <h3 className="text-foreground font-bold text-lg mb-3">{s.title}</h3>

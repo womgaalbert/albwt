@@ -6,45 +6,73 @@ import { useLang } from "@/lib/LanguageContext";
 
 const projects = [
   {
-    title: "Energy ARIMA Forecasting",
-    desc: "Time series analysis and ARIMA/SARIMA modeling to forecast U.S. industrial energy production (1939–2025) using Federal Reserve (FRED) data.",
-    tags: ["Time Series", "ARIMA", "SARIMA", "Python"],
+    title: { en: "Energy ARIMA Forecasting", fr: "Prévision énergétique ARIMA" },
+    desc: {
+      en: "Time series analysis and ARIMA/SARIMA modeling to forecast U.S. industrial energy production (1939–2025) using Federal Reserve (FRED) data.",
+      fr: "Analyse de séries temporelles et modélisation ARIMA/SARIMA pour prévoir la production énergétique industrielle américaine (1939–2025) à partir des données de la Réserve fédérale (FRED).",
+    },
+    tags: {
+      en: ["Time Series", "ARIMA", "SARIMA", "Python"],
+      fr: ["Séries temporelles", "ARIMA", "SARIMA", "Python"],
+    },
     stars: 1,
     lang: "Jupyter Notebook",
     url: "https://github.com/womgaalbert/Energy-ARIMA-Forecasting",
     color: "hsl(var(--primary))",
   },
   {
-    title: "Behavior Detection (Sensors)",
-    desc: "Analyzing and interpreting sensor data to identify specific behavioral patterns. Building structured models that classify and predict behaviors.",
-    tags: ["Sensor Data", "Classification", "ML", "Python"],
+    title: { en: "Behavior Detection (Sensors)", fr: "Détection de comportements (capteurs)" },
+    desc: {
+      en: "Analyzing and interpreting sensor data to identify specific behavioral patterns. Building structured models that classify and predict behaviors.",
+      fr: "Analyse et interprétation de données de capteurs pour repérer des schémas comportementaux précis, avec des modèles structurés qui classent et prédisent les comportements.",
+    },
+    tags: {
+      en: ["Sensor Data", "Classification", "ML", "Python"],
+      fr: ["Données de capteurs", "Classification", "ML", "Python"],
+    },
     stars: 0,
     lang: "Jupyter Notebook",
     url: "https://github.com/womgaalbert/Detect-Behavior-with-Sensor-Data",
     color: "hsl(var(--brand-blue))",
   },
   {
-    title: "Transformer Time Series Prediction",
-    desc: "Proof of concept for a transformer-based time series prediction model — bringing NLP architecture to temporal data forecasting.",
-    tags: ["Transformers", "Deep Learning", "Forecasting"],
+    title: { en: "Transformer Time Series Prediction", fr: "Prévision de séries temporelles par Transformer" },
+    desc: {
+      en: "Proof of concept for a transformer-based time series prediction model — bringing NLP architecture to temporal data forecasting.",
+      fr: "Preuve de concept d'un modèle de prévision de séries temporelles fondé sur les Transformers — l'architecture du NLP appliquée aux données temporelles.",
+    },
+    tags: {
+      en: ["Transformers", "Deep Learning", "Forecasting"],
+      fr: ["Transformers", "Apprentissage profond", "Prévision"],
+    },
     stars: 0,
     lang: "Python",
     url: "https://github.com/womgaalbert/transformer-time-series-prediction",
     color: "#8b5cf6",
   },
   {
-    title: "ConvNet on CIFAR-10",
-    desc: "CNN built from scratch to classify CIFAR-10 images, starting with pixel normalization. Uses stacked convolutional blocks with pooling and dropout.",
-    tags: ["CNN", "Computer Vision", "CIFAR-10"],
+    title: { en: "ConvNet on CIFAR-10", fr: "ConvNet sur CIFAR-10" },
+    desc: {
+      en: "CNN built from scratch to classify CIFAR-10 images, starting with pixel normalization. Uses stacked convolutional blocks with pooling and dropout.",
+      fr: "Réseau de neurones convolutif construit de zéro pour classer les images CIFAR-10, de la normalisation des pixels aux blocs convolutifs empilés avec pooling et dropout.",
+    },
+    tags: {
+      en: ["CNN", "Computer Vision", "CIFAR-10"],
+      fr: ["CNN", "Vision par ordinateur", "CIFAR-10"],
+    },
     stars: 0,
     lang: "Jupyter Notebook",
-    url: "https://github.com/womgaalbert/Convnet-On-CIFAR-10",
     color: "#f59e0b",
+    url: "https://github.com/womgaalbert/Convnet-On-CIFAR-10",
   },
 ];
 
 export default function FeaturedProjects() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  /** @param {any} v */
+  const tr = (v) => (v && typeof v === "object" && !Array.isArray(v) ? v[lang] || v.en : v);
+  /** @param {any} v */
+  const trList = (v) => (Array.isArray(v) ? v : v[lang] || v.en);
   return (
     <section className="py-24 bg-footer">
       <div className="max-w-7xl mx-auto px-6">
@@ -77,10 +105,10 @@ export default function FeaturedProjects() {
                   <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
-              <h3 className="text-foreground font-bold text-lg mb-2">{p.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-4">{p.desc}</p>
+              <h3 className="text-foreground font-bold text-lg mb-2">{tr(p.title)}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4">{tr(p.desc)}</p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {p.tags.map(tag => (
+                {trList(p.tags).map(tag => (
                   <span key={tag} className="bg-background border border-border text-muted-foreground text-xs px-2 py-0.5 rounded-full">{tag}</span>
                 ))}
               </div>

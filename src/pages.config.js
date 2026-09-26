@@ -47,16 +47,21 @@
  *
  * The mainPage value must match a key in the PAGES object exactly.
  */
-import About from './pages/About';
-import Contact from './pages/Contact';
+import { lazy } from 'react';
 import Home from './pages/Home';
-import Projects from './pages/Projects';
-import Services from './pages/Services';
 import __Layout from './Layout.jsx';
+
+// Home is eager (landing page); the rest are split into their own chunks.
+const About = lazy(() => import('./pages/About'));
+const Booking = lazy(() => import('./pages/Booking'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Projects = lazy(() => import('./pages/Projects'));
+const Services = lazy(() => import('./pages/Services'));
 
 
 export const PAGES = {
     "About": About,
+    "Booking": Booking,
     "Contact": Contact,
     "Home": Home,
     "Projects": Projects,

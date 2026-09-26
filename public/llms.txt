@@ -1,0 +1,37 @@
+# Albert Womga — Freelance AI/ML Engineer & Data Scientist
+
+> Albert Tchaptchet Womga is a data scientist and AI/ML engineer based in Ottawa, Canada, available for freelance projects in Canada, Cameroon and remotely. He works in English and French and builds machine-learning systems for production: LLM agents, MLOps pipelines, NLP, time-series forecasting and computer vision. He has 15+ years of delivery across government, healthcare and legal tech.
+
+## Services
+
+- [Machine Learning Solutions](https://albwt.com/services): custom end-to-end ML pipelines, from data preparation to model deployment.
+- [LLM agents & AI automation](https://albwt.com/sandbox): production AI agents with caching, rate limits and deterministic fallbacks, running on serverless infrastructure.
+- [Predictive Analytics & Forecasting](https://albwt.com/services): time-series models (ARIMA/SARIMA, LSTM, Transformers) for demand, energy, markets and operations.
+- [NLP & Text Analytics](https://albwt.com/services): document classification (e.g. DistilBERT), extraction and analytics over text.
+- [Computer Vision](https://albwt.com/services): CNN-based image classification, detection and behavioural analysis.
+- [Data Analysis & Visualization](https://albwt.com/services): exploratory analysis, statistical modelling and dashboards for decision-makers.
+- [AI Strategy Consulting](https://albwt.com/services): guidance for organizations adopting AI and data science at scale.
+
+## Selected projects
+
+- [GitHub Repo Analyzer agent (live demo)](https://albwt.com/sandbox): LangGraph.js agent on Supabase Edge Functions that fetches, analyzes and reports on any public GitHub repository.
+- [Energy ARIMA Forecasting](https://github.com/womgaalbert/Energy-ARIMA-Forecasting): ARIMA/SARIMA forecasting of U.S. industrial energy production (1939–2025).
+- [BFRB Sensor Fusion](https://github.com/womgaalbert/Detect-Behavior-with-Sensor-Data): multimodal time-series classification with LSTM/Transformer and sensor fusion.
+- [Transformer Time Series Prediction](https://github.com/womgaalbert/transformer-time-series-prediction): attention-based forecasting.
+- [ConvNet on CIFAR-10](https://github.com/womgaalbert/Convnet-On-CIFAR-10): CNN built from scratch.
+- [Student Plurilingual Representation](https://github.com/womgaalbert/Student-Plurilingual-Representation-French-Learning): MLOps pipeline with XGBoost, SMOTE and MLflow.
+- [cmavocate.ca](https://cmavocate.ca): legal aid web platform.
+
+## Pages
+
+- [Home](https://albwt.com/)
+- [About](https://albwt.com/about): background, skills and experience.
+- [Projects](https://albwt.com/projects)
+- [Blog](https://albwt.com/blog): articles on production ML, agents, MLOps, NLP and forecasting.
+- [Contact / hire](https://albwt.com/contact)
+
+## Profiles
+
+- [GitHub](https://github.com/womgaalbert)
+- [LinkedIn](https://www.linkedin.com/in/albert-womga-009a7931/)
+- [X](https://x.com/albtchap)

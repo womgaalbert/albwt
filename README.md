@@ -71,4 +71,5 @@ Static site — build with `npm run build` and serve `dist/` from any static hos
 
 Email: **contact@albwt.com**
 GitHub: [womgaalbert](https://github.com/womgaalbert)
-LinkedIn: [albert-womga](https://linkedin.com/in/albert-womga-009a7931/)
+LinkedIn: [albert-womga](https://linkedin.com/in/albert-womga-009a7931/)  
+X: [@albtchap](https://x.com/albtchap)

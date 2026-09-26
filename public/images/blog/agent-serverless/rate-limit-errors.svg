@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="340" viewBox="0 0 800 340" role="img" aria-labelledby="t d" font-family="Inter, system-ui, sans-serif"><title id="t">Most LLM errors were rate limits</title><desc id="d">Datadog, State of AI Engineering 2026: in February 2026, 5 percent of all LLM call spans reported an error, and 60 percent of those errors were caused by exceeded rate limits.</desc>
+<defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#00d4b8" stroke-opacity="0.06"/></pattern></defs>
+<rect width="800" height="340" fill="#101b33"/><rect width="800" height="340" fill="url(#grid)"/>
+
+<text x="40" y="52" font-size="20" fill="#e6edf7" font-weight="800">Most LLM errors were rate limits</text>
+<text x="40" y="76" font-size="12" fill="#8fa3bf">Production LLM call spans, February 2026</text>
+
+<!-- stat 1 -->
+<text x="40" y="160" font-size="64" fill="#00d4b8" font-weight="900">5%</text>
+<text x="40" y="188" font-size="13" fill="#c6d3e6">of all LLM calls</text>
+<text x="40" y="206" font-size="13" fill="#c6d3e6">returned an error</text>
+
+<!-- bar: composition of those errors -->
+<text x="250" y="118" font-size="13" fill="#c6d3e6">What caused those errors</text>
+<rect x="250" y="130" width="306" height="56" rx="8" fill="#f59e0b"/>
+<rect x="556" y="130" width="204" height="56" rx="8" fill="#2b3a57"/>
+<rect x="548" y="130" width="16" height="56" fill="#2b3a57"/>
+<rect x="548" y="130" width="8" height="56" fill="#f59e0b"/>
+<text x="270" y="166" font-size="22" fill="#1a1406" font-weight="900">60% rate limits</text>
+<text x="658" y="166" font-size="15" fill="#c6d3e6" text-anchor="middle" font-weight="700">40% other</text>
+<text x="250" y="212" font-size="12" fill="#8fa3bf">Most failed calls were the provider saying "too many requests".</text>
+
+<line x1="40" y1="250" x2="760" y2="250" stroke="#2b3a57"/>
+<text x="40" y="278" font-size="12" fill="#c6d3e6">By March 2026 the error rate fell to 2%, and rate limits were still almost a third of errors: ~8.4 million of them.</text>
+<text x="40" y="312" font-size="11" fill="#8fa3bf">Source: Datadog, "State of AI Engineering" (July 2026), datadoghq.com/state-of-ai-engineering</text>
+</svg>

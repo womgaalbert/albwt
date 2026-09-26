@@ -14,8 +14,6 @@
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.2",
     "@radix-ui/react-toast": "^1.2.2",
-    "@stripe/react-stripe-js": "^3.0.0",
-    "@stripe/stripe-js": "^5.2.0",
     "@supabase/supabase-js": "^2.108.2",
     "@tanstack/react-query": "^5.84.1",
     "class-variance-authority": "^0.7.1",
@@ -27,8 +25,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
-    "react-resizable-panels": "^2.1.7",
     "react-router-dom": "^6.26.0",
+    "remark-gfm": "^4.0.1",
     "sonner": "^2.0.1",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7"

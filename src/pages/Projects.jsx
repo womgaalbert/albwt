@@ -3,17 +3,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Star, GitBranch, Github, ChevronRight } from "lucide-react";
 import { useLang } from "@/lib/LanguageContext";
 import ProjectComments from "@/components/projects/ProjectComments";
+import InkImage from "@/components/media/InkImage";
+import Seo from "@/components/Seo";
 
 const projects = [
   {
     slug: "energy-arima-forecasting",
+    alt: { en: "Cover illustration: long-run energy production curve with a forecast line extending past the historical data", fr: "Illustration : courbe de production d'énergie sur le long terme prolongée par une ligne de prévision" },
     title: "Energy ARIMA Forecasting",
     titleFr: "Prévision ARIMA de l'Énergie",
     desc: "Applies time series analysis and ARIMA/SARIMA modeling to forecast U.S. industrial energy production (1939–2025). Uses historical data from the Federal Reserve (FRED), identifying long-term trends and seasonal patterns.",
     descFr: "Applique l'analyse de séries temporelles et la modélisation ARIMA/SARIMA pour prévoir la production industrielle d'énergie aux États-Unis (1939–2025). Utilise les données historiques de la Réserve Fédérale (FRED).",
     highlights: ["ARIMA/SARIMA multi-step forecasting", "Full statistical validation framework", "U.S. industrial energy production (1939–2025)"],
     highlightsFr: ["Prévision multi-étapes ARIMA/SARIMA", "Framework de validation statistique complète", "Production industrielle US (1939–2025)"],
-    tags: ["ARIMA", "SARIMA", "Forecasting", "Python"],
+    tags: { en: ["ARIMA", "SARIMA", "Forecasting", "Python"], fr: ["ARIMA", "SARIMA", "Prévision", "Python"] },
     stars: 1,
     lang: "Jupyter Notebook",
     url: "https://github.com/womgaalbert/Energy-ARIMA-Forecasting",
@@ -25,13 +28,14 @@ const projects = [
   },
   {
     slug: "bfrb-sensor-fusion",
+    alt: { en: "Cover illustration: several overlapping sensor signal waveforms merged into one classification stream", fr: "Illustration : plusieurs signaux de capteurs superposés fusionnés en un seul flux de classification" },
     title: "BFRB Sensor Fusion — Multimodal Behaviour Analytics",
     titleFr: "Fusion de Capteurs BFRB — Analytique Comportementale Multimodale",
     desc: "Implemented multimodal time-series classification using LSTM/Transformer architectures, sliding-window segmentation, and sensor fusion — methodology applicable to fraud detection and customer journey analytics.",
     descFr: "Classification multimodale de séries temporelles avec des architectures LSTM/Transformer, segmentation par fenêtre glissante et fusion de capteurs — applicable à la détection de fraude et à l'analytique parcours client.",
     highlights: ["LSTM/Transformer multimodal classification", "Sliding-window segmentation for time-series", "Sensor fusion methodology"],
     highlightsFr: ["Classification multimodale LSTM/Transformer", "Segmentation par fenêtre glissante", "Méthodologie de fusion de capteurs"],
-    tags: ["LSTM", "Transformer", "Sensor Fusion", "Time-Series"],
+    tags: { en: ["LSTM", "Transformer", "Sensor Fusion", "Time-Series"], fr: ["LSTM", "Transformer", "Fusion de capteurs", "Séries temporelles"] },
     stars: 0,
     lang: "Jupyter Notebook",
     url: "https://github.com/womgaalbert/Detect-Behavior-with-Sensor-Data",
@@ -43,13 +47,14 @@ const projects = [
   },
   {
     slug: "transformer-time-series",
+    alt: { en: "Cover illustration: attention connections linking points of a time series", fr: "Illustration : connexions d'attention reliant les points d'une série temporelle" },
     title: "Transformer Time Series Prediction",
     titleFr: "Prédiction de Séries Temporelles par Transformer",
     desc: "Proof of concept for a transformer-based time series prediction model — bringing NLP architecture to temporal data forecasting. Demonstrates the power of attention mechanisms for sequence data.",
     descFr: "Preuve de concept pour un modèle de prédiction de séries temporelles basé sur les transformers — appliquant l'architecture NLP aux données temporelles. Démontre la puissance des mécanismes d'attention.",
     highlights: ["Transformer architecture for time-series", "Attention mechanism applied to sequential data", "NLP-to-forecasting transfer"],
     highlightsFr: ["Architecture Transformer pour séries temporelles", "Mécanisme d'attention sur données séquentielles", "Transfert NLP → prévision"],
-    tags: ["Transformers", "Deep Learning", "Attention", "Forecasting"],
+    tags: { en: ["Transformers", "Deep Learning", "Attention", "Forecasting"], fr: ["Transformers", "Apprentissage profond", "Attention", "Prévision"] },
     stars: 0,
     lang: "Python",
     url: "https://github.com/womgaalbert/transformer-time-series-prediction",
@@ -61,13 +66,14 @@ const projects = [
   },
   {
     slug: "convnet-cifar10",
+    alt: { en: "Cover illustration: stacked convolutional layers turning an image grid into class predictions", fr: "Illustration : couches convolutives empilées transformant une grille d'image en prédictions de classes" },
     title: "ConvNet on CIFAR-10",
     titleFr: "ConvNet sur CIFAR-10",
     desc: "CNN built from scratch to classify CIFAR-10 images. Features pixel normalization, stacked convolutional blocks with pooling and dropout regularization for improved generalization.",
     descFr: "CNN construit de zéro pour classifier les images CIFAR-10. Comprend la normalisation des pixels, des blocs convolutifs empilés avec pooling et régularisation par dropout.",
     highlights: ["Custom CNN architecture from scratch", "Dropout + pooling regularization", "CIFAR-10 benchmark classification"],
     highlightsFr: ["Architecture CNN personnalisée", "Régularisation Dropout + Pooling", "Classification benchmark CIFAR-10"],
-    tags: ["CNN", "Computer Vision", "CIFAR-10", "PyTorch"],
+    tags: { en: ["CNN", "Computer Vision", "CIFAR-10", "PyTorch"], fr: ["CNN", "Vision par ordinateur", "CIFAR-10", "PyTorch"] },
     stars: 0,
     lang: "Jupyter Notebook",
     url: "https://github.com/womgaalbert/Convnet-On-CIFAR-10",
@@ -79,13 +85,14 @@ const projects = [
   },
   {
     slug: "student-plurilingual",
+    alt: { en: "Cover illustration: MLOps pipeline stages from data to tracked model", fr: "Illustration : étapes d'un pipeline MLOps, des données au modèle suivi" },
     title: "Student Plurilingual Representation — French Learning",
     titleFr: "Représentation Plurilingue des Étudiants — Apprentissage du Français",
     desc: "Ongoing MLOps pipeline (Level 0 → Level 1) analyzing student perceptions of French learning. XGBoost classification with SMOTE balancing, MLflow experiment tracking, and hypothesis-driven modeling (H1–H4).",
     descFr: "Pipeline MLOps (Niveau 0 → Niveau 1) analysant les perceptions des étudiants sur l'apprentissage du français. Classification XGBoost avec équilibrage SMOTE, suivi MLflow et modélisation par hypothèses (H1–H4).",
     highlights: ["XGBoost + SMOTE for imbalanced classification", "MLflow experiment tracking & model registry", "Hypothesis-driven pipeline (H1–H4)"],
     highlightsFr: ["XGBoost + SMOTE pour données déséquilibrées", "Suivi MLflow & registre de modèles", "Pipeline par hypothèses (H1–H4)"],
-    tags: ["XGBoost", "MLOps", "MLflow", "NLP", "Python"],
+    tags: { en: ["XGBoost", "MLOps", "MLflow", "NLP", "Python"], fr: ["XGBoost", "MLOps", "MLflow", "NLP", "Python"] },
     stars: 0,
     lang: "Python",
     url: "https://github.com/womgaalbert/Student-Plurilingual-Representation-French-Learning",
@@ -93,17 +100,18 @@ const projects = [
     category: "Machine Learning",
     categoryFr: "Machine Learning",
     image: "/images/projects/student-plurilingual.svg",
-    year: "2025 🔄",
+    year: { en: "2025 · ongoing", fr: "2025 · en cours" },
   },
   {
     slug: "portfolio-website",
+    alt: { en: "Cover illustration: stylised browser window of the portfolio website", fr: "Illustration : fenêtre de navigateur stylisée du site portfolio" },
     title: "albert.womga.io — Portfolio",
     titleFr: "albert.womga.io — Portfolio",
     desc: "My personal GitHub Pages website — a digital presence showcasing projects and professional background as a Data Scientist and AI Specialist.",
     descFr: "Mon site GitHub Pages personnel — une présence digitale présentant mes projets et mon parcours professionnel en tant que Data Scientist et Spécialiste IA.",
     highlights: ["Personal brand & digital presence", "Project showcase platform", "GitHub Pages deployment"],
     highlightsFr: ["Marque personnelle & présence digitale", "Plateforme de présentation de projets", "Déploiement GitHub Pages"],
-    tags: ["Portfolio", "GitHub Pages", "Web"],
+    tags: { en: ["Portfolio", "GitHub Pages", "Web"], fr: ["Portfolio", "GitHub Pages", "Web"] },
     stars: 0,
     lang: "HTML/CSS",
     url: "https://github.com/womgaalbert/albert.womga.io",
@@ -115,13 +123,14 @@ const projects = [
   },
   {
     slug: "cmavocate-legal-platform",
+    alt: { en: "Cover illustration: stylised legal aid web platform interface", fr: "Illustration : interface stylisée de la plateforme web d'aide juridique" },
     title: "cmavocate.ca — Legal Aid Web Platform",
     titleFr: "cmavocate.ca — Plateforme Web d'Aide Juridique",
     desc: "Designed and developed cmavocate.ca, a professional legal aid web platform providing accessible legal resources and services for Canadian users.",
     descFr: "Conception et développement de cmavocate.ca, une plateforme web d'aide juridique professionnelle offrant des ressources et services juridiques accessibles aux utilisateurs canadiens.",
     highlights: ["Full web platform design & development", "Accessible legal resource hub for Canada", "Professional UX/UI for legal services"],
     highlightsFr: ["Conception & développement web complet", "Hub de ressources juridiques accessible", "UX/UI professionnel pour services juridiques"],
-    tags: ["Web", "React", "UX/UI", "Legal Tech"],
+    tags: { en: ["Web", "React", "UX/UI", "Legal Tech"], fr: ["Web", "React", "UX/UI", "Legal tech"] },
     stars: 0,
     lang: "JavaScript",
     url: "https://cmavocate.ca",
@@ -159,6 +168,13 @@ export default function Projects() {
 
   return (
     <div className="pt-24 pb-20">
+      <Seo
+        title={t.projects.title}
+        description={{
+          en: "Machine learning, deep learning, forecasting and computer vision projects by Albert Womga — freelance AI/ML engineer (Canada & Cameroon).",
+          fr: "Projets de machine learning, deep learning, prévision et vision par ordinateur d'Albert Womga — ingénieur IA/ML indépendant (Canada & Cameroun).",
+        }}
+      />
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -177,8 +193,10 @@ export default function Projects() {
           {categories.map((cat) => (
             <button
               key={cat}
+              type="button"
+              aria-pressed={activeCategory === cat}
               onClick={() => setActiveCategory(cat)}
-              className="px-4 py-2 rounded-full text-sm font-medium transition-all"
+              className="px-4 py-2 rounded-full text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               style={{
                 background: activeCategory === cat ? "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))" : "hsl(var(--card))",
                 color: activeCategory === cat ? "white" : "hsl(var(--muted-foreground))",
@@ -199,25 +217,30 @@ export default function Projects() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.2, delay: i * 0.04 }}
-              className="card-hover bg-card border border-border rounded-2xl overflow-hidden flex flex-col"
+              className="ink-reveal card-hover bg-card border border-border rounded-2xl overflow-hidden flex flex-col"
             >
               {/* Image */}
-              <div className="relative h-52 overflow-hidden">
-                <img
+              <div className="relative h-60 overflow-hidden">
+                <InkImage
                   src={p.image}
-                  alt={p.title}
-                  className="w-full h-full object-cover"
+                  alt={p.alt}
+                  caption={lang === "fr" ? p.titleFr : p.title}
+                  width={600}
+                  height={400}
+                  priority={i < 2}
+                  zoomable
+                  className="w-full h-full"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent" />
-                <div className="absolute top-4 left-4 flex items-center gap-2">
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-card/90 via-transparent to-transparent" />
+                <div className="pointer-events-none absolute top-4 left-4 z-20 flex items-center gap-2">
                   <span
-                    className="text-xs font-semibold px-2.5 py-1 rounded-full border"
-                    style={{ background: `${p.color}20`, color: p.color, borderColor: `${p.color}40` }}
+                    className="text-xs font-semibold px-2.5 py-1 rounded-full border bg-card/85 backdrop-blur"
+                    style={{ color: p.color, borderColor: `color-mix(in srgb, ${p.color} 40%, transparent)` }}
                   >
                     {lang === "fr" ? p.categoryFr : p.category}
                   </span>
                 </div>
-                <div className="absolute top-4 right-4 text-muted-foreground text-xs font-mono">{p.year}</div>
+                <div className="pointer-events-none absolute top-4 right-4 z-20 text-foreground text-xs font-mono bg-card/85 backdrop-blur px-2 py-0.5 rounded">{typeof p.year === "object" ? p.year[lang] || p.year.en : p.year}</div>
               </div>
 
               {/* Content */}
@@ -240,7 +263,7 @@ export default function Projects() {
                 </ul>
 
                 <div className="flex flex-wrap gap-1.5 mb-4">
-                  {p.tags.map(tag => (
+                  {(Array.isArray(p.tags) ? p.tags : p.tags[lang] || p.tags.en).map(tag => (
                     <span key={tag} className="bg-background border border-border text-muted-foreground text-xs px-2 py-0.5 rounded-full">{tag}</span>
                   ))}
                 </div>
@@ -252,11 +275,13 @@ export default function Projects() {
                   </div>
                   <div className="flex items-center gap-3">
                     <button
+                      type="button"
                       onClick={() => toggleComments(p.slug)}
+                      aria-expanded={!!expandedComments[p.slug]}
                       className="text-xs font-medium transition-colors"
-                      style={{ color: expandedComments[p.slug] ? p.color : "#9ca3af" }}
+                      style={{ color: expandedComments[p.slug] ? p.color : "hsl(var(--muted-foreground))" }}
                     >
-                      {expandedComments[p.slug] ? "Hide comments" : "Comments"}
+                      {expandedComments[p.slug] ? t.projects.hideComments : t.projects.comments}
                     </button>
                     <a
                       href={p.url}

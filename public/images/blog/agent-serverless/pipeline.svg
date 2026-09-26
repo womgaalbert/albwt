@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420" role="img" aria-labelledby="t d" font-family="Inter, system-ui, sans-serif"><title id="t">Agent graph of the GitHub Project Analyzer</title><desc id="d">START, checkCache, rateLimit, fetchRepo, analyze, synthesize, saveCache, END. A cache hit goes straight to END for free; an exceeded rate limit returns 429. Only synthesize calls an LLM.</desc>
+<defs>
+<pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#00d4b8" stroke-opacity="0.06"/></pattern>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#8fa3bf"/></marker>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#00d4b8"/></marker>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#f87171"/></marker>
+</defs>
+<rect width="800" height="420" fill="#101b33"/><rect width="800" height="420" fill="url(#grid)"/>
+
+<!-- edges -->
+<g fill="none" stroke="#8fa3bf" stroke-width="2">
+<path d="M92 110 H128" marker-end="url(#a)"/>
+<path d="M280 110 H328" marker-end="url(#a)"/>
+<path d="M480 110 H528" marker-end="url(#a)"/>
+<path d="M605 138 V240" marker-end="url(#a)"/>
+<path d="M530 270 H482" marker-end="url(#a)"/>
+<path d="M330 270 H282" marker-end="url(#a)"/>
+<path d="M130 270 H94" marker-end="url(#a)"/>
+</g>
+<!-- cache hit shortcut -->
+<path d="M205 138 V190 H70 V246" fill="none" stroke="#00d4b8" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ah)"/>
+<text x="215" y="172" font-size="12" fill="#00d4b8" font-weight="600">cache hit · free, not rate-limited</text>
+<!-- rate limited -->
+<path d="M405 82 V52 H470" fill="none" stroke="#f87171" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ar)"/>
+<text x="478" y="57" font-size="12" fill="#f87171" font-weight="600">429 · limit reached → END</text>
+
+<!-- terminals -->
+<circle cx="70" cy="110" r="22" fill="#16243f" stroke="#8fa3bf" stroke-width="2"/><text x="70" y="114" font-size="10" fill="#e6edf7" text-anchor="middle" font-weight="700">START</text>
+<circle cx="70" cy="270" r="22" fill="#16243f" stroke="#8fa3bf" stroke-width="2"/><text x="70" y="274" font-size="10" fill="#e6edf7" text-anchor="middle" font-weight="700">END</text>
+
+<!-- nodes: Postgres (blue) -->
+<g><rect x="130" y="82" width="150" height="56" rx="12" fill="#16243f" stroke="#4d8dff" stroke-width="2"/><text x="205" y="106" font-size="15" fill="#e6edf7" text-anchor="middle" font-weight="700">checkCache</text><text x="205" y="125" font-size="11" fill="#8fa3bf" text-anchor="middle">24 h Postgres cache</text></g>
+<g><rect x="330" y="82" width="150" height="56" rx="12" fill="#16243f" stroke="#4d8dff" stroke-width="2"/><text x="405" y="106" font-size="15" fill="#e6edf7" text-anchor="middle" font-weight="700">rateLimit</text><text x="405" y="125" font-size="11" fill="#8fa3bf" text-anchor="middle">10 fresh runs / h per IP</text></g>
+<g><rect x="130" y="242" width="150" height="56" rx="12" fill="#16243f" stroke="#4d8dff" stroke-width="2"/><text x="205" y="266" font-size="15" fill="#e6edf7" text-anchor="middle" font-weight="700">saveCache</text><text x="205" y="285" font-size="11" fill="#8fa3bf" text-anchor="middle">only AI reports cached</text></g>
+<!-- nodes: deterministic code (teal) -->
+<g><rect x="530" y="82" width="150" height="56" rx="12" fill="#16243f" stroke="#00d4b8" stroke-width="2"/><text x="605" y="106" font-size="15" fill="#e6edf7" text-anchor="middle" font-weight="700">fetchRepo</text><text x="605" y="125" font-size="11" fill="#8fa3bf" text-anchor="middle">4 parallel GitHub calls</text></g>
+<g><rect x="530" y="242" width="150" height="56" rx="12" fill="#16243f" stroke="#00d4b8" stroke-width="2"/><text x="605" y="266" font-size="15" fill="#e6edf7" text-anchor="middle" font-weight="700">analyze</text><text x="605" y="285" font-size="11" fill="#8fa3bf" text-anchor="middle">pure code, 0 tokens</text></g>
+<!-- node: LLM (amber) -->
+<g><rect x="330" y="242" width="150" height="56" rx="12" fill="#2a2414" stroke="#f59e0b" stroke-width="2.5"/><text x="405" y="266" font-size="15" fill="#fde68a" text-anchor="middle" font-weight="700">synthesize</text><text x="405" y="285" font-size="11" fill="#fcd34d" text-anchor="middle">the only LLM call</text></g>
+
+<!-- legend -->
+<g font-size="12" fill="#c6d3e6">
+<rect x="130" y="340" width="14" height="14" rx="3" fill="none" stroke="#4d8dff" stroke-width="2"/><text x="152" y="352">Postgres</text>
+<rect x="240" y="340" width="14" height="14" rx="3" fill="none" stroke="#00d4b8" stroke-width="2"/><text x="262" y="352">deterministic code</text>
+<rect x="400" y="340" width="14" height="14" rx="3" fill="#2a2414" stroke="#f59e0b" stroke-width="2"/><text x="422" y="352">LLM (Groq → NVIDIA NIM)</text>
+</g>
+<text x="400" y="392" font-size="13" fill="#8fa3bf" text-anchor="middle">LangGraph.js on Supabase Edge Functions — 6 nodes, only one of them spends tokens</text>
+</svg>

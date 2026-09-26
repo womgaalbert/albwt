@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# AI assistants and search crawlers are welcome: see /llms.txt for a summary.
+Sitemap: https://albwt.com/sitemap.xml

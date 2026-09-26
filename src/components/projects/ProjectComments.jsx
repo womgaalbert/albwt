@@ -2,8 +2,10 @@ import { useState, useEffect, useCallback } from "react";
 import { MessageSquare, Send } from "lucide-react";
 import { MAX_INPUT_LENGTHS } from "@/lib/sanitize";
 import { supabase } from "@/lib/supabase";
+import { useLang } from "@/lib/LanguageContext";
 
 export default function ProjectComments({ projectSlug, accentColor }) {
+  const { lang, t } = useLang();
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -23,7 +25,7 @@ export default function ProjectComments({ projectSlug, accentColor }) {
       if (queryError) throw queryError;
       setComments(data);
     } catch (err) {
-      setError("Failed to load comments. Please try again later.");
+      setError("load");
       setComments([]);
     }
     setLoading(false);
@@ -50,43 +52,48 @@ export default function ProjectComments({ projectSlug, accentColor }) {
       setForm({ author_name: "", content: "" });
       await loadComments();
     } catch (err) {
-      setSubmitError("Failed to post comment. Please try again.");
+      setSubmitError("post");
     }
     setSubmitting(false);
   };
 
   const formatDate = (dateStr) =>
-    new Date(dateStr).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+    new Date(dateStr).toLocaleDateString(lang === "fr" ? "fr-CA" : "en-CA", { month: "short", day: "numeric", year: "numeric" });
 
   return (
     <div className="mt-6 pt-6 border-t border-border">
       <div className="flex items-center gap-2 mb-4">
         <MessageSquare className="w-4 h-4" style={{ color: accentColor }} />
         <span className="text-foreground font-semibold text-sm">
-          {comments.length} Comment{comments.length !== 1 ? "s" : ""}
+          {t.projects.commentsCount.replace("{n}", comments.length)}
         </span>
       </div>
 
       {/* Comment form */}
       <form onSubmit={handleSubmit} className="mb-5 space-y-3">
+        <label htmlFor={`comment-name-${projectSlug}`} className="sr-only">{t.projects.commentName}</label>
         <input
+          id={`comment-name-${projectSlug}`}
           value={form.author_name}
           onChange={e => setForm({ ...form, author_name: e.target.value })}
-          placeholder="Your name"
+          placeholder={t.projects.commentName}
           maxLength={MAX_INPUT_LENGTHS.commentAuthor}
-          className="w-full bg-background border border-border text-foreground rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-primary transition-colors placeholder-muted-foreground/60"
+          className="w-full bg-background border border-border text-foreground rounded-xl px-3 py-2.5 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus:border-primary transition-colors placeholder-muted-foreground/60"
         />
         <div className="flex gap-2">
+          <label htmlFor={`comment-body-${projectSlug}`} className="sr-only">{t.projects.commentPlaceholder}</label>
           <textarea
+            id={`comment-body-${projectSlug}`}
             value={form.content}
             onChange={e => setForm({ ...form, content: e.target.value })}
-            placeholder="Share your thoughts on this project..."
+            placeholder={t.projects.commentPlaceholder}
             rows={2}
             maxLength={MAX_INPUT_LENGTHS.commentContent}
-            className="flex-1 bg-background border border-border text-foreground rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-primary transition-colors resize-none placeholder-muted-foreground/60"
+            className="flex-1 bg-background border border-border text-foreground rounded-xl px-3 py-2.5 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus:border-primary transition-colors resize-none placeholder-muted-foreground/60"
           />
           <button
             type="submit"
+            aria-label={t.projects.commentPost}
             disabled={submitting || !form.author_name.trim() || !form.content.trim()}
             className="px-3 rounded-xl text-white disabled:opacity-40 flex items-center justify-center self-start py-2.5"
             style={{ background: `linear-gradient(135deg, ${accentColor}, hsl(var(--brand-blue)))` }}
@@ -98,22 +105,22 @@ export default function ProjectComments({ projectSlug, accentColor }) {
           </button>
         </div>
         {submitError && (
-          <p className="text-red-400 text-xs">{submitError}</p>
+          <p role="alert" className="text-destructive text-xs">{t.projects.commentPostError}</p>
         )}
       </form>
 
       {/* Comments list */}
       {loading ? (
-        <div className="text-muted-foreground/70 text-xs">Loading comments...</div>
+        <div className="text-muted-foreground/70 text-xs">{t.projects.commentsLoading}</div>
       ) : error ? (
-        <div className="text-red-400 text-xs">{error}</div>
+        <div role="alert" className="text-destructive text-xs">{t.projects.commentsLoadError}</div>
       ) : (
         <div>
           {comments.map((c) => (
             <div key={c.id} className="flex gap-2.5 mb-3">
               <div
                 className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold"
-                style={{ background: `${accentColor}30`, border: `1px solid ${accentColor}50`, color: accentColor }}
+                style={{ background: `color-mix(in srgb, ${accentColor} 19%, transparent)`, border: `1px solid color-mix(in srgb, ${accentColor} 31%, transparent)`, color: accentColor }}
               >
                 {c.author_name.charAt(0).toUpperCase()}
               </div>
@@ -127,7 +134,7 @@ export default function ProjectComments({ projectSlug, accentColor }) {
             </div>
           ))}
           {comments.length === 0 && (
-            <p className="text-muted-foreground/70 text-xs">Be the first to comment on this project.</p>
+            <p className="text-muted-foreground/70 text-xs">{t.projects.commentsEmpty}</p>
           )}
         </div>
       )}

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, MapPin, Calendar, Award, Quote } from "lucide-react";
 import { useLang, renderRich } from "@/lib/LanguageContext";
+import Seo from "@/components/Seo";
 
 const skills = [
   "Python", "SQL", "R", "Git/GitHub", "REST APIs",
@@ -13,48 +14,72 @@ const skills = [
 
 const linkedInEndorsements = [
   {
-    quote: "Albert provided outstanding statistical consultancy to our research teams. His expertise in biostatistics — from study design and multivariate analysis to clinical modelling — significantly elevated the rigour of our publications and ethics submissions. A rare combination of deep statistical knowledge and genuine pedagogy.",
+    quote: {
+      en: "Albert provided outstanding statistical consultancy to our research teams. His expertise in biostatistics — from study design and multivariate analysis to clinical modelling — significantly elevated the rigour of our publications and ethics submissions. A rare combination of deep statistical knowledge and genuine pedagogy.",
+      fr: "Albert a fourni un accompagnement statistique remarquable à nos équipes de recherche. Son expertise en biostatistique — du plan d'étude à l'analyse multivariée et à la modélisation clinique — a nettement renforcé la rigueur de nos publications et de nos soumissions au comité d'éthique. Une combinaison rare de savoir statistique approfondi et de véritable pédagogie.",
+    },
     name: "Prof. Koki Ndoumbo",
-    title: "Professor & Dean",
-    org: "Faculty of Medicine, University of Yaoundé I",
+    title: { en: "Professor & Dean", fr: "Professeur et doyen" },
+    org: { en: "Faculty of Medicine, University of Yaoundé I", fr: "Faculté de médecine, Université de Yaoundé I" },
     initials: "KN",
     color: "#f59e0b",
-    relation: "Managed Albert directly",
+    relation: { en: "Managed Albert directly", fr: "A encadré Albert directement" },
   },
   {
-    quote: "Albert built the entire cmavocats.ca platform and integrated an AI document classification system that transformed how we handle legal documents. His NLP pipeline reduced our routing time from minutes to seconds. Remarkable technical depth, clear communication, and genuine commitment to delivering value.",
+    quote: {
+      en: "Albert built the entire cmavocats.ca platform and integrated an AI document classification system that transformed how we handle legal documents. His NLP pipeline reduced our routing time from minutes to seconds. Remarkable technical depth, clear communication, and genuine commitment to delivering value.",
+      fr: "Albert a construit l'intégralité de la plateforme cmavocats.ca et y a intégré un système de classification documentaire par IA qui a transformé notre gestion des documents juridiques. Son pipeline NLP a réduit notre temps d'acheminement de plusieurs minutes à quelques secondes. Une profondeur technique remarquable, une communication claire et un réel souci du résultat.",
+    },
     name: "C.M. Avocats",
-    title: "Legal Technology Partner",
-    org: "CM Avocats — Gatineau, QC, Canada",
+    title: { en: "Legal Technology Partner", fr: "Partenaire en technologies juridiques" },
+    org: { en: "CM Avocats — Gatineau, QC, Canada", fr: "CM Avocats — Gatineau (QC), Canada" },
     initials: "CM",
     color: "#8b5cf6",
-    relation: "Client · Legal Tech",
+    relation: { en: "Client · Legal Tech", fr: "Client · Legal tech" },
   },
   {
-    quote: "Over more than a decade, Albert consistently delivered institutional analytics of the highest quality. His dashboards and insight reports directly shaped our education policy and budget decisions. He has an exceptional ability to translate complex data into actionable strategy for senior decision-makers.",
-    name: "Ministry Analytics Office",
-    title: "Government Analytics Division",
-    org: "Ministry of Secondary Education — Cameroon",
+    quote: {
+      en: "Over more than a decade, Albert consistently delivered institutional analytics of the highest quality. His dashboards and insight reports directly shaped our education policy and budget decisions. He has an exceptional ability to translate complex data into actionable strategy for senior decision-makers.",
+      fr: "Pendant plus de dix ans, Albert a livré sans faillir des analyses institutionnelles de très haute qualité. Ses tableaux de bord et ses rapports ont directement orienté notre politique éducative et nos décisions budgétaires. Il a une capacité exceptionnelle à traduire des données complexes en stratégie actionnable pour les décideurs.",
+    },
+    name: { en: "Ministry Analytics Office", fr: "Bureau d'analyse du ministère" },
+    title: { en: "Government Analytics Division", fr: "Division de l'analyse gouvernementale" },
+    org: { en: "Ministry of Secondary Education — Cameroon", fr: "Ministère des Enseignements secondaires — Cameroun" },
     initials: "MS",
     color: "#10b981",
-    relation: "Senior Stakeholder · 13 years",
+    relation: { en: "Senior Stakeholder · 13 years", fr: "Partie prenante · 13 ans" },
   },
   {
-    quote: "Merci à Albert Womga pour le remarquable travail de développement qui a permis de transformer des données de recherche en un dashboard interactif intégrant des méthodes de machine learning et de traitement automatique des langues. Cette collaboration illustre les possibilités offertes par le dialogue entre didactique des langues et intelligence artificielle au service de la recherche en éducation.",
+    quote: {
+      en: "Thank you to Albert Womga for the remarkable development work that turned research data into an interactive dashboard combining machine learning and natural language processing. This collaboration shows what becomes possible when language didactics and artificial intelligence work together in the service of education research.",
+      fr: "Merci à Albert Womga pour le remarquable travail de développement qui a permis de transformer des données de recherche en un dashboard interactif intégrant des méthodes de machine learning et de traitement automatique des langues. Cette collaboration illustre les possibilités offertes par le dialogue entre didactique des langues et intelligence artificielle au service de la recherche en éducation.",
+    },
     name: "Chancelline Armelle (Fodouop) Nongni Kendjio",
-    title: "Doctorante en Didactique du FLES",
-    org: "Student Plurilingual Representation — French Learning Research",
+    title: { en: "PhD candidate in French language didactics", fr: "Doctorante en didactique du FLES" },
+    org: {
+      en: "Student Plurilingual Representation — French Learning Research",
+      fr: "Représentation plurilingue des élèves — recherche sur l'apprentissage du français",
+    },
     initials: "CA",
     color: "hsl(var(--brand-blue))",
-    relation: "Research Collaborator · NLP & Education",
+    relation: { en: "Research collaborator · NLP & education", fr: "Collaboratrice de recherche · NLP et éducation" },
   },
 ];
 
 export default function About() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  /** @param {any} v */
+  const tr = (v) => (v && typeof v === "object" ? v[lang] || v.en : v);
 
   return (
     <div className="pt-24 pb-20">
+      <Seo
+        title={{ en: "About — AI/ML Engineer", fr: "À propos — Ingénieur IA/ML" }}
+        description={{
+          en: "Background, skills and experience of Albert Tchaptchet Womga: Data Scientist III, machine learning, LLMs and MLOps.",
+          fr: "Parcours, compétences et expérience d'Albert Tchaptchet Womga : Data Scientist III, machine learning, LLM et MLOps.",
+        }}
+      />
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <motion.div
@@ -212,20 +237,20 @@ export default function About() {
                 <div className="absolute top-5 right-5 opacity-10" style={{color: e.color}}>
                   <Quote className="w-9 h-9" />
                 </div>
-                <p className="text-muted-foreground text-sm leading-relaxed flex-1">"{e.quote}"</p>
+                <p className="text-muted-foreground text-sm leading-relaxed flex-1">"{tr(e.quote)}"</p>
                 <div className="border-t border-border" />
                 <div className="flex items-center gap-3">
                   <div
                     className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                    style={{background: `linear-gradient(135deg, ${e.color}, ${e.color}88)`}}
+                    style={{background: `linear-gradient(135deg, ${e.color}, color-mix(in srgb, ${e.color} 53%, transparent))`}}
                   >
                     {e.initials}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-foreground font-semibold text-sm">{e.name}</p>
-                    <p className="text-muted-foreground text-xs truncate">{e.title} · {e.org}</p>
+                    <p className="text-foreground font-semibold text-sm">{tr(e.name)}</p>
+                    <p className="text-muted-foreground text-xs truncate">{tr(e.title)} · {tr(e.org)}</p>
                   </div>
-                  <span className="text-xs text-muted-foreground/70 bg-background border border-border px-2 py-1 rounded-full flex-shrink-0">{e.relation}</span>
+                  <span className="text-xs text-muted-foreground/70 bg-background border border-border px-2 py-1 rounded-full flex-shrink-0">{tr(e.relation)}</span>
                 </div>
               </motion.div>
             ))}

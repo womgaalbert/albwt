@@ -1,8 +1,10 @@
 import { useLocation, Link } from 'react-router-dom';
 import { Home, SearchX } from 'lucide-react';
 import { createPageUrl } from '@/utils';
+import { useLang } from '@/lib/LanguageContext';
 
 export default function PageNotFound({}) {
+    const { t } = useLang();
     const location = useLocation();
     const pageName = location.pathname.substring(1);
 
@@ -24,10 +26,10 @@ export default function PageNotFound({}) {
                     {/* Main Message */}
                     <div className="space-y-3">
                         <h2 className="text-2xl font-bold text-foreground">
-                            Page Not Found
+                            {t.notFound.title}
                         </h2>
                         <p className="text-muted-foreground leading-relaxed">
-                            The page <span className="font-medium text-foreground">"{pageName}"</span> could not be found in this application.
+                            {t.notFound.descBefore}<span className="font-medium text-foreground">"{pageName}"</span>{t.notFound.descAfter}
                         </p>
                     </div>
 
@@ -38,7 +40,7 @@ export default function PageNotFound({}) {
                             className="btn-primary inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background"
                         >
                             <Home className="w-4 h-4 mr-2" />
-                            Go Home
+                            {t.notFound.home}
                         </Link>
                     </div>
                 </div>

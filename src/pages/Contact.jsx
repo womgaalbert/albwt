@@ -1,9 +1,14 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Github, Linkedin, Send, CheckCircle, Globe, CalendarDays } from "lucide-react";
+import { XLogo, GoogleLogo } from "@/components/SocialIcons";
+import { GoogleReviewButton } from "@/components/portfolio/GoogleReviews";
+import { GOOGLE_PROFILE_URL } from "@/lib/google";
 import { MAX_INPUT_LENGTHS } from "@/lib/sanitize";
 import { supabase } from "@/lib/supabase";
 import { useLang } from "@/lib/LanguageContext";
+import Seo from "@/components/Seo";
 
 const RATE_LIMIT_MS = 10000; // 10 seconds between submissions
 
@@ -48,10 +53,17 @@ export default function Contact() {
   };
 
   // Build a mailto: fallback URL from form data
-  const mailtoUrl = `mailto:contact@albwt.com?subject=${encodeURIComponent(t.contact.mailtoSubject.replace("{name}", form.name || "—").replace("{service}", form.service || "—"))}&body=${encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\nService: ${form.service}\n\nMessage:\n${form.message}`)}`;
+  const mailtoUrl = `mailto:contact@albwt.com?subject=${encodeURIComponent(t.contact.mailtoSubject.replace("{name}", form.name || "—").replace("{service}", form.service || "—"))}&body=${encodeURIComponent(`${t.contact.fullName}: ${form.name}\n${t.contact.email}: ${form.email}\n${t.contact.company}: ${form.company}\n${t.contact.service}: ${form.service}\n\n${t.contact.message}:\n${form.message}`)}`;
 
   return (
     <div className="pt-24 pb-20">
+      <Seo
+        title={{ en: "Hire Me — Start an AI Project", fr: "Me contacter — Lancer un projet IA" }}
+        description={{
+          en: "Tell me about your AI, machine learning or data project. Freelance engagements in Canada, Cameroon and remote.",
+          fr: "Parlez-moi de votre projet d'IA, de machine learning ou de données. Missions indépendantes au Canada, au Cameroun et à distance.",
+        }}
+      />
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -110,6 +122,25 @@ export default function Contact() {
                 >
                   <Linkedin className="w-5 h-5" style={{color:"#0a66c2"}} /> albert-womga-009a7931
                 </a>
+                <a
+                  href="https://x.com/albtchap"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3 bg-background border border-border rounded-xl text-foreground/80 hover:text-foreground hover:border-primary/50 transition-colors text-sm"
+                >
+                  <XLogo className="w-5 h-5" /> @albtchap
+                </a>
+                {GOOGLE_PROFILE_URL && (
+                  <a
+                    href={GOOGLE_PROFILE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-3 bg-background border border-border rounded-xl text-foreground/80 hover:text-foreground hover:border-primary/50 transition-colors text-sm"
+                  >
+                    <GoogleLogo className="w-5 h-5" /> {t.contact.googleProfile}
+                  </a>
+                )}
+                <GoogleReviewButton className="w-full" />
               </div>
             </div>
 
@@ -117,19 +148,17 @@ export default function Contact() {
               <h3 className="text-foreground font-bold mb-3">{t.contact.availability}</h3>
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-green-400 text-sm font-medium">{t.contact.available}</span>
+                <span className="text-green-700 dark:text-green-400 text-sm font-medium">{t.contact.available}</span>
               </div>
               <p className="text-muted-foreground text-sm mb-4">{t.contact.response}</p>
-              <a
-                href="https://calendly.com/womga-albert"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/booking"
                 className="flex items-center justify-center gap-2 w-full py-3 rounded-xl font-semibold text-white text-sm transition-opacity hover:opacity-90"
                 style={{background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))"}}
               >
                 <CalendarDays className="w-4 h-4" />
                 {t.contact.scheduleMeeting}
-              </a>
+              </Link>
             </div>
           </motion.div>
 
@@ -150,58 +179,65 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="bg-card border border-border rounded-2xl p-8 space-y-5">
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-sm text-muted-foreground mb-2">{t.contact.fullName} *</label>
+                    <label htmlFor="contact-name" className="block text-sm text-muted-foreground mb-2">{t.contact.fullName} *</label>
                     <input
+                      id="contact-name"
+                      autoComplete="name"
                       required
                       value={form.name}
                       onChange={e => setForm({...form, name: e.target.value})}
-                      className="w-full bg-background border border-border text-foreground rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
+                      className="w-full bg-background border border-border text-foreground rounded-xl px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus:border-primary transition-colors"
                       placeholder={t.contact.placeholderName}
                       maxLength={MAX_INPUT_LENGTHS.name}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm text-muted-foreground mb-2">{t.contact.email} *</label>
+                    <label htmlFor="contact-email" className="block text-sm text-muted-foreground mb-2">{t.contact.email} *</label>
                     <input
+                      id="contact-email"
+                      autoComplete="email"
                       required
                       type="email"
                       value={form.email}
                       onChange={e => setForm({...form, email: e.target.value})}
-                      className="w-full bg-background border border-border text-foreground rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
+                      className="w-full bg-background border border-border text-foreground rounded-xl px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus:border-primary transition-colors"
                       placeholder={t.contact.placeholderEmail}
                       maxLength={MAX_INPUT_LENGTHS.email}
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm text-muted-foreground mb-2">{t.contact.company}</label>
+                  <label htmlFor="contact-company" className="block text-sm text-muted-foreground mb-2">{t.contact.company}</label>
                   <input
+                    id="contact-company"
                     value={form.company}
                     onChange={e => setForm({...form, company: e.target.value})}
-                    className="w-full bg-background border border-border text-foreground rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
+                    className="w-full bg-background border border-border text-foreground rounded-xl px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus:border-primary transition-colors"
                     placeholder={t.contact.placeholderCompany}
                     maxLength={MAX_INPUT_LENGTHS.company}
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-muted-foreground mb-2">{t.contact.service}</label>
+                  <label htmlFor="contact-service" className="block text-sm text-muted-foreground mb-2">{t.contact.service}</label>
                   <select
+                    id="contact-service"
                     value={form.service}
                     onChange={e => setForm({...form, service: e.target.value})}
-                    className="w-full bg-background border border-border text-foreground rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
+                    className="w-full bg-background border border-border text-foreground rounded-xl px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus:border-primary transition-colors"
                   >
                     <option value="">{t.contact.selectService}</option>
                     {t.contact.serviceOptions.map(s => <option key={s} value={s}>{s}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm text-muted-foreground mb-2">{t.contact.message} *</label>
+                  <label htmlFor="contact-message" className="block text-sm text-muted-foreground mb-2">{t.contact.message} *</label>
                   <textarea
+                    id="contact-message"
                     required
                     value={form.message}
                     onChange={e => setForm({...form, message: e.target.value})}
                     rows={5}
-                    className="w-full bg-background border border-border text-foreground rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors resize-none"
+                    className="w-full bg-background border border-border text-foreground rounded-xl px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus:border-primary transition-colors resize-none"
                     placeholder={t.contact.placeholderMessage}
                     maxLength={MAX_INPUT_LENGTHS.contactMessage}
                   />
@@ -218,7 +254,7 @@ export default function Contact() {
                   )}
                 </button>
                 {rateLimitError && (
-                  <p className="text-red-400 text-sm text-center mt-2">{rateLimitError}</p>
+                  <p className="text-red-700 dark:text-red-400 text-sm text-center mt-2">{rateLimitError}</p>
                 )}
                 <div className="text-center">
                   <a
