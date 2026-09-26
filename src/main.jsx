@@ -5,7 +5,7 @@ import { ThemeProvider } from 'next-themes'
 import '@/index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+  <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
     <App />
   </ThemeProvider>
 )
