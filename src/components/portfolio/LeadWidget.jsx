@@ -223,7 +223,8 @@ export default function LeadWidget({ currentPageName }) {
             role="dialog"
             aria-label={w.title}
             className="fixed z-40 bottom-24 left-4 right-4 sm:left-auto sm:right-6 sm:w-[370px] flex flex-col bg-card border border-border rounded-2xl shadow-2xl shadow-black/10 dark:shadow-black/40 overflow-hidden origin-bottom-right"
-            style={{ maxHeight: "min(580px, calc(100vh - 120px))" }}
+            // 96px launcher offset + 72px fixed nav + 12px gap, so the header never slides under the nav.
+            style={{ maxHeight: "min(580px, calc(100dvh - 180px))" }}
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-border flex-shrink-0" style={{ background: "linear-gradient(135deg, hsl(var(--primary) / 0.12), hsl(var(--brand-blue) / 0.12))" }}>
