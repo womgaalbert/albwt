@@ -4,7 +4,7 @@
  * Funnel events (see the individual call sites):
  *   page_view          — SPA route change (App.jsx)
  *   cta_click           — any "book a call" button { source: nav|hero|services|cta_banner|contact_sidebar|widget }
- *   widget_open         — floating lead widget opened
+ *   widget_open         — floating lead widget opened { source: click|auto|teaser|cta }
  *   lead_submitted      — lead form inside the widget succeeded
  *   booking_confirmed   — discovery call booked (Booking.jsx)
  *   contact_submitted   — contact form succeeded (Contact.jsx)

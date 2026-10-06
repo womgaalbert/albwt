@@ -4,7 +4,7 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { MessageCircle, X, Send, Sparkles } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { supabase } from "@/lib/supabase";
-import { sanitizeUrl, MAX_INPUT_LENGTHS } from "@/lib/sanitize";
+import { sanitizeUrl, sanitizeLlmInput, MAX_INPUT_LENGTHS } from "@/lib/sanitize";
 import { useLang } from "@/lib/LanguageContext";
 import { createPageUrl } from "@/utils";
 import { trackEvent } from "@/lib/analytics";
@@ -17,6 +17,8 @@ const LEAD_KEY = "albwt_lead"; // { name, capturedAt } — skips the form for 30
 const LEAD_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 const TEASER_KEY = "albwt_teaser_dismissed"; // teaser shows once per visitor
 const TEASER_DELAY_MS = 25_000;
+const AUTO_OPEN_KEY = "albwt_widget_autoopened"; // panel opens by itself once per visitor (desktop)
+const AUTO_OPEN_DELAY_MS = 8_000;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 // Must match supabase/functions/submit-lead
@@ -110,7 +112,7 @@ export default function LeadWidget({ currentPageName }) {
 
   // Any CTA on the site can open the widget: window.dispatchEvent(new Event("open-lead-widget"))
   useEffect(() => {
-    const open = () => openWidget();
+    const open = () => openWidget("cta");
     window.addEventListener("open-lead-widget", open);
     return () => window.removeEventListener("open-lead-widget", open);
   }, []);
@@ -131,19 +133,31 @@ export default function LeadWidget({ currentPageName }) {
     };
   }, [hidden, isOpen]);
 
+  // Auto-open on the contact form once per visitor, desktop only (on phones it would
+  // cover the page — the teaser does the job there).
+  useEffect(() => {
+    if (hidden || isOpen || readStorage(AUTO_OPEN_KEY) || getStoredLead()) return;
+    if (window.matchMedia?.("(max-width: 639px)").matches) return;
+    const timer = setTimeout(() => {
+      writeStorage(AUTO_OPEN_KEY, "1");
+      openWidget("auto");
+    }, AUTO_OPEN_DELAY_MS);
+    return () => clearTimeout(timer);
+  }, [hidden, isOpen]);
+
   const dismissTeaser = () => {
     setTeaserVisible(false);
     writeStorage(TEASER_KEY, "1");
   };
 
-  function openWidget() {
-    trackEvent("widget_open");
+  function openWidget(source = "click") {
+    trackEvent("widget_open", { source });
     setIsOpen(true);
     setTeaserVisible(false);
     writeStorage(TEASER_KEY, "1");
   }
 
-  const toggle = () => (isOpen ? setIsOpen(false) : openWidget());
+  const toggle = () => (isOpen ? setIsOpen(false) : openWidget("click"));
 
   const submitLead = async (e) => {
     e.preventDefault();
@@ -192,14 +206,23 @@ export default function LeadWidget({ currentPageName }) {
     setMessages((prev) => [...prev, { role: "assistant", content: w.chatIntro }]);
   };
 
+  // AI answers via the `chat` Edge Function; the keyword answers are the fallback,
+  // so the widget keeps working if the function or the LLM is down.
   const sendMessage = async (text) => {
-    const userText = (text ?? input).trim();
+    const userText = sanitizeLlmInput((text ?? input).trim());
     if (!userText || loading) return;
+    const updated = [...messages, { role: "user", content: userText }];
     setInput("");
-    setMessages((prev) => [...prev, { role: "user", content: userText }]);
+    setMessages(updated);
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 500 + Math.random() * 700));
-    setMessages((prev) => [...prev, { role: "assistant", content: getMockResponse(userText, lang) }]);
+    let reply = "";
+    try {
+      const { data, error } = await supabase.functions.invoke("chat", {
+        body: { messages: updated.map(({ role, content }) => ({ role, content })), lang },
+      });
+      if (!error && typeof data?.content === "string") reply = data.content.trim();
+    } catch {}
+    setMessages((prev) => [...prev, { role: "assistant", content: reply || getMockResponse(userText, lang) }]);
     setLoading(false);
   };
 
@@ -354,6 +377,7 @@ export default function LeadWidget({ currentPageName }) {
                     <Send className="w-4 h-4 text-white" />
                   </button>
                 </form>
+                <p className="text-[11px] text-muted-foreground/80 text-center mt-2">{w.aiDisclaimer}</p>
                 <Link
                   to={createPageUrl("Booking")}
                   onClick={() => {
@@ -382,7 +406,7 @@ export default function LeadWidget({ currentPageName }) {
             transition={{ duration: 0.25 }}
             className="fixed z-40 bottom-24 right-6 max-w-[260px] flex items-start gap-2 bg-card border border-border rounded-2xl rounded-br-sm shadow-xl shadow-black/10 dark:shadow-black/40 pl-4 pr-2 py-3"
           >
-            <button type="button" onClick={openWidget} className="text-sm text-foreground text-left leading-snug">
+            <button type="button" onClick={() => openWidget("teaser")} className="text-sm text-foreground text-left leading-snug">
               <Sparkles className="w-3.5 h-3.5 inline -mt-0.5 mr-1" style={{ color: "hsl(var(--primary))" }} />
               {w.teaser}
             </button>
