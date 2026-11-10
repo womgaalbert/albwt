@@ -55,7 +55,7 @@ export default function Home() {
         </div>
 
         {/* Bottom fade into next section */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-background pointer-events-none z-[5]" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-footer pointer-events-none z-[5]" />
 
         <div className="max-w-7xl mx-auto px-6 pt-24 pb-16 grid md:grid-cols-2 gap-12 items-center relative z-10">
           <motion.div
@@ -122,7 +122,7 @@ export default function Home() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-muted-foreground/70">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[6] flex flex-col items-center gap-1 text-footer-foreground/80">
           <span className="text-xs">{t.home.scroll}</span>
           <ChevronDown className="w-4 h-4 animate-bounce" />
         </div>

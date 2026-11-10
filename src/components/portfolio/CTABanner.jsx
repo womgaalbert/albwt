@@ -5,10 +5,10 @@ import { ArrowRight, CalendarDays, Mail } from "lucide-react";
 import { useLang } from "@/lib/LanguageContext";
 import { trackEvent } from "@/lib/analytics";
 
-export default function CTABanner() {
+export default function CTABanner({ source = "cta_banner", standalone = false }) {
   const { t } = useLang();
   return (
-    <section className="pt-8 pb-20 bg-footer">
+    <section className={`${standalone ? "pt-20" : "pt-8"} pb-20 bg-footer`}>
       <div className="max-w-4xl mx-auto px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -27,7 +27,7 @@ export default function CTABanner() {
               <div className="flex flex-wrap gap-4 justify-center">
                 <Link
                   to={createPageUrl("Booking")}
-                  onClick={() => trackEvent("cta_click", { source: "cta_banner" })}
+                  onClick={() => trackEvent("cta_click", { source })}
                   className="btn-primary flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-white whitespace-nowrap"
                 >
                   <CalendarDays className="w-4 h-4" /> {t.cta.bookCall} <ArrowRight className="w-4 h-4" />

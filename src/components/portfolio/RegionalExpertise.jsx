@@ -26,7 +26,7 @@ export default function RegionalExpertise() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 max-w-sm mx-auto gap-4">
+        <div className="grid sm:grid-cols-2 max-w-3xl mx-auto gap-5">
           {t.regional.regions.map((r, i) => (
             <motion.div
               key={r.country}
@@ -34,12 +34,14 @@ export default function RegionalExpertise() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.07 }}
-              className="bg-card border border-border rounded-2xl p-5 flex flex-col items-center text-center card-hover"
+              className="bg-card border border-border rounded-2xl p-6 flex items-center gap-5 text-left card-hover"
+              style={{ borderLeft: `4px solid ${colors[i % colors.length]}` }}
             >
-              <span className="text-4xl mb-3">{r.flag}</span>
-              <p className="text-foreground font-bold text-sm mb-1">{r.country}</p>
-              <p className="text-muted-foreground text-xs leading-snug">{r.detail}</p>
-              <div className="mt-3 w-6 h-0.5 rounded-full" style={{ backgroundColor: colors[i % colors.length] }} />
+              <span className="text-5xl flex-shrink-0">{r.flag}</span>
+              <div>
+                <p className="text-foreground font-bold mb-1">{r.country}</p>
+                <p className="text-muted-foreground text-sm leading-snug">{r.detail}</p>
+              </div>
             </motion.div>
           ))}
         </div>

@@ -179,7 +179,7 @@ export default function Contact() {
             className="lg:col-span-3"
           >
             {sent ? (
-              <div className="bg-card border border-primary/30 rounded-2xl p-12 text-center h-full flex flex-col items-center justify-center">
+              <div role="status" className="bg-card border border-primary/30 rounded-2xl p-12 text-center h-full flex flex-col items-center justify-center">
                 <CheckCircle className="w-16 h-16 mb-4" style={{color:"hsl(var(--primary))"}} />
                 <h3 className="text-foreground font-bold text-xl mb-2">{t.contact.successTitle}</h3>
                 <p className="text-muted-foreground">{t.contact.successDesc}</p>
@@ -267,7 +267,7 @@ export default function Contact() {
                   )}
                 </button>
                 {rateLimitError && (
-                  <p className="text-red-700 dark:text-red-400 text-sm text-center mt-2">{rateLimitError}</p>
+                  <p role="alert" className="text-red-700 dark:text-red-400 text-sm text-center mt-2">{rateLimitError}</p>
                 )}
                 <div className="text-center">
                   <a

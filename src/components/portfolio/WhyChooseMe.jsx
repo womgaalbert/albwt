@@ -32,12 +32,13 @@ export default function WhyChooseMe() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="flex gap-4 p-6 bg-card border border-border rounded-2xl card-hover"
+              className="relative overflow-hidden flex gap-4 p-6 bg-card border border-border rounded-2xl card-hover"
             >
-              <div className="w-11 h-11 rounded-xl flex-shrink-0 flex items-center justify-center bg-primary/10">
-                <Icon className="w-5 h-5 text-primary" />
+              <span aria-hidden="true" className="absolute -right-1 -top-5 text-8xl font-black text-primary/[0.07] select-none">{i + 1}</span>
+              <div className="btn-primary w-11 h-11 rounded-xl flex-shrink-0 flex items-center justify-center">
+                <Icon className="w-5 h-5 text-white" />
               </div>
-              <div>
+              <div className="relative">
                 <h3 className="text-foreground font-semibold mb-1">{r.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{r.desc}</p>
               </div>

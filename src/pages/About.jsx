@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, MapPin, Calendar, Award, Quote } from "lucide-react";
 import { useLang, renderRich } from "@/lib/LanguageContext";
 import Seo from "@/components/Seo";
+import CTABanner from "@/components/portfolio/CTABanner";
 
 const skills = [
   "Python", "SQL", "R", "Git/GitHub", "REST APIs",
@@ -72,6 +73,7 @@ export default function About() {
   const tr = (v) => (v && typeof v === "object" ? v[lang] || v.en : v);
 
   return (
+    <>
     <div className="pt-24 pb-20">
       <Seo
         title={{ en: "About — AI/ML Engineer", fr: "À propos — Ingénieur IA/ML" }}
@@ -98,14 +100,14 @@ export default function About() {
           {/* Left: Bio + Experience */}
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
             <div className="bg-card border border-border rounded-2xl p-8 mb-6">
-              <div className="flex items-center gap-5 mb-6">
-                <div className="relative w-24 h-24 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-lg flex-shrink-0 group">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-5 mb-6">
+                <div className="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-lg flex-shrink-0 group">
                   <img
-                    src="/images/albert-womga-192.webp"
+                    src="/images/albert-womga-384.webp"
                     srcSet="/images/albert-womga-192.webp 192w, /images/albert-womga-384.webp 384w"
-                    sizes="96px"
-                    width={96}
-                    height={96}
+                    sizes="160px"
+                    width={160}
+                    height={160}
                     alt={t.about.portraitAlt}
                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
@@ -145,15 +147,16 @@ export default function About() {
 
             {/* Experience */}
             <h3 className="text-foreground font-bold text-lg mb-4">{t.about.experienceLabel}</h3>
-            <div className="space-y-4">
+            <div className="relative ml-2 pl-7 border-l-2 border-primary/20 space-y-4">
               {t.about.experiences.map((exp, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + i * 0.1 }}
-                  className="bg-card border border-border rounded-xl p-5"
+                  className="relative bg-card border border-border rounded-xl p-5"
                 >
+                  <span aria-hidden="true" className="absolute -left-[36px] top-6 w-3.5 h-3.5 rounded-full bg-primary ring-4 ring-background" />
                   <div className="flex items-center gap-2 mb-1">
                     <Calendar className="w-3.5 h-3.5 text-muted-foreground" />
                     <span className="text-xs text-muted-foreground">{exp.period}</span>
@@ -241,14 +244,14 @@ export default function About() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 + i * 0.1 }}
-                className="bg-card border border-border rounded-2xl p-6 flex flex-col gap-4 relative"
+                className="min-w-0 bg-card border border-border rounded-2xl p-6 flex flex-col gap-4 relative"
               >
                 <div className="absolute top-5 right-5 opacity-10" style={{color: e.color}}>
                   <Quote className="w-9 h-9" />
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed flex-1">"{tr(e.quote)}"</p>
                 <div className="border-t border-border" />
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                   <div
                     className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
                     style={{background: `linear-gradient(135deg, ${e.color}, color-mix(in srgb, ${e.color} 53%, transparent))`}}
@@ -280,5 +283,7 @@ export default function About() {
 
       </div>
     </div>
+    <CTABanner standalone source="about" />
+    </>
   );
 }

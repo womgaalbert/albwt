@@ -19,6 +19,10 @@ import { useLang } from "@/lib/LanguageContext";
 import ProjectComments from "@/components/projects/ProjectComments";
 import ProjectMotionMedia from "@/components/media/ProjectMotionMedia";
 import Seo from "@/components/Seo";
+import { Link } from "react-router-dom";
+import { CalendarDays } from "lucide-react";
+import { createPageUrl } from "@/utils";
+import { trackEvent } from "@/lib/analytics";
 
 const projects = [
   {
@@ -706,14 +710,21 @@ export default function Projects() {
           </div>
         )}
 
-        <div className="text-center mt-16">
+        <div className="flex flex-wrap items-center justify-center gap-4 mt-16">
+          <Link
+            to={createPageUrl("Booking")}
+            onClick={() => trackEvent("cta_click", { source: "projects" })}
+            className="btn-primary inline-flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-white shadow-lg"
+          >
+            <CalendarDays className="w-4 h-4" aria-hidden="true" /> {t.cta.bookCall}
+          </Link>
           <a
             href="https://github.com/womgaalbert"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary inline-flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-white shadow-lg hover:shadow-xl transition-all"
+            className="inline-flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-foreground/80 border border-border hover:border-primary hover:text-primary transition-colors"
           >
-            <Github className="w-4 h-4" /> {t.projects.viewAll}
+            <Github className="w-4 h-4" aria-hidden="true" /> {t.projects.viewAll}
           </a>
         </div>
       </div>

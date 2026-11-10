@@ -9,6 +9,7 @@ import { supabase } from "@/lib/supabase";
 import { useLang } from "@/lib/LanguageContext";
 import BlogMotionMedia from "@/components/media/BlogMotionMedia";
 import Seo from "@/components/Seo";
+import CTABanner from "@/components/portfolio/CTABanner";
 import { blogCategoryLabel, localizePost, BLOG_CATEGORY_DB_VALUES as categoryDbValues } from "@/lib/blog";
 
 const categoryKeys = Object.keys(categoryDbValues);
@@ -41,6 +42,7 @@ export default function Blog() {
     });
 
   return (
+    <>
     <div className="pt-24 pb-20">
       <Seo
         title={t.blog.title}
@@ -171,5 +173,7 @@ export default function Blog() {
         )}
       </div>
     </div>
+    <CTABanner standalone source="blog" />
+    </>
   );
 }

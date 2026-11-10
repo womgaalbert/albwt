@@ -368,7 +368,7 @@ export default function Booking() {
                 <div className="grid grid-cols-2 gap-3">
                   {[["video", b.video, Video], ["phone", b.phoneCall, Phone]].map(([value, label, Icon]) => (
                     <label key={value}
-                      className={`flex items-center gap-2 rounded-xl border px-4 py-3 text-sm cursor-pointer transition-colors ${
+                      className={`flex items-center gap-2 rounded-xl border px-4 py-3 text-sm cursor-pointer transition-colors focus-within:ring-2 focus-within:ring-ring ${
                         form.format === value ? "border-primary bg-primary/5 text-foreground font-semibold" : "border-border text-muted-foreground hover:border-primary/50"
                       }`}>
                       <input type="radio" name="format" value={value} checked={form.format === value}

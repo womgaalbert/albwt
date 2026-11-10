@@ -10,6 +10,9 @@ import RepoAnalyzer from "@/components/sandbox/RepoAnalyzer";
 import AgentTeardown from "@/components/three/AgentTeardown";
 import { useLang } from "@/lib/LanguageContext";
 import Seo from "@/components/Seo";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
+import { trackEvent } from "@/lib/analytics";
 
 const agents = [
   {
@@ -85,10 +88,10 @@ const techStack = [
 const features = [
   {
     icon: Zap,
-    title: { en: "Live Agent Dashboard", fr: "Tableau de bord des agents en direct" },
+    title: { en: "Live Repository Analyzer", fr: "Analyseur de dépôts en direct" },
     description: {
-      en: "Visual interface showing the Orchestrator's workflow, sub-agent statuses, and chain-of-thought as tasks are processed in real time.",
-      fr: "Interface visuelle montrant le flux de l'orchestrateur, l'état des sous-agents et leur raisonnement pendant le traitement en temps réel.",
+      en: "Paste a public GitHub repository and a real agent fetches it, analyzes its structure and writes a report on this page.",
+      fr: "Collez un dépôt GitHub public : un véritable agent le récupère, analyse sa structure et rédige un rapport sur cette page.",
     },
     color: "hsl(var(--primary))",
   },
@@ -185,7 +188,7 @@ export default function Sandbox() {
 
         {/* LIVE Demo — GitHub Project Analyzer */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className="mb-16">
-          <h2 className="text-xl font-bold text-foreground mb-2 flex items-center gap-2">
+          <h2 className="text-2xl md:text-3xl font-black text-foreground mb-2 flex items-center gap-2">
             <Zap className="w-5 h-5" style={{ color: "hsl(var(--primary))" }} /> {t.sandbox.title}
           </h2>
           <p className="text-muted-foreground text-sm mb-6 max-w-3xl">{t.sandbox.subtitle}</p>
@@ -201,7 +204,7 @@ export default function Sandbox() {
 
         {/* Agent Architecture */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mb-16">
-          <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+          <h2 className="text-2xl md:text-3xl font-black text-foreground mb-6 flex items-center gap-2">
             <Brain className="w-5 h-5" style={{ color: "hsl(var(--primary))" }} /> {t.sandbox.ecosystem}
           </h2>
           <div className="grid lg:grid-cols-5 gap-4 mb-6">
@@ -215,6 +218,7 @@ export default function Sandbox() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08 }}
                   onClick={() => setActiveAgent(agent.id)}
+                  aria-pressed={isActive}
                   className={`p-5 rounded-2xl border text-left transition-all ${
                     isActive ? "border-opacity-60 bg-card" : "border-border bg-card hover:border-primary/50"
                   }`}
@@ -270,7 +274,7 @@ export default function Sandbox() {
 
         {/* Workflow Steps */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="mb-16">
-          <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+          <h2 className="text-2xl md:text-3xl font-black text-foreground mb-6 flex items-center gap-2">
             <Zap className="w-5 h-5" style={{ color: "hsl(var(--primary))" }} /> {t.sandbox.decomposition}
           </h2>
           <div className="flex flex-col md:flex-row gap-0">
@@ -298,7 +302,7 @@ export default function Sandbox() {
 
         {/* Features */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="mb-16">
-          <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+          <h2 className="text-2xl md:text-3xl font-black text-foreground mb-6 flex items-center gap-2">
             <Star className="w-5 h-5" style={{ color: "hsl(var(--primary))" }} /> {t.sandbox.dashboardFeatures}
           </h2>
           <div className="grid md:grid-cols-2 gap-5">
@@ -327,7 +331,7 @@ export default function Sandbox() {
 
         {/* Tech Stack */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="mb-16">
-          <h2 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+          <h2 className="text-2xl md:text-3xl font-black text-foreground mb-6 flex items-center gap-2">
             <Layers className="w-5 h-5" style={{ color: "hsl(var(--primary))" }} /> {t.sandbox.techStack}
           </h2>
           <div className="grid md:grid-cols-5 gap-4">
@@ -358,7 +362,7 @@ export default function Sandbox() {
 
         {/* AI Consultant Chat */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }} className="mb-16">
-          <h2 className="text-xl font-bold text-foreground mb-2 flex items-center gap-2">
+          <h2 className="text-2xl md:text-3xl font-black text-foreground mb-2 flex items-center gap-2">
             <MessageSquare className="w-5 h-5" style={{ color: "hsl(var(--primary))" }} /> {t.sandbox.consultant}
           </h2>
           <p className="text-muted-foreground text-sm mb-6">{t.sandbox.consultantIntro}</p>
@@ -378,14 +382,23 @@ export default function Sandbox() {
             <h3 className="text-foreground font-black text-xl mb-2">{t.sandbox.phase1}</h3>
             <p className="text-muted-foreground text-sm max-w-xl">{t.sandbox.roadmapText}</p>
           </div>
-          <a
-            href="https://github.com/womgaalbert"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white text-sm flex-shrink-0"
-          >
-            <GitBranch className="w-4 h-4" /> {t.sandbox.viewOnGithub} <ChevronRight className="w-4 h-4" />
-          </a>
+          <div className="flex flex-wrap gap-3 flex-shrink-0">
+            <Link
+              to={createPageUrl("Booking")}
+              onClick={() => trackEvent("cta_click", { source: "sandbox" })}
+              className="btn-primary flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white text-sm"
+            >
+              {t.cta.bookCall} <ChevronRight className="w-4 h-4" aria-hidden="true" />
+            </Link>
+            <a
+              href="https://github.com/womgaalbert"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-foreground/80 text-sm border border-border hover:border-primary hover:text-primary transition-colors"
+            >
+              <GitBranch className="w-4 h-4" aria-hidden="true" /> {t.sandbox.viewOnGithub}
+            </a>
+          </div>
         </motion.div>
 
       </div>

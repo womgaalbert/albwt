@@ -13,6 +13,7 @@ import { supabase } from "@/lib/supabase";
 import { useLang } from "@/lib/LanguageContext";
 import InkImage from "@/components/media/InkImage";
 import Seo, { SITE_URL } from "@/components/Seo";
+import CTABanner from "@/components/portfolio/CTABanner";
 import { blogCoverSrc, blogCategoryLabel, localizePost } from "@/lib/blog";
 import SourceCard, { sourceKind } from "@/components/blog/SourceCard";
 
@@ -175,6 +176,7 @@ export default function BlogPost() {
   };
 
   return (
+    <>
     <div className="pt-24 pb-20">
       {/* Reading Progress Bar */}
       <div className="fixed top-0 left-0 right-0 h-1 z-50 bg-transparent">
@@ -398,5 +400,7 @@ export default function BlogPost() {
         )}
       </div>
     </div>
+    <CTABanner standalone source="blog_post" />
+    </>
   );
 }

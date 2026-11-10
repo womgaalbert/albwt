@@ -10,7 +10,7 @@ import { localizePost } from "@/lib/blog";
 import BlogMotionMedia from "@/components/media/BlogMotionMedia";
 
 export default function HomeBlogPreview() {
-  const { lang } = useLang();
+  const { t, lang } = useLang();
 
   const { data: posts = [], isLoading } = useQuery({
     queryKey: ["homeBlogPosts"],
@@ -59,7 +59,7 @@ export default function HomeBlogPreview() {
         {posts.map((post, i) => {
           const localized = localizePost(post, lang);
           const publishedDate = post.published_date
-            ? format(new Date(post.published_date), "MMMM d, yyyy", { locale: lang === "fr" ? frLocale : undefined })
+            ? format(new Date(post.published_date), lang === "fr" ? "d MMMM yyyy" : "MMMM d, yyyy", { locale: lang === "fr" ? frLocale : undefined })
             : "";
 
           return (
@@ -92,7 +92,7 @@ export default function HomeBlogPreview() {
                   {post.read_time && (
                     <span className="flex items-center gap-1">
                       <Clock className="w-3.5 h-3.5" />
-                      {post.read_time}
+                      {post.read_time} {t.blog.minRead}
                     </span>
                   )}
                 </div>

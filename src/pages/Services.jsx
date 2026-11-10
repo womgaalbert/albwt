@@ -5,21 +5,34 @@ import { Brain, TrendingUp, MessageSquare, Search, BarChart2, Users, CheckCircle
 import { useLang } from "@/lib/LanguageContext";
 import { trackEvent } from "@/lib/analytics";
 import Seo from "@/components/Seo";
+import LazyVideo from "@/components/media/LazyVideo";
 
 const serviceIcons = [Brain, TrendingUp, MessageSquare, BarChart2, Search, Users];
 const serviceColors = [
   "hsl(var(--primary))",
   "hsl(var(--brand-blue))",
-  "#8b5cf6",
-  "#f59e0b",
-  "#ef4444",
-  "#10b981",
+  "hsl(var(--chart-3))",
+  "hsl(var(--chart-4))",
+  "hsl(var(--chart-5))",
+  "hsl(var(--chart-1))",
 ];
+
+// One visual per entry in t.services.services, in the same order.
+const serviceMedia = [
+  { loop: "/videos/projects/bfrb-sensor-fusion-loop.mp4", poster: "/images/projects/bfrb-sensor-fusion-poster.webp" },
+  { loop: "/videos/projects/energy-arima-forecasting-loop.mp4", poster: "/images/projects/energy-arima-forecasting-poster.webp" },
+  { loop: "/videos/projects/transformer-time-series-loop.mp4", poster: "/images/projects/transformer-time-series-poster.webp" },
+  { loop: "/videos/projects/convnet-cifar10-loop.mp4", poster: "/images/projects/convnet-cifar10-poster.webp" },
+  { poster: "/images/projects/student-plurilingual-databricks.webp" },
+  { poster: "/images/agent-teardown-poster.webp" },
+];
+
+const readable = (color) => `color-mix(in srgb, ${color} 55%, hsl(var(--foreground)))`;
 
 export default function Services() {
   const { t } = useLang();
   const markets = [
-    { ...t.services.markets.canada, flag: "🇨🇦", color: "#ef4444" },
+    { ...t.services.markets.canada, flag: "🇨🇦", color: "hsl(var(--chart-5))" },
     { ...t.services.markets.cameroon, flag: "🇨🇲", color: "hsl(var(--primary))" },
   ];
 
@@ -49,6 +62,7 @@ export default function Services() {
           {t.services.services.map((s, i) => {
             const Icon = serviceIcons[i % serviceIcons.length];
             const color = serviceColors[i % serviceColors.length];
+            const media = serviceMedia[i % serviceMedia.length];
             return (
               <motion.div
                 key={i}
@@ -56,8 +70,16 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="card-hover bg-card border border-border rounded-2xl p-6 flex flex-col">
+                className="card-hover bg-card border border-border rounded-2xl overflow-hidden flex flex-col">
 
+                <div className="relative h-36 bg-footer">
+                  {media.loop ? (
+                    <LazyVideo src={media.loop} poster={media.poster} label="" />
+                  ) : (
+                    <img src={media.poster} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                  )}
+                </div>
+                <div className="p-6 flex flex-col flex-1">
                 <div className="flex items-center justify-between mb-5">
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: `color-mix(in srgb, ${color} 8%, transparent)` }}>
                     <Icon className="w-6 h-6" style={{ color }} />
@@ -67,7 +89,7 @@ export default function Services() {
                       className="text-xs font-mono font-semibold px-3 py-1 rounded-full border shadow-sm"
                       style={{
                         background: `color-mix(in srgb, ${color} 10%, transparent)`,
-                        color,
+                        color: readable(color),
                         borderColor: `color-mix(in srgb, ${color} 25%, transparent)`,
                       }}
                     >
@@ -94,10 +116,11 @@ export default function Services() {
                       color: "hsl(var(--foreground))",
                     }}
                   >
-                    <span className="font-semibold" style={{ color }}>{s.callDeliverable.split(":")[0]}:</span>
+                    <span className="font-semibold" style={{ color: readable(color) }}>{s.callDeliverable.split(":")[0]}:</span>
                     <span className="text-muted-foreground ml-1">{s.callDeliverable.split(":").slice(1).join(":")}</span>
                   </div>
                 )}
+                </div>
               </motion.div>
             );
           })}
