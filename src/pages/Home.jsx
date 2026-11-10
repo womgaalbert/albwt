@@ -12,6 +12,7 @@ import Testimonials from "@/components/portfolio/Testimonials";
 import GoogleReviews from "@/components/portfolio/GoogleReviews";
 import InteractiveDataViz from "@/components/portfolio/InteractiveDataViz";
 import RegionalExpertise from "@/components/portfolio/RegionalExpertise";
+import AgentTeardownBand from "@/components/portfolio/AgentTeardownBand";
 import LazyVideo from "@/components/media/LazyVideo";
 import { useLang, renderRich } from "@/lib/LanguageContext";
 import { trackEvent } from "@/lib/analytics";
@@ -131,6 +132,7 @@ export default function Home() {
       <RegionalExpertise />
       <ServicesPreview />
       <FeaturedProjects />
+      <AgentTeardownBand />
       <HomeBlogPreview />
       <WhyChooseMe />
       <Testimonials />

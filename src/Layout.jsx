@@ -61,7 +61,7 @@ export default function Layout({ children, currentPageName }) {
               <Link
                 key={link.page}
                 to={createPageUrl(link.page)}
-                title={link.page === "Sandbox" ? "Interactive AI Lab · Multi-Agent Architecture & Live Repo Analyzer" : undefined}
+                title={link.page === "Sandbox" ? t.layout.sandboxTitle : undefined}
                 className={`nav-link text-sm font-medium px-3 py-1.5 rounded-full transition-all ${
                   currentPageName === link.page
                     ? "bg-primary/10 text-primary font-semibold shadow-sm"

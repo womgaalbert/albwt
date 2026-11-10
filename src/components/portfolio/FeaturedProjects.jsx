@@ -121,7 +121,8 @@ const projects = [
     category: "Forecasting",
     categoryFr: "Prévision",
     motionType: "forecast",
-    image: "/images/projects/energy-arima-forecasting.svg",
+    loop: "/videos/projects/energy-arima-forecasting-loop.mp4",
+    image: "/images/projects/energy-arima-forecasting-poster.webp",
     outcome: {
       en: "FRED 1939–2025 · Multi-step Forecast",
       fr: "FRED 1939–2025 · Prévision Multi-étapes",
@@ -144,10 +145,11 @@ const projects = [
     category: "Sensor Fusion",
     categoryFr: "Fusion de Capteurs",
     motionType: "sensor",
-    image: "/images/projects/bfrb-sensor-fusion.svg",
+    loop: "/videos/projects/bfrb-sensor-fusion-loop.mp4",
+    image: "/images/projects/bfrb-sensor-fusion-poster.webp",
     outcome: {
-      en: "LSTM + Transformer · 98.4% Accuracy",
-      fr: "LSTM + Transformer · Précision 98.4%",
+      en: "LSTM + Transformer · Multimodal Time Series",
+      fr: "LSTM + Transformer · Séries Temporelles Multimodales",
     },
     stars: 0,
     lang: "Jupyter Notebook",
@@ -210,7 +212,7 @@ export default function FeaturedProjects() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-muted-foreground/70 hover:text-foreground transition-colors p-1"
-                    aria-label={`Open ${tr(p.title)}`}
+                    aria-label={t.featured.openProject.replace("{name}", tr(p.title))}
                   >
                     <ExternalLink className="w-4 h-4" />
                   </a>

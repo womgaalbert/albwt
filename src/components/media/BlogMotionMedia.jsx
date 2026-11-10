@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Activity } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { Activity } from "lucide-react";
+import { useLang } from "@/lib/LanguageContext";
 import { blogCoverSrc } from "@/lib/blog";
 import LazyVideo from "./LazyVideo";
 
@@ -16,7 +16,7 @@ function getBlogMotionConfig(post) {
     return {
       type: "video",
       video: post.video,
-      badge: "Motion Video",
+      badge: "video",
       color: "hsl(var(--primary))",
     };
   }
@@ -25,48 +25,48 @@ function getBlogMotionConfig(post) {
     return {
       type: "network",
       video: null,
-      badge: "Agent Network · Live Sim",
-      color: "#2dd4bf",
+      badge: "agents",
+      color: "hsl(var(--glow))",
     };
   }
   if (slug.includes("arima") || slug.includes("forecasting") || slug.includes("time-series")) {
     return {
       type: "forecast",
       video: null,
-      badge: "Time-Series · Dynamic Wave",
-      color: "#38bdf8",
+      badge: "forecasting",
+      color: "hsl(var(--chart-2))",
     };
   }
   if (slug.includes("cnn") || slug.includes("cifar") || slug.includes("vision")) {
     return {
       type: "vision",
       video: null,
-      badge: "Computer Vision · Feature Scan",
-      color: "#f59e0b",
+      badge: "vision",
+      color: "hsl(var(--chart-4))",
     };
   }
   if (slug.includes("mlops") || slug.includes("pipeline")) {
     return {
       type: "pipeline",
       video: null,
-      badge: "MLOps Pipeline · Active DAG",
-      color: "#10b981",
+      badge: "mlops",
+      color: "hsl(var(--chart-1))",
     };
   }
   if (slug.includes("nlp") || slug.includes("distilbert") || slug.includes("transformer") || slug.includes("gpt")) {
     return {
       type: "attention",
       video: null,
-      badge: "Attention Beams · Token Weights",
-      color: "#a855f7",
+      badge: "language",
+      color: "hsl(var(--chart-3))",
     };
   }
 
   return {
     type: "network",
     video: null,
-    badge: "AI Simulation · Production",
-    color: "#2dd4bf",
+    badge: "ai",
+    color: "hsl(var(--glow))",
   };
 }
 
@@ -77,7 +77,8 @@ export default function BlogMotionMedia({
   className = "h-52 w-full",
   priority = false,
 }) {
-  const [motionActive, setMotionActive] = useState(true);
+  const { t } = useLang();
+  const reducedMotion = useReducedMotion();
 
   const config = getBlogMotionConfig(post);
   const cover = blogCoverSrc(post);
@@ -106,14 +107,8 @@ export default function BlogMotionMedia({
       )}
 
       {/* Dynamic Motion Graphic Overlays for Non-Video or Supplemental Telemetry */}
-      <AnimatePresence>
-        {motionActive && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 pointer-events-none"
-          >
+      {!reducedMotion && (
+          <div className="absolute inset-0 pointer-events-none">
             {/* Dynamic Network / Neural Constellation Overlay */}
             {config.type === "network" && (
               <svg className="w-full h-full opacity-60" viewBox="0 0 320 160" preserveAspectRatio="none">
@@ -224,8 +219,8 @@ export default function BlogMotionMedia({
             {/* Dynamic CNN Scanner Overlay */}
             {config.type === "vision" && (
               <motion.div
-                className="absolute border border-dashed border-amber-400/80 rounded"
-                style={{ background: "color-mix(in srgb, #f59e0b 10%, transparent)" }}
+                className="absolute border border-dashed border-chart-4 rounded"
+                style={{ background: "color-mix(in srgb, hsl(var(--chart-4)) 10%, transparent)" }}
                 animate={{
                   top: ["20%", "40%", "20%"],
                   left: ["20%", "50%", "20%"],
@@ -238,18 +233,17 @@ export default function BlogMotionMedia({
 
             {/* Dynamic MLOps Flow Overlay */}
             {config.type === "pipeline" && (
-              <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 h-0.5 bg-emerald-500/20">
+              <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 h-0.5 bg-chart-1/20">
                 <motion.div
-                  className="w-8 h-full bg-emerald-400 rounded-full"
-                  style={{ boxShadow: "0 0 8px #10b981" }}
+                  className="w-8 h-full bg-chart-1 rounded-full"
+                  style={{ boxShadow: "0 0 8px hsl(var(--chart-1))" }}
                   animate={{ left: ["0%", "80%", "0%"] }}
                   transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                 />
               </div>
             )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+      )}
 
       {/* Ambient Gradient */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-card/85 via-transparent to-transparent" />
@@ -257,29 +251,11 @@ export default function BlogMotionMedia({
       {/* Top Left: Video / Motion Badge */}
       <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5">
         <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-mono font-medium bg-black/60 backdrop-blur border border-white/10 text-white shadow-sm">
-          <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
-          {config.badge}
+          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+          {t.media.topics[config.badge]}
         </span>
       </div>
 
-      {/* Top Right: Controls */}
-      <div className="absolute top-3 right-3 z-20 flex items-center gap-1">
-        {!config.video && (
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setMotionActive(!motionActive);
-            }}
-            className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/60 backdrop-blur border border-white/10 text-[10px] font-mono text-white/80 hover:text-white transition-colors"
-            title="Toggle motion simulation"
-          >
-            <Sparkles className={`w-3 h-3 ${motionActive ? "text-primary" : "opacity-40"}`} />
-            <span>{motionActive ? "Motion" : "Static"}</span>
-          </button>
-        )}
-      </div>
     </div>
   );
 }

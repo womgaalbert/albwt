@@ -106,7 +106,7 @@ export default function About() {
                     sizes="96px"
                     width={96}
                     height={96}
-                    alt="Albert Womga — Data Scientist & AI Specialist"
+                    alt={t.about.portraitAlt}
                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />

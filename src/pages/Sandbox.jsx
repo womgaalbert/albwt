@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import AIConsultantChat from "@/components/sandbox/AIConsultantChat";
 import RepoAnalyzer from "@/components/sandbox/RepoAnalyzer";
+import AgentTeardown from "@/components/three/AgentTeardown";
 import { useLang } from "@/lib/LanguageContext";
 import Seo from "@/components/Seo";
 
@@ -190,6 +191,13 @@ export default function Sandbox() {
           <p className="text-muted-foreground text-sm mb-6 max-w-3xl">{t.sandbox.subtitle}</p>
           <RepoAnalyzer />
         </motion.div>
+
+        {/* The same agent, as an explorable 3D model */}
+        <section aria-labelledby="teardown-title" className="mb-16">
+          <h2 id="teardown-title" className="text-2xl md:text-3xl font-black text-foreground mb-2">{t.teardown.title}</h2>
+          <p className="text-muted-foreground text-sm mb-6 max-w-3xl">{t.teardown.subtitle}</p>
+          <AgentTeardown />
+        </section>
 
         {/* Agent Architecture */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mb-16">

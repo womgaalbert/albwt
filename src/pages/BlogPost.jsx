@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -19,10 +19,13 @@ import SourceCard, { sourceKind } from "@/components/blog/SourceCard";
 const shareBtn = "w-9 h-9 rounded-lg bg-card border border-border flex items-center justify-center hover:border-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
 function CodeBlock({ className, children }) {
+  const { t } = useLang();
   const [copied, setCopied] = useState(false);
   const match = /language-(\w+)/.exec(className || "");
   const codeLang = match ? match[1] : "";
   const codeString = String(children).replace(/\n$/, "");
+  // Fenced blocks without a language have no class, but always contain a newline.
+  const isBlock = Boolean(match) || String(children).includes("\n");
 
   const onCopy = async () => {
     try {
@@ -32,7 +35,7 @@ function CodeBlock({ className, children }) {
     } catch {}
   };
 
-  if (!match) {
+  if (!isBlock) {
     return <code className="bg-card text-primary px-1.5 py-0.5 rounded text-sm font-mono">{children}</code>;
   }
 
@@ -44,17 +47,17 @@ function CodeBlock({ className, children }) {
           type="button"
           onClick={onCopy}
           className="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-          aria-label="Copy code"
+          aria-label={t.blog.copyCode}
         >
           {copied ? (
             <>
               <Check className="w-3.5 h-3.5 text-primary" />
-              <span className="text-primary font-medium">Copied!</span>
+              <span className="text-primary font-medium">{t.blog.copied}</span>
             </>
           ) : (
             <>
               <Copy className="w-3.5 h-3.5" />
-              <span>Copy</span>
+              <span>{t.blog.copy}</span>
             </>
           )}
         </button>
@@ -76,18 +79,8 @@ export default function BlogPost() {
   const identifier = slug || postId;
   const { lang, t } = useLang();
   const dateLocale = lang === "fr" ? { locale: frLocale } : undefined;
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        setScrollProgress((window.scrollY / totalHeight) * 100);
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // A motion value updates the bar without re-rendering the whole article.
+  const { scrollYProgress } = useScroll();
 
   const { data: post, isLoading, error } = useQuery({
     queryKey: ["blogPost", identifier],
@@ -185,9 +178,9 @@ export default function BlogPost() {
     <div className="pt-24 pb-20">
       {/* Reading Progress Bar */}
       <div className="fixed top-0 left-0 right-0 h-1 z-50 bg-transparent">
-        <div
-          className="h-full bg-gradient-to-r from-primary to-brand-blue transition-all duration-150"
-          style={{ width: `${scrollProgress}%` }}
+        <motion.div
+          className="h-full origin-left bg-gradient-to-r from-primary to-brand-blue"
+          style={{ scaleX: scrollYProgress }}
         />
       </div>
       <Seo
@@ -372,6 +365,8 @@ export default function BlogPost() {
               th: ({ children }) => <th className="px-4 py-3 font-semibold text-left bg-muted/40 text-foreground">{children}</th>,
               td: ({ children }) => <td className="px-4 py-3 border-t border-border/50 text-muted-foreground">{children}</td>,
               code: CodeBlock,
+              // CodeBlock draws its own container, so the outer <pre> would double it.
+              pre: ({ children }) => <>{children}</>,
               blockquote: ({ children }) => (
                 <blockquote className="border-l-4 border-primary pl-4 italic text-muted-foreground my-4">
                   {children}
