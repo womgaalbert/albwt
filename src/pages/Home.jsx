@@ -34,21 +34,20 @@ export default function Home() {
         
         {/* Aurora gradient mesh */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="aurora w-[36rem] h-[36rem] bg-teal-400/40 -top-40 -right-40 animate-float" />
-          <div className="aurora w-[30rem] h-[30rem] bg-blue-500/40 -bottom-32 -left-32" style={{animationDelay:"3s"}} />
-          <div className="aurora w-[24rem] h-[24rem] bg-violet-500/25 top-1/3 left-1/2" style={{animationDelay:"6s"}} />
+          <div className="aurora w-[36rem] h-[36rem] bg-primary/40 -top-40 -right-40 animate-float" />
+          <div className="aurora w-[30rem] h-[30rem] bg-brand-blue/40 -bottom-32 -left-32" />
+          <div className="aurora w-[24rem] h-[24rem] bg-chart-3/25 top-1/3 left-1/2" />
           {/* Floating data nodes */}
           {[...Array(12)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-1.5 h-1.5 rounded-full opacity-60"
+              className="hero-dot absolute w-1.5 h-1.5 rounded-full opacity-60"
               style={{
                 backgroundColor: "hsl(var(--primary))",
                 boxShadow: "0 0 8px hsl(var(--primary) / 0.8)",
                 top: `${10 + (i * 7.5) % 80}%`,
                 left: `${5 + (i * 8.3) % 90}%`,
-                animationDelay: `${i * 0.5}s`,
-                animation: `float ${4 + (i % 3)}s ease-in-out infinite`
+                animation: `float ${4 + (i % 3)}s ease-in-out ${i * 0.5}s infinite`
               }}
             />
           ))}
@@ -63,8 +62,8 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <div className="inline-flex items-center gap-2 bg-teal-500/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6">
-              <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 mb-6">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               <span className="text-primary text-sm font-medium">{t.home.badge}</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6">
@@ -102,12 +101,13 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex justify-center items-center"
           >
-            <div className="relative w-full max-w-lg aspect-video rounded-3xl overflow-hidden border border-primary/30 shadow-2xl bg-card/60 backdrop-blur-md group">
+            <div className="relative w-full max-w-lg">
               {/* Glow backdrop */}
               <div
-                className="absolute -inset-4 rounded-3xl blur-2xl opacity-40 -z-10"
+                className="absolute -inset-4 rounded-3xl blur-2xl opacity-40"
                 style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.5), transparent 70%)" }}
               />
+              <div className="relative aspect-video rounded-3xl overflow-hidden border border-primary/30 shadow-2xl bg-card group">
               <LazyVideo
                 src="/videos/hero-loop.mp4"
                 poster="/images/hero-poster.webp"
@@ -115,6 +115,7 @@ export default function Home() {
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 pointer-events-none rounded-3xl ring-1 ring-inset ring-white/15" />
+              </div>
             </div>
           </motion.div>
         </div>

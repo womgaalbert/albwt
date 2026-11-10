@@ -437,7 +437,7 @@ export default function ProjectMotionMedia({
       <div className="pointer-events-none absolute top-4 left-4 z-20 flex items-center gap-2">
         <span
           className="text-xs font-semibold px-2.5 py-1 rounded-full border bg-card/85 backdrop-blur shadow-sm"
-          style={{ color: project.color, borderColor: `color-mix(in srgb, ${project.color} 40%, transparent)` }}
+          style={{ color: `color-mix(in srgb, ${project.color} 55%, hsl(var(--foreground)))`, borderColor: `color-mix(in srgb, ${project.color} 40%, transparent)` }}
         >
           {project.categoryLabel || project.category}
         </span>

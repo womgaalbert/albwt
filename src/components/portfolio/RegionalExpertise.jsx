@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useLang } from "@/lib/LanguageContext";
 
-const colors = ["#ef4444", "hsl(var(--primary))"];
+const colors = ["hsl(var(--chart-5))", "hsl(var(--primary))"];
 
 export default function RegionalExpertise() {
   const { t } = useLang();
@@ -15,7 +15,7 @@ export default function RegionalExpertise() {
           viewport={{ once: true }}
           className="text-center mb-10"
         >
-          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "hsl(var(--primary))" }}>
+          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "hsl(var(--footer-accent))" }}>
             {t.regional.badge}
           </span>
           <h2 className="text-2xl md:text-3xl font-black mt-2 text-white">

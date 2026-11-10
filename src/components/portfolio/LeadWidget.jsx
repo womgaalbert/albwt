@@ -368,8 +368,7 @@ export default function LeadWidget({ currentPageName }) {
                     onChange={(e) => setInput(e.target.value)} placeholder={w.placeholder} aria-label={w.placeholder}
                     disabled={loading} className={`${inputClass} flex-1 disabled:opacity-60`} />
                   <button type="submit" aria-label={w.send} disabled={loading || !input.trim()}
-                    className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 disabled:opacity-40 transition-opacity"
-                    style={{ background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))" }}>
+                    className="btn-primary w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 disabled:opacity-40">
                     <Send className="w-4 h-4 text-white" />
                   </button>
                 </form>

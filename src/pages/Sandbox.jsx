@@ -215,7 +215,7 @@ export default function Sandbox() {
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style={{ background: `color-mix(in srgb, ${agent.color} 12%, transparent)` }}>
                     <Icon className="w-5 h-5" style={{ color: agent.color }} />
                   </div>
-                  <p className="text-xs font-semibold mb-1" style={{ color: agent.color }}>{tr(agent.role)}</p>
+                  <p className="text-xs font-semibold mb-1" style={{ color: `color-mix(in srgb, ${agent.color} 55%, hsl(var(--foreground)))` }}>{tr(agent.role)}</p>
                   <h3 className="text-foreground font-bold text-sm leading-tight">{tr(agent.name)}</h3>
                   {agent.id === "orchestrator" && (
                     <span className="inline-flex items-center gap-1 mt-2 text-xs text-green-700 dark:text-green-400">
@@ -242,7 +242,7 @@ export default function Sandbox() {
                     <selected.icon className="w-5 h-5" style={{ color: selected.color }} />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold" style={{ color: selected.color }}>{tr(selected.role)}</p>
+                    <p className="text-xs font-semibold" style={{ color: `color-mix(in srgb, ${selected.color} 55%, hsl(var(--foreground)))` }}>{tr(selected.role)}</p>
                     <h3 className="text-foreground font-bold">{tr(selected.name)}</h3>
                   </div>
                 </div>

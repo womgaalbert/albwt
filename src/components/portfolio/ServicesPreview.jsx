@@ -51,7 +51,7 @@ export default function ServicesPreview() {
               {s.callDeliverable && (
                 <div className="pt-3 border-t border-border mt-auto">
                   <span className="text-xs text-muted-foreground/90 font-medium flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400 flex-shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
                     {s.callDeliverable}
                   </span>
                 </div>

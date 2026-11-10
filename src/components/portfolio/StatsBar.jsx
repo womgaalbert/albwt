@@ -23,8 +23,8 @@ export default function StatsBar() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
             >
-              <div className="text-3xl font-black" style={{background:"linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent"}}>{stat.value}</div>
-              <div className="text-muted-foreground text-sm mt-1">{stat.label}</div>
+              <div className="text-3xl font-black" style={{background:"linear-gradient(135deg, hsl(var(--footer-accent)), hsl(var(--footer-accent-2)))", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent"}}>{stat.value}</div>
+              <div className="text-footer-foreground/80 text-sm mt-1">{stat.label}</div>
             </motion.div>
           ))}
         </div>

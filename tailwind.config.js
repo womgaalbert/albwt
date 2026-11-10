@@ -4,6 +4,9 @@ module.exports = {
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
   	extend: {
+  		fontFamily: {
+  			sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+  		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
@@ -15,7 +18,8 @@ module.exports = {
   			'brand-blue': 'hsl(var(--brand-blue))',
   			footer: {
   				DEFAULT: 'hsl(var(--footer-bg))',
-  				foreground: 'hsl(var(--footer-foreground))'
+  				foreground: 'hsl(var(--footer-foreground))',
+  				accent: 'hsl(var(--footer-accent))'
   			},
   			card: {
   				DEFAULT: 'hsl(var(--card))',

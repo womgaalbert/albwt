@@ -143,7 +143,7 @@ export default function Booking() {
 
   const stepTitle = (n, label) => (
     <h2 className="flex items-center gap-2 text-foreground font-bold mb-4">
-      <span className="flex h-6 w-6 items-center justify-center rounded-full text-xs text-white" style={{ background: "hsl(var(--primary))" }}>{n}</span>
+      <span className="flex h-6 w-6 items-center justify-center rounded-full text-xs text-primary-foreground" style={{ background: "hsl(var(--primary))" }}>{n}</span>
       {label}
     </h2>
   );
@@ -202,8 +202,7 @@ export default function Booking() {
               <button
                 type="button"
                 onClick={() => downloadIcs(booked.startsAt, b.icsTitle)}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-white text-sm hover:opacity-90"
-                style={{ background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))" }}
+                className="btn-primary inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-white text-sm"
               >
                 <CalendarPlus className="w-4 h-4" /> {b.addToCalendar}
               </button>
@@ -268,7 +267,7 @@ export default function Booking() {
                             onClick={() => { setDay(key); setSlot(""); setError(""); }}
                             className={`aspect-square rounded-lg text-sm transition-colors ${
                               active
-                                ? "text-white font-bold"
+                                ? "text-primary-foreground font-bold"
                                 : available
                                   ? "text-foreground font-semibold bg-primary/10 hover:bg-primary/20"
                                   : "text-muted-foreground/40 cursor-not-allowed"
@@ -300,7 +299,7 @@ export default function Booking() {
                           onClick={() => { setSlot(s); setError(""); }}
                           title={`${fmtTime(s, OTTAWA_TZ)} (${b.ottawaTime})`}
                           className={`py-2 rounded-lg border text-sm transition-colors ${
-                            s === slot ? "text-white border-transparent font-semibold" : "border-border text-foreground hover:border-primary/50"
+                            s === slot ? "text-primary-foreground border-transparent font-semibold" : "border-border text-foreground hover:border-primary/50"
                           }`}
                           style={s === slot ? { background: "hsl(var(--primary))" } : undefined}
                         >
@@ -395,8 +394,7 @@ export default function Booking() {
               <button
                 type="submit"
                 disabled={!slot || submitting}
-                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold text-white text-sm transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))" }}
+                className="btn-primary w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold text-white text-sm disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <CalendarDays className="w-4 h-4" />
                 {submitting ? b.submitting : b.submit}

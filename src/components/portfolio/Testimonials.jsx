@@ -54,7 +54,7 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "hsl(var(--primary))" }}>
+          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "hsl(var(--footer-accent))" }}>
             {t.testimonials.badge}
           </span>
           <h2 className="text-3xl md:text-4xl font-black mt-3 text-white">
@@ -68,7 +68,7 @@ export default function Testimonials() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-sm font-medium mt-4 hover:underline"
-            style={{ color: "hsl(var(--primary))" }}
+            style={{ color: "hsl(var(--footer-accent))" }}
           >
             {t.testimonials.seeAll} <ExternalLink className="w-3.5 h-3.5" />
           </a>

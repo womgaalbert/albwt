@@ -163,8 +163,7 @@ export default function Contact() {
               <Link
                 to="/booking"
                 onClick={() => trackEvent("cta_click", { source: "contact_sidebar" })}
-                className="flex items-center justify-center gap-2 w-full py-3 rounded-xl font-semibold text-white text-sm transition-opacity hover:opacity-90"
-                style={{background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))"}}
+                className="btn-primary flex items-center justify-center gap-2 w-full py-3 rounded-xl font-semibold text-white text-sm"
               >
                 <CalendarDays className="w-4 h-4" />
                 {t.contact.scheduleMeeting}

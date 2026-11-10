@@ -172,7 +172,7 @@ export default function FeaturedProjects() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "hsl(var(--primary))" }}>
+          <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "hsl(var(--footer-accent))" }}>
             {t.featured.badge}
           </span>
           <h2 className="text-3xl md:text-4xl font-black mt-3 text-white">{t.featured.title}</h2>
@@ -222,7 +222,7 @@ export default function FeaturedProjects() {
                     className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-semibold"
                     style={{
                       background: `color-mix(in srgb, ${p.color} 14%, transparent)`,
-                      color: p.color,
+                      color: `color-mix(in srgb, ${p.color} 55%, hsl(var(--foreground)))`,
                       border: `1px solid color-mix(in srgb, ${p.color} 25%, transparent)`,
                     }}
                   >
@@ -250,7 +250,7 @@ export default function FeaturedProjects() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 font-semibold hover:underline"
-                        style={{ color: p.color }}
+                        style={{ color: `color-mix(in srgb, ${p.color} 55%, hsl(var(--foreground)))` }}
                       >
                         {lang === "fr" ? "Tester l'app" : "Try live app"}
                         <ArrowRight className="w-3.5 h-3.5" />
@@ -262,7 +262,7 @@ export default function FeaturedProjects() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 font-semibold hover:underline"
-                        style={{ color: p.color }}
+                        style={{ color: `color-mix(in srgb, ${p.color} 55%, hsl(var(--foreground)))` }}
                       >
                         {lang === "fr" ? "Voir le site" : "Visit site"}
                         <ArrowRight className="w-3.5 h-3.5" />
@@ -292,7 +292,7 @@ export default function FeaturedProjects() {
           <Link
             to={createPageUrl("Projects")}
             className="inline-flex items-center gap-2 font-semibold hover:gap-3 transition-all"
-            style={{ color: "hsl(var(--primary))" }}
+            style={{ color: "hsl(var(--footer-accent))" }}
           >
             {t.featured.viewAll} <ArrowRight className="w-4 h-4" />
           </Link>

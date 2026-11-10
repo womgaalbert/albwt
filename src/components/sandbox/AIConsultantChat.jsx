@@ -183,7 +183,7 @@ export default function AIConsultantChat() {
             onClick={() => sendMessage()}
             disabled={!input.trim() || loading}
             className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
-            style={{ background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))" }}
+            style={{ background: "linear-gradient(135deg, hsl(var(--cta-from)), hsl(var(--cta-to)))" }}
           >
             <Send className="w-4 h-4 text-white" />
           </button>

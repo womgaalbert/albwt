@@ -96,7 +96,7 @@ export default function Blog() {
               onClick={() => setActiveCategory(key)}
               className="px-4 py-2 rounded-full text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               style={{
-                background: activeCategory === key ? "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))" : "hsl(var(--card))",
+                background: activeCategory === key ? "linear-gradient(135deg, hsl(var(--cta-from)), hsl(var(--cta-to)))" : "hsl(var(--card))",
                 color: activeCategory === key ? "white" : "hsl(var(--muted-foreground))",
                 border: activeCategory === key ? "none" : "1px solid hsl(var(--border))",
               }}

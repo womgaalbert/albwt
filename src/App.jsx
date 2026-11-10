@@ -9,6 +9,7 @@ import { LanguageProvider } from '@/lib/LanguageContext';
 import { AuthProvider } from '@/lib/AuthContext';
 import { trackPageView } from '@/lib/analytics';
 import { lazy, Suspense, useEffect } from 'react';
+import { MotionConfig } from 'framer-motion';
 
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 
@@ -17,6 +18,15 @@ const PageFallback = () => (
     <div role="status" aria-label="Loading / Chargement" className="w-8 h-8 border-4 border-border border-t-primary rounded-full animate-spin" />
   </div>
 );
+
+// A new route starts at the top unless the link targets an anchor.
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (!hash) window.scrollTo(0, 0);
+  }, [pathname, hash]);
+  return null;
+}
 
 // GA4 page_view on every SPA route change.
 function PageViewTracker() {
@@ -41,7 +51,9 @@ function App() {
       <AuthProvider>
       <QueryClientProvider client={queryClientInstance}>
         <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+          <ScrollToTop />
           <PageViewTracker />
+          <MotionConfig reducedMotion="user">
           <Routes>
             <Route path="/" element={
               <LayoutWrapper currentPageName={mainPageKey}>
@@ -75,6 +87,7 @@ function App() {
             <Route path="/blogpost" element={<LayoutWrapper currentPageName="Blog"><BlogPost /></LayoutWrapper>} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
+          </MotionConfig>
           <Toaster />
           <SonnerToaster position="top-center" />
         </Router>

@@ -438,7 +438,7 @@ function ProjectCard({ project: p, lang, t, expandedComments, toggleComments, pr
               className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-semibold"
               style={{
                 background: `color-mix(in srgb, ${p.color} 14%, transparent)`,
-                color: p.color,
+                color: `color-mix(in srgb, ${p.color} 55%, hsl(var(--foreground)))`,
                 border: `1px solid color-mix(in srgb, ${p.color} 25%, transparent)`,
               }}
             >
@@ -485,7 +485,7 @@ function ProjectCard({ project: p, lang, t, expandedComments, toggleComments, pr
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white shadow-sm transition-transform active:scale-95"
-                  style={{ backgroundColor: p.color }}
+                  style={{ backgroundColor: `color-mix(in srgb, ${p.color} 65%, black)` }}
                 >
                   <Play className="w-3 h-3 fill-white" />
                   {lang === "fr" ? "Tester le tableau de bord" : "Try Live Dashboard"}
@@ -500,7 +500,7 @@ function ProjectCard({ project: p, lang, t, expandedComments, toggleComments, pr
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors border hover:bg-muted/40"
                   style={{
-                    color: p.color,
+                    color: `color-mix(in srgb, ${p.color} 55%, hsl(var(--foreground)))`,
                     borderColor: `color-mix(in srgb, ${p.color} 35%, transparent)`,
                   }}
                 >
@@ -619,7 +619,7 @@ export default function Projects() {
               style={{
                 background:
                   activeCategory === cat
-                    ? "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))"
+                    ? "linear-gradient(135deg, hsl(var(--cta-from)), hsl(var(--cta-to)))"
                     : "hsl(var(--card))",
                 color: activeCategory === cat ? "white" : "hsl(var(--muted-foreground))",
                 border: activeCategory === cat ? "none" : "1px solid hsl(var(--border))",

@@ -32,6 +32,10 @@
     --brand-blue: 216 100% 45%;
     --footer-bg: 221 52% 13%;
     --footer-foreground: 210 40% 98%;
+    --footer-accent: 172 80% 55%;
+    --footer-accent-2: 205 100% 72%;
+    --cta-from: 172 84% 28%;
+    --cta-to: 216 100% 45%;
     --glow: 172 100% 42%;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -71,6 +75,10 @@
     --brand-blue: 216 100% 50%;
     --footer-bg: 223 54% 10%;
     --footer-foreground: 210 40% 98%;
+    --footer-accent: 172 80% 55%;
+    --footer-accent-2: 205 100% 72%;
+    --cta-from: 172 84% 26%;
+    --cta-to: 216 100% 45%;
     --glow: 172 100% 42%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -116,7 +124,7 @@
   }
 
   .btn-primary {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)));
+    background: linear-gradient(135deg, hsl(var(--cta-from)), hsl(var(--cta-to)));
     transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
   }
 
@@ -130,8 +138,9 @@
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
   }
 
+  /* !important: Framer Motion leaves an inline transform on animated cards. */
   .card-hover:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) !important;
     box-shadow: 0 20px 40px hsl(var(--glow) / 0.18);
     border-color: hsl(var(--primary) / 0.45);
   }
@@ -169,10 +178,6 @@
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-15px); }
 }
-
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: hsl(var(--background)); }
-::-webkit-scrollbar-thumb { background: hsl(var(--primary)); border-radius: 3px; }
 
 ::selection {
   background: hsl(var(--primary) / 0.3);
@@ -256,6 +261,29 @@
     filter: blur(60px);
     animation: none !important;
   }
+
+  .hero-dot,
+  .animate-pulse,
+  .animate-ping,
+  .animate-bounce {
+    animation: none !important;
+  }
+
+  .card-hover,
+  .btn-primary {
+    transition: none;
+  }
+
+  .card-hover:hover,
+  .btn-primary:hover {
+    transform: none !important;
+  }
+}
+
+/* Keyboard focus is always visible, including on links and custom controls. */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
 }
 
 /* Custom sleek scrollbar */

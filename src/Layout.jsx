@@ -56,7 +56,7 @@ export default function Layout({ children, currentPageName }) {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-5">
+          <div className="hidden lg:flex items-center gap-3 xl:gap-5">
             {headerLinks.map((link) => (
               <Link
                 key={link.page}
@@ -83,7 +83,7 @@ export default function Layout({ children, currentPageName }) {
           </div>
 
           {/* Mobile toggle */}
-          <div className="md:hidden flex items-center gap-3">
+          <div className="lg:hidden flex items-center gap-3">
             <ThemeToggle />
             <button
               type="button"
@@ -100,7 +100,7 @@ export default function Layout({ children, currentPageName }) {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div id="mobile-menu" className="md:hidden bg-card border-t border-border px-6 py-4 flex flex-col gap-4">
+          <div id="mobile-menu" className="lg:hidden bg-card border-t border-border px-6 py-4 flex flex-col gap-4">
             {headerLinks.map((link) => (
               <Link
                 key={link.page}
@@ -139,7 +139,7 @@ export default function Layout({ children, currentPageName }) {
           </div>
           <div className="flex flex-wrap gap-4 md:gap-6 text-sm text-footer-foreground/60">
             {navLinks.map((link) => (
-              <Link key={link.page} to={createPageUrl(link.page)} className="hover:text-primary transition-colors whitespace-nowrap" style={{color: "inherit"}}>
+              <Link key={link.page} to={createPageUrl(link.page)} className="hover:text-footer-accent transition-colors whitespace-nowrap">
                 {link.label}
               </Link>
             ))}
