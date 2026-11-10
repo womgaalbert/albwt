@@ -207,7 +207,8 @@ const projects = [
     motionType: "pipeline",
     outcome: "Databricks Lakehouse · Unity Catalog + Streamlit Live",
     outcomeFr: "Lakehouse Databricks · Unity Catalog + Streamlit Live",
-    image: "/images/projects/student-plurilingual-databricks.webp",
+    loop: "/videos/projects/student-plurilingual-databricks-loop.mp4",
+    image: "/images/projects/student-plurilingual-databricks-poster.webp",
     year: { en: "2025 · doctoral research", fr: "2025 · recherche doctorale" },
   },
   {

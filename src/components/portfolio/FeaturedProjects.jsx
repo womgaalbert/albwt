@@ -97,7 +97,8 @@ const projects = [
     category: "Machine Learning",
     categoryFr: "Machine Learning",
     motionType: "pipeline",
-    image: "/images/projects/student-plurilingual-databricks.webp",
+    loop: "/videos/projects/student-plurilingual-databricks-loop.mp4",
+    image: "/images/projects/student-plurilingual-databricks-poster.webp",
     outcome: {
       en: "Databricks Lakehouse · Unity Catalog + Streamlit Live",
       fr: "Lakehouse Databricks · Unity Catalog + Streamlit Live",
