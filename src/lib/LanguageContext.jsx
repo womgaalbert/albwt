@@ -17,6 +17,7 @@ export const translations = {
       bookCta: "Book a Free Call",
       viewProjects: "View Projects",
       scroll: "Scroll",
+      heroVideoLabel: "Animated overview of Albert Womga's AI and data science services",
     },
     stats: {
       years: "Years Experience",
@@ -186,6 +187,10 @@ export const translations = {
     media: {
       enlarge: "Enlarge image: {alt}",
       close: "Close image",
+      playVideo: "Play video",
+      pauseVideo: "Pause video",
+      watchVideo: "Watch video",
+      closeVideo: "Close video",
       inkHint: "Hover to reveal colour",
       membersTitle: "Members-only visual",
       membersBody: "Sign in with your email to view the full case-study visuals.",
@@ -524,6 +529,7 @@ export const translations = {
       bookCta: "Réserver un appel gratuit",
       viewProjects: "Voir les projets",
       scroll: "Défiler",
+      heroVideoLabel: "Aperçu animé des services d'IA et de science des données d'Albert Womga",
     },
     stats: {
       years: "Années d'expérience",
@@ -693,6 +699,10 @@ export const translations = {
     media: {
       enlarge: "Agrandir l'image : {alt}",
       close: "Fermer l'image",
+      playVideo: "Lire la vidéo",
+      pauseVideo: "Mettre la vidéo en pause",
+      watchVideo: "Voir la vidéo",
+      closeVideo: "Fermer la vidéo",
       inkHint: "Survolez pour révéler la couleur",
       membersTitle: "Visuel réservé aux membres",
       membersBody: "Connectez-vous avec votre e-mail pour voir les visuels complets de l'étude de cas.",

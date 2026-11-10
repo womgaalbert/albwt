@@ -19,8 +19,9 @@ const projects = [
     category: "Live Client Project",
     categoryFr: "Projet Client en Ligne",
     motionType: "browser",
+    loop: "/videos/projects/cleary-cleaning-loop.mp4",
     video: "/videos/projects/cleary-cleaning.mp4",
-    image: "/images/projects/cleary-cleaning.png",
+    image: "/images/projects/cleary-cleaning-poster.webp",
     outcome: {
       en: "Live Business · Upfront Pricing & <3min Booking",
       fr: "Entreprise en Ligne · Prix Transparent & Réservation <3min",
@@ -43,8 +44,9 @@ const projects = [
     category: "Live Client Project",
     categoryFr: "Projet Client en Ligne",
     motionType: "restaurant",
+    loop: "/videos/projects/mialine-loop.mp4",
     video: "/videos/projects/mialine-presentation-60s.mp4",
-    image: "/images/projects/mialine-gifted-hands.webp",
+    image: "/images/projects/mialine-poster.webp",
     outcome: {
       en: "Live Client Business · 45 Menu Items & WhatsApp Cart",
       fr: "Activité Client en Ligne · 45 Plats & Panier WhatsApp",
@@ -67,8 +69,9 @@ const projects = [
     category: "Live Client Project",
     categoryFr: "Projet Client en Ligne",
     motionType: "browser",
+    loop: "/videos/projects/cmavocat-loop.mp4",
     video: "/videos/projects/cmavocat-presentation-60s.mp4",
-    image: "/images/projects/cm-avocats-platform.svg",
+    image: "/images/projects/cmavocat-poster.webp",
     outcome: {
       en: "AI Document Routing · 0.4s Latency | Gatineau & Calgary",
       fr: "Routage IA de Documents · Latence 0.4s | Gatineau & Calgary",
@@ -94,7 +97,7 @@ const projects = [
     category: "Machine Learning",
     categoryFr: "Machine Learning",
     motionType: "pipeline",
-    image: "/images/projects/student-plurilingual-databricks.png",
+    image: "/images/projects/student-plurilingual-databricks.webp",
     outcome: {
       en: "Databricks Lakehouse · Unity Catalog + Streamlit Live",
       fr: "Lakehouse Databricks · Unity Catalog + Streamlit Live",

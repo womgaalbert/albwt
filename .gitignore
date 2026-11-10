@@ -35,3 +35,6 @@ supabase/.temp/
 .env
 .vercel
 CLAUDE.md
+
+# Full-size source video, kept locally only
+media-src/

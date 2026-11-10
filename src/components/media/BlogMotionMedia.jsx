@@ -1,7 +1,8 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, Pause, Volume2, VolumeX, Sparkles, Activity } from "lucide-react";
+import { Sparkles, Activity } from "lucide-react";
 import { blogCoverSrc } from "@/lib/blog";
+import LazyVideo from "./LazyVideo";
 
 /**
  * Maps blog post slugs to appropriate motion design simulation types or video loops
@@ -77,51 +78,18 @@ export default function BlogMotionMedia({
   priority = false,
 }) {
   const [motionActive, setMotionActive] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
-  const [isHovered, setIsHovered] = useState(false);
-  const videoRef = useRef(null);
 
   const config = getBlogMotionConfig(post);
   const cover = blogCoverSrc(post);
 
-  const togglePlay = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      videoRef.current.play();
-      setIsPlaying(true);
-    }
-  };
-
-  const toggleMute = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (!videoRef.current) return;
-    videoRef.current.muted = !isMuted;
-    setIsMuted(!isMuted);
-  };
-
   return (
-    <div
-      className={`relative overflow-hidden group/media bg-black/60 ${className}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className={`relative overflow-hidden group/media bg-black/60 ${className}`}>
       {/* Base Layer: Video or Image */}
       {config.video ? (
-        <video
-          ref={videoRef}
+        <LazyVideo
           src={config.video}
           poster={cover || undefined}
-          autoPlay
-          loop
-          muted={isMuted}
-          playsInline
+          label={alt || title || ""}
           className="w-full h-full object-cover transition-transform duration-700 group-hover/media:scale-105"
         />
       ) : cover ? (
@@ -296,26 +264,7 @@ export default function BlogMotionMedia({
 
       {/* Top Right: Controls */}
       <div className="absolute top-3 right-3 z-20 flex items-center gap-1">
-        {config.video ? (
-          <div className="flex items-center gap-1 bg-black/60 backdrop-blur border border-white/10 rounded-full px-2 py-0.5">
-            <button
-              type="button"
-              onClick={togglePlay}
-              className="text-white hover:text-primary transition-colors p-1"
-              aria-label={isPlaying ? "Pause video" : "Play video"}
-            >
-              {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
-            </button>
-            <button
-              type="button"
-              onClick={toggleMute}
-              className="text-white hover:text-primary transition-colors p-1"
-              aria-label={isMuted ? "Unmute video" : "Mute video"}
-            >
-              {isMuted ? <VolumeX className="w-3 h-3" /> : <Volume2 className="w-3 h-3" />}
-            </button>
-          </div>
-        ) : (
+        {!config.video && (
           <button
             type="button"
             onClick={(e) => {

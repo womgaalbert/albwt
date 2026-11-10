@@ -101,7 +101,11 @@ export default function About() {
               <div className="flex items-center gap-5 mb-6">
                 <div className="relative w-24 h-24 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-lg flex-shrink-0 group">
                   <img
-                    src="/images/albert-womga.jpg"
+                    src="/images/albert-womga-192.webp"
+                    srcSet="/images/albert-womga-192.webp 192w, /images/albert-womga-384.webp 384w"
+                    sizes="96px"
+                    width={96}
+                    height={96}
                     alt="Albert Womga — Data Scientist & AI Specialist"
                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />

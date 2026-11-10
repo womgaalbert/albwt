@@ -12,6 +12,7 @@ import Testimonials from "@/components/portfolio/Testimonials";
 import GoogleReviews from "@/components/portfolio/GoogleReviews";
 import InteractiveDataViz from "@/components/portfolio/InteractiveDataViz";
 import RegionalExpertise from "@/components/portfolio/RegionalExpertise";
+import LazyVideo from "@/components/media/LazyVideo";
 import { useLang, renderRich } from "@/lib/LanguageContext";
 import { trackEvent } from "@/lib/analytics";
 import Seo from "@/components/Seo";
@@ -107,22 +108,13 @@ export default function Home() {
                 className="absolute -inset-4 rounded-3xl blur-2xl opacity-40 -z-10"
                 style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.5), transparent 70%)" }}
               />
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                poster="/images/hero-poster.jpg"
+              <LazyVideo
+                src="/videos/hero-loop.mp4"
+                poster="/images/hero-poster.webp"
+                label={t.home.heroVideoLabel}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              >
-                <source src="/videos/hero-loop.mp4" type="video/mp4" />
-              </video>
+              />
               <div className="absolute inset-0 pointer-events-none rounded-3xl ring-1 ring-inset ring-white/15" />
-              {/* Badge overlay */}
-              <div className="absolute bottom-3 right-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-xs font-mono text-white/90 shadow-lg">
-                <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-                <span>18s · Production Loop</span>
-              </div>
             </div>
           </motion.div>
         </div>

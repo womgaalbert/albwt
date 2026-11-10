@@ -1,7 +1,10 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, Pause, Volume2, VolumeX, Sparkles, Activity, Cpu, TrendingUp, Layers, Eye, Globe, ShoppingBag } from "lucide-react";
+import { Play, Sparkles, Activity, Cpu, TrendingUp, Layers, Eye, Globe, ShoppingBag } from "lucide-react";
+import { useLang } from "@/lib/LanguageContext";
 import InkImage from "./InkImage";
+import LazyVideo from "./LazyVideo";
+import VideoDialog from "./VideoDialog";
 
 /**
  * Generative Motion Design Visualizers for AI / Data Science Projects
@@ -375,46 +378,23 @@ export default function ProjectMotionMedia({
   priority = false,
   zoomable = true,
 }) {
+  const { t, lang } = useLang();
   const [motionActive, setMotionActive] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
-  const videoRef = useRef(null);
+  const [fullVideoOpen, setFullVideoOpen] = useState(false);
 
-  const hasVideo = Boolean(project?.video);
+  // `loop` is the small silent card clip; `video` is the full presentation.
+  const hasVideo = Boolean(project?.loop);
+  const hasFullVideo = Boolean(project?.video);
   const motionType = project?.motionType || "forecast";
-
-  const togglePlay = () => {
-    if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      videoRef.current.play();
-      setIsPlaying(true);
-    }
-  };
-
-  const toggleMute = () => {
-    if (!videoRef.current) return;
-    videoRef.current.muted = !isMuted;
-    setIsMuted(!isMuted);
-  };
+  const altText = typeof project?.alt === "string" ? project.alt : project?.alt?.[lang];
+  const videoLabel = altText || project?.title || "";
 
   return (
     <div className={`group ${containerClassName}`}>
       {/* Base Layer: Native Video OR Static Image */}
       {hasVideo ? (
         <div className="relative w-full h-full bg-black">
-          <video
-            ref={videoRef}
-            src={project.video}
-            poster={project.image}
-            autoPlay
-            loop
-            muted={isMuted}
-            playsInline
-            className="w-full h-full object-cover"
-          />
+          <LazyVideo src={project.loop} poster={project.image} label={videoLabel} />
         </div>
       ) : (
         <InkImage
@@ -466,24 +446,16 @@ export default function ProjectMotionMedia({
       {/* Top Right: Interactive Motion / Video Controls */}
       <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5">
         {hasVideo ? (
-          <div className="flex items-center gap-1 bg-black/60 backdrop-blur border border-white/10 rounded-full px-2 py-0.5">
+          hasFullVideo && (
             <button
               type="button"
-              onClick={togglePlay}
-              className="text-white hover:text-primary transition-colors p-1"
-              aria-label={isPlaying ? "Pause video" : "Play video"}
+              onClick={() => setFullVideoOpen(true)}
+              className="inline-flex items-center gap-1.5 min-h-11 px-3.5 rounded-full bg-black/65 backdrop-blur border border-white/15 text-white text-xs font-semibold transition-colors hover:bg-black/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+              <Play className="w-3.5 h-3.5" aria-hidden="true" />
+              {t.media.watchVideo}
             </button>
-            <button
-              type="button"
-              onClick={toggleMute}
-              className="text-white hover:text-primary transition-colors p-1"
-              aria-label={isMuted ? "Unmute video" : "Mute video"}
-            >
-              {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-            </button>
-          </div>
+          )
         ) : (
           <button
             type="button"
@@ -497,6 +469,16 @@ export default function ProjectMotionMedia({
           </button>
         )}
       </div>
+
+      {hasFullVideo && (
+        <VideoDialog
+          open={fullVideoOpen}
+          onClose={() => setFullVideoOpen(false)}
+          src={project.video}
+          poster={project.image}
+          title={videoLabel}
+        />
+      )}
     </div>
   );
 }

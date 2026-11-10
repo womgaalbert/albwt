@@ -1,8 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { lazy, Suspense, useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { MessageCircle, X, Send, Sparkles } from "lucide-react";
-import ReactMarkdown from "react-markdown";
 import { supabase } from "@/lib/supabase";
 import { sanitizeUrl, sanitizeLlmInput, MAX_INPUT_LENGTHS } from "@/lib/sanitize";
 import { useLang } from "@/lib/LanguageContext";
@@ -11,6 +10,9 @@ import { trackEvent } from "@/lib/analytics";
 import { getMockResponse } from "@/components/sandbox/consultantAnswers";
 
 // Pages that already have their own contact form.
+// Only the open chat needs this, so it stays out of every page's first load.
+const ReactMarkdown = lazy(() => import("react-markdown"));
+
 const HIDDEN_ON = new Set(["Contact", "Booking"]);
 
 const LEAD_KEY = "albwt_lead"; // { name, capturedAt } — skips the form for 30 days
@@ -269,6 +271,7 @@ export default function LeadWidget({ currentPageName }) {
                   >
                     {msg.role === "assistant" ? (
                       <div className="prose prose-sm max-w-none dark:prose-invert prose-p:my-1 prose-ul:my-1">
+                        <Suspense fallback={msg.content}>
                         <ReactMarkdown
                           components={{
                             a: ({ children, href }) => (
@@ -280,6 +283,7 @@ export default function LeadWidget({ currentPageName }) {
                         >
                           {msg.content}
                         </ReactMarkdown>
+                        </Suspense>
                       </div>
                     ) : (
                       msg.content
@@ -312,7 +316,9 @@ export default function LeadWidget({ currentPageName }) {
 
                   {formError && (
                     <div role="alert" className="text-xs text-red-700 dark:text-red-400 [&_a]:underline">
-                      <ReactMarkdown>{formError}</ReactMarkdown>
+                      <Suspense fallback={formError}>
+                        <ReactMarkdown>{formError}</ReactMarkdown>
+                      </Suspense>
                     </div>
                   )}
 
