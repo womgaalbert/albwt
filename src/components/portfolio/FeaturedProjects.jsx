@@ -87,8 +87,8 @@ const projects = [
       fr: "Apprentissage du Français — Databricks ML",
     },
     desc: {
-      en: "Production machine-learning platform on Databricks serverless built for doctoral research on Cameroonian students' plurilingual representations of French. Runs full lakehouse lifecycle: Delta Lake & Unity Catalog, 8-task Databricks Workflows, MLflow registry, and a unified scale-to-zero Model Serving endpoint powering a live Streamlit app.",
-      fr: "Plateforme ML de production sur Databricks serverless conçue pour une recherche doctorale sur les représentations plurilingues du français au Cameroun. Cycle lakehouse complet : Delta Lake & Unity Catalog, Workflow à 8 tâches, registre MLflow et Model Serving unifié alimentant une application Streamlit en direct.",
+      en: "Production machine-learning platform on Databricks serverless built for doctoral research on Cameroonian students' plurilingual representations of French. Runs full lakehouse lifecycle: Delta Lake & Unity Catalog, 8-task Databricks Workflows, MLflow registry, and a unified scale-to-zero Model Serving endpoint powering a live Streamlit app. Delivered through a SMART-scoped plan and a medallion-style ETL pipeline — governed end to end by Unity Catalog.",
+      fr: "Plateforme ML de production sur Databricks serverless conçue pour une recherche doctorale sur les représentations plurilingues du français au Cameroun. Cycle lakehouse complet : Delta Lake & Unity Catalog, Workflow à 8 tâches, registre MLflow et Model Serving unifié alimentant une application Streamlit en direct. Livrée selon un plan cadré SMART et un pipeline ETL de style médallion — gouvernés de bout en bout par Unity Catalog.",
     },
     tags: {
       en: ["Databricks", "Unity Catalog", "Delta Lake", "MLflow", "Model Serving", "Streamlit"],
