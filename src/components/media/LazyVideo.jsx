@@ -17,7 +17,7 @@ function wantsReducedData() {
  * and playback stops again when it leaves. Visitors who prefer reduced motion
  * or reduced data get the poster image instead.
  */
-export default function LazyVideo({ src, poster, label, className = "w-full h-full object-cover" }) {
+export default function LazyVideo({ src, poster, label, className = "w-full h-full object-cover", compact = false }) {
   const { t } = useLang();
   const reducedMotion = useReducedMotion();
   const [reducedData] = useState(wantsReducedData);
@@ -64,7 +64,7 @@ export default function LazyVideo({ src, poster, label, className = "w-full h-fu
   };
 
   return (
-    <div ref={wrapperRef} className="relative w-full h-full">
+    <div ref={wrapperRef} className="relative w-full h-full group/video">
       <video
         ref={videoRef}
         src={attached ? src : undefined}
@@ -81,7 +81,9 @@ export default function LazyVideo({ src, poster, label, className = "w-full h-fu
         onClick={togglePaused}
         aria-label={paused ? t.media.playVideo : t.media.pauseVideo}
         aria-pressed={paused}
-        className="absolute bottom-1 right-1 z-20 w-11 h-11 flex items-center justify-center rounded-full text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className={`absolute bottom-1 right-1 z-20 w-11 h-11 flex items-center justify-center rounded-full text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+          compact ? "opacity-0 group-hover/video:opacity-100 focus-within:opacity-100 focus-visible:opacity-100 transition-opacity" : ""
+        }`}
       >
         <span className="w-8 h-8 flex items-center justify-center rounded-full bg-black/60 backdrop-blur border border-white/15 transition-colors hover:bg-black/80">
           {paused ? <Play className="w-3.5 h-3.5" aria-hidden="true" /> : <Pause className="w-3.5 h-3.5" aria-hidden="true" />}

@@ -14,7 +14,8 @@ import { useLang } from "@/lib/LanguageContext";
 import InkImage from "@/components/media/InkImage";
 import Seo, { SITE_URL } from "@/components/Seo";
 import CTABanner from "@/components/portfolio/CTABanner";
-import { blogCoverSrc, blogCategoryLabel, localizePost } from "@/lib/blog";
+import { blogCoverMedia, blogCoverSrc, blogCategoryLabel, localizePost } from "@/lib/blog";
+import LazyVideo from "@/components/media/LazyVideo";
 import SourceCard, { sourceKind } from "@/components/blog/SourceCard";
 
 const shareBtn = "w-9 h-9 rounded-lg bg-card border border-border flex items-center justify-center hover:border-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
@@ -212,16 +213,25 @@ export default function BlogPost() {
             animate={{ opacity: 1, y: 0 }}
             className="mb-8 rounded-2xl overflow-hidden"
           >
-            <InkImage
-              src={blogCoverSrc(post)}
-              alt={text.coverAlt}
-              caption={text.title}
-              width={800}
-              height={400}
-              priority
-              zoomable
-              className="w-full h-64 md:h-96 rounded-2xl"
-            />
+            {blogCoverMedia(post) ? (
+              <LazyVideo
+                src={blogCoverMedia(post).loop}
+                poster={blogCoverMedia(post).poster}
+                label={text.coverAlt}
+                className="w-full h-64 md:h-96 rounded-2xl object-cover"
+              />
+            ) : (
+              <InkImage
+                src={blogCoverSrc(post)}
+                alt={text.coverAlt}
+                caption={text.title}
+                width={800}
+                height={400}
+                priority
+                zoomable
+                className="w-full h-64 md:h-96 rounded-2xl"
+              />
+            )}
           </motion.div>
         )}
 

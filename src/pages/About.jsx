@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, MapPin, Calendar, Award, Quote } from "lucide-react";
 import { useLang, renderRich } from "@/lib/LanguageContext";
 import Seo from "@/components/Seo";
+import LazyVideo from "@/components/media/LazyVideo";
 import CTABanner from "@/components/portfolio/CTABanner";
 
 const skills = [
@@ -102,13 +103,11 @@ export default function About() {
             <div className="bg-card border border-border rounded-2xl p-8 mb-6">
               <div className="flex flex-col sm:flex-row sm:items-center gap-5 mb-6">
                 <div className="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-lg flex-shrink-0 group">
-                  <img
-                    src="/images/albert-womga-384.webp"
-                    srcSet="/images/albert-womga-192.webp 192w, /images/albert-womga-384.webp 384w"
-                    sizes="160px"
-                    width={160}
-                    height={160}
-                    alt={t.about.portraitAlt}
+                  <LazyVideo
+                    src="/videos/about/portrait-loop.mp4"
+                    poster="/images/albert-womga-384.webp"
+                    label={t.about.portraitAlt}
+                    compact
                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />

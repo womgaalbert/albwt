@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { Activity } from "lucide-react";
 import { useLang } from "@/lib/LanguageContext";
-import { blogCoverSrc } from "@/lib/blog";
+import { blogCoverMedia, blogCoverSrc } from "@/lib/blog";
 import LazyVideo from "./LazyVideo";
 
 /**
@@ -10,6 +10,16 @@ import LazyVideo from "./LazyVideo";
 function getBlogMotionConfig(post) {
   const slug = post?.slug || "";
   const cat = (post?.category || "").toLowerCase();
+
+  // A real motion loop rendered from the post's figures: no drawn overlay.
+  if (blogCoverMedia(post)) {
+    return {
+      type: "video",
+      video: blogCoverMedia(post),
+      badge: "video",
+      color: "hsl(var(--primary))",
+    };
+  }
 
   // If the post has a specific video explicitly attached, use it
   if (post?.video) {
@@ -88,8 +98,8 @@ export default function BlogMotionMedia({
       {/* Base Layer: Video or Image */}
       {config.video ? (
         <LazyVideo
-          src={config.video}
-          poster={cover || undefined}
+          src={typeof config.video === "string" ? config.video : config.video.loop}
+          poster={typeof config.video === "string" ? cover || undefined : config.video.poster}
           label={alt || title || ""}
           className="w-full h-full object-cover transition-transform duration-700 group-hover/media:scale-105"
         />

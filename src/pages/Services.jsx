@@ -23,8 +23,8 @@ const serviceMedia = [
   { loop: "/videos/projects/energy-arima-forecasting-loop.mp4", poster: "/images/projects/energy-arima-forecasting-poster.webp" },
   { loop: "/videos/projects/transformer-time-series-loop.mp4", poster: "/images/projects/transformer-time-series-poster.webp" },
   { loop: "/videos/projects/convnet-cifar10-loop.mp4", poster: "/images/projects/convnet-cifar10-poster.webp" },
-  { poster: "/images/projects/student-plurilingual-databricks.webp" },
-  { poster: "/images/agent-teardown-poster.webp" },
+  { loop: "/videos/projects/student-plurilingual-databricks-loop.mp4", poster: "/images/projects/student-plurilingual-databricks-poster.webp" },
+  { loop: "/videos/projects/agent-teardown-loop.mp4", poster: "/images/agent-teardown-poster.webp" },
 ];
 
 const readable = (color) => `color-mix(in srgb, ${color} 55%, hsl(var(--foreground)))`;
