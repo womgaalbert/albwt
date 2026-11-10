@@ -23,7 +23,6 @@ export const translations = {
       years: "Years Experience",
       institutions: "Institutions Analyzed",
       countries: "Continents Served",
-      repos: "GitHub Repositories",
       degree: "Applied Statistics",
     },
     regional: {
@@ -567,7 +566,6 @@ export const translations = {
       years: "Années d'expérience",
       institutions: "Institutions analysées",
       countries: "Continents servis",
-      repos: "Dépôts GitHub",
       degree: "Statistique appliquée",
     },
     regional: {

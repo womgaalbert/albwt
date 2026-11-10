@@ -7,14 +7,13 @@ export default function StatsBar() {
     { value: "15+", label: t.stats.years },
     { value: "500+", label: t.stats.institutions },
     { value: "2", label: t.stats.countries },
-    { value: "6", label: t.stats.repos },
     { value: "M.Sc.", label: t.stats.degree },
   ];
 
   return (
     <section className="bg-footer border-y border-border py-8">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {stats.map((stat, i) => (
             <motion.div
               key={i}
