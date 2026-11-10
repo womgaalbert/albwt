@@ -17,8 +17,8 @@ export const testimonials = [
   },
   {
     quote: {
-      en: "Albert built the entire cmavocats.ca platform and integrated an AI document classification system that cut our document routing time from minutes to seconds. Remarkable technical depth and professionalism.",
-      fr: "Albert a construit toute la plateforme cmavocats.ca et y a intégré un système de classification documentaire par IA qui a réduit notre temps d'acheminement de plusieurs minutes à quelques secondes. Une profondeur technique et un professionnalisme remarquables.",
+      en: "Albert built the entire cmavocat.ca platform and integrated an AI document classification system that cut our document routing time from minutes to seconds. Remarkable technical depth and professionalism.",
+      fr: "Albert a construit toute la plateforme cmavocat.ca et y a intégré un système de classification documentaire par IA qui a réduit notre temps d'acheminement de plusieurs minutes à quelques secondes. Une profondeur technique et un professionnalisme remarquables.",
     },
     name: { en: "C.M. Avocats Team", fr: "Équipe C.M. Avocats" },
     title: { en: "Legal Technology", fr: "Technologies juridiques" },
@@ -46,7 +46,7 @@ export default function Testimonials() {
   /** @param {any} v */
   const tr = (v) => (v && typeof v === "object" ? v[lang] || v.en : v);
   return (
-    <section className="py-24 bg-footer">
+    <section className="pt-20 pb-8 bg-footer">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -57,10 +57,10 @@ export default function Testimonials() {
           <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "hsl(var(--primary))" }}>
             {t.testimonials.badge}
           </span>
-          <h2 className="text-3xl md:text-4xl font-black mt-3 text-foreground">
+          <h2 className="text-3xl md:text-4xl font-black mt-3 text-white">
             {t.testimonials.title}
           </h2>
-          <p className="text-muted-foreground mt-4 max-w-xl mx-auto text-lg">
+          <p className="text-footer-foreground/80 mt-4 max-w-xl mx-auto text-lg">
             {t.testimonials.subtitle}
           </p>
           <a

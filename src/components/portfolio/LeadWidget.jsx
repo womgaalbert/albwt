@@ -133,17 +133,7 @@ export default function LeadWidget({ currentPageName }) {
     };
   }, [hidden, isOpen]);
 
-  // Auto-open on the contact form once per visitor, desktop only (on phones it would
-  // cover the page — the teaser does the job there).
-  useEffect(() => {
-    if (hidden || isOpen || readStorage(AUTO_OPEN_KEY) || getStoredLead()) return;
-    if (window.matchMedia?.("(max-width: 639px)").matches) return;
-    const timer = setTimeout(() => {
-      writeStorage(AUTO_OPEN_KEY, "1");
-      openWidget("auto");
-    }, AUTO_OPEN_DELAY_MS);
-    return () => clearTimeout(timer);
-  }, [hidden, isOpen]);
+  // Auto-open disabled: keep widget closed until visitor opens it explicitly.
 
   const dismissTeaser = () => {
     setTeaserVisible(false);

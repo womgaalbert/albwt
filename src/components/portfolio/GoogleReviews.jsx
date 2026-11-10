@@ -65,7 +65,7 @@ export default function GoogleReviews() {
 
   const profileUrl = GOOGLE_PROFILE_URL || data.mapsUri;
   const reviewUrl = GOOGLE_REVIEW_URL || data.writeReviewUri;
-  const reviews = data.reviews.filter((r) => r.text).slice(0, 3);
+  const reviews = (data.reviews || []).filter((r) => r && r.text).slice(0, 3);
 
   return (
     <section className="py-24" aria-labelledby="google-reviews-title">

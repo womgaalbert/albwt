@@ -27,8 +27,8 @@ const linkedInEndorsements = [
   },
   {
     quote: {
-      en: "Albert built the entire cmavocats.ca platform and integrated an AI document classification system that transformed how we handle legal documents. His NLP pipeline reduced our routing time from minutes to seconds. Remarkable technical depth, clear communication, and genuine commitment to delivering value.",
-      fr: "Albert a construit l'intégralité de la plateforme cmavocats.ca et y a intégré un système de classification documentaire par IA qui a transformé notre gestion des documents juridiques. Son pipeline NLP a réduit notre temps d'acheminement de plusieurs minutes à quelques secondes. Une profondeur technique remarquable, une communication claire et un réel souci du résultat.",
+      en: "Albert built the entire cmavocat.ca platform and integrated an AI document classification system that transformed how we handle legal documents. His NLP pipeline reduced our routing time from minutes to seconds. Remarkable technical depth, clear communication, and genuine commitment to delivering value.",
+      fr: "Albert a construit l'intégralité de la plateforme cmavocat.ca et y a intégré un système de classification documentaire par IA qui a transformé notre gestion des documents juridiques. Son pipeline NLP a réduit notre temps d'acheminement de plusieurs minutes à quelques secondes. Une profondeur technique remarquable, une communication claire et un réel souci du résultat.",
     },
     name: "C.M. Avocats",
     title: { en: "Legal Technology Partner", fr: "Partenaire en technologies juridiques" },
@@ -98,15 +98,20 @@ export default function About() {
           {/* Left: Bio + Experience */}
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
             <div className="bg-card border border-border rounded-2xl p-8 mb-6">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl font-black text-white" style={{background:"linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-blue)))"}}>
-                  AW
+              <div className="flex items-center gap-5 mb-6">
+                <div className="relative w-24 h-24 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-lg flex-shrink-0 group">
+                  <img
+                    src="/images/albert-womga.jpg"
+                    alt="Albert Womga — Data Scientist & AI Specialist"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
                 </div>
                 <div>
-                  <h2 className="text-foreground font-bold text-xl">Albert Womga</h2>
-                  <p className="text-muted-foreground text-sm">{t.about.role}</p>
-                  <div className="flex items-center gap-1 text-muted-foreground/70 text-xs mt-1">
-                    <MapPin className="w-3 h-3" />
+                  <h2 className="text-foreground font-bold text-2xl">Albert Womga</h2>
+                  <p className="text-muted-foreground text-sm font-medium">{t.about.role}</p>
+                  <div className="flex items-center gap-1.5 text-muted-foreground/70 text-xs mt-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-primary" />
                     <span>{t.about.location}</span>
                   </div>
                 </div>

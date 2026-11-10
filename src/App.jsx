@@ -10,9 +10,7 @@ import { AuthProvider } from '@/lib/AuthContext';
 import { trackPageView } from '@/lib/analytics';
 import { lazy, Suspense, useEffect } from 'react';
 
-const Blog = lazy(() => import('./pages/Blog'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
-const Sandbox = lazy(() => import('./pages/Sandbox'));
 
 const PageFallback = () => (
   <div className="min-h-screen flex items-center justify-center">
@@ -72,12 +70,9 @@ function App() {
                 }
               />
             ))}
-            <Route path="/Blog" element={<LayoutWrapper currentPageName="Blog"><Blog /></LayoutWrapper>} />
-            <Route path="/blog" element={<LayoutWrapper currentPageName="Blog"><Blog /></LayoutWrapper>} />
+            <Route path="/blog/:slug" element={<LayoutWrapper currentPageName="Blog"><BlogPost /></LayoutWrapper>} />
             <Route path="/BlogPost" element={<LayoutWrapper currentPageName="Blog"><BlogPost /></LayoutWrapper>} />
             <Route path="/blogpost" element={<LayoutWrapper currentPageName="Blog"><BlogPost /></LayoutWrapper>} />
-            <Route path="/Sandbox" element={<LayoutWrapper currentPageName="Sandbox"><Sandbox /></LayoutWrapper>} />
-            <Route path="/sandbox" element={<LayoutWrapper currentPageName="Sandbox"><Sandbox /></LayoutWrapper>} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           <Toaster />

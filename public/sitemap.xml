@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Pages -->
   <url><loc>https://albwt.com/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
   <url><loc>https://albwt.com/services</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://albwt.com/projects</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
@@ -8,4 +9,15 @@
   <url><loc>https://albwt.com/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://albwt.com/contact</loc><changefreq>yearly</changefreq><priority>0.7</priority></url>
   <url><loc>https://albwt.com/booking</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Published Blog Posts -->
+  <url><loc>https://albwt.com/blog/production-ai-agent-serverless</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://albwt.com/blog/gpt-6-wave-and-model-churn</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://albwt.com/blog/why-ai-agents-fail-in-production</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://albwt.com/blog/agents-md-open-standard-coding-agents</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://albwt.com/blog/time-series-forecasting-arima</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://albwt.com/blog/nlp-document-classifier-distilbert</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://albwt.com/blog/transformer-time-series</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://albwt.com/blog/mlops-pipeline-production</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://albwt.com/blog/cnn-cifar10-from-scratch</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

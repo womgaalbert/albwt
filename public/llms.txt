@@ -19,8 +19,10 @@
 - [BFRB Sensor Fusion](https://github.com/womgaalbert/Detect-Behavior-with-Sensor-Data): multimodal time-series classification with LSTM/Transformer and sensor fusion.
 - [Transformer Time Series Prediction](https://github.com/womgaalbert/transformer-time-series-prediction): attention-based forecasting.
 - [ConvNet on CIFAR-10](https://github.com/womgaalbert/Convnet-On-CIFAR-10): CNN built from scratch.
-- [Student Plurilingual Representation](https://github.com/womgaalbert/Student-Plurilingual-Representation-French-Learning): MLOps pipeline with XGBoost, SMOTE and MLflow.
-- [cmavocate.ca](https://cmavocate.ca): legal aid web platform.
+- [Student Plurilingual Representation (Databricks)](https://github.com/womgaalbert/Student-Plurilingual-Representation-French-Learning-Databricks): end-to-end ML platform on Databricks with Unity Catalog, Delta Lake, MLflow registry, Model Serving, and a live Streamlit dashboard (https://student-plurilingual-representation-french-learning-htyukpvkoo.streamlit.app/) for doctoral research on French learning in Cameroon.
+- [CLEARY CLEANING](https://clearycleaning.ca): bilingual home cleaning platform for Ottawa and Gatineau with upfront pricing, under 3-minute booking, and private masked communications.
+- [Mialine Gifted Hands](https://mialinegiftedhands.com): bilingual resto-bar and food ordering platform in Yaoundé (Carrefour Obili), Cameroon with 45 menu items, WhatsApp ordering cart, and event catering.
+- [CM Avocat](https://cmavocat.ca): Canadian legal technology platform for Cabinet CM Avocat (led by Me Charles Mbakop, offices in Gatineau & Calgary) featuring bilingual intake, immigration & business law, 20–30 min evaluation consultation scheduling, and NLP document routing (0.4s latency).
 
 ## Pages
 

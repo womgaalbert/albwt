@@ -1,9 +1,10 @@
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Calendar, Clock, ArrowLeft, Share2, Twitter, Linkedin, Facebook, Link as LinkIcon } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, Share2, Twitter, Linkedin, Facebook, Link as LinkIcon, Check, Copy } from "lucide-react";
 import { sanitizeUrl } from "@/lib/sanitize";
 import { format } from "date-fns";
 import { fr as frLocale } from "date-fns/locale";
@@ -17,25 +18,91 @@ import SourceCard, { sourceKind } from "@/components/blog/SourceCard";
 
 const shareBtn = "w-9 h-9 rounded-lg bg-card border border-border flex items-center justify-center hover:border-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
+function CodeBlock({ className, children }) {
+  const [copied, setCopied] = useState(false);
+  const match = /language-(\w+)/.exec(className || "");
+  const codeLang = match ? match[1] : "";
+  const codeString = String(children).replace(/\n$/, "");
+
+  const onCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(codeString);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {}
+  };
+
+  if (!match) {
+    return <code className="bg-card text-primary px-1.5 py-0.5 rounded text-sm font-mono">{children}</code>;
+  }
+
+  return (
+    <div className="relative group my-6 rounded-xl border border-border bg-card/90 overflow-hidden shadow-sm">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-background/70 text-xs text-muted-foreground font-mono">
+        <span className="uppercase tracking-wider font-semibold text-primary/80">{codeLang || "code"}</span>
+        <button
+          type="button"
+          onClick={onCopy}
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+          aria-label="Copy code"
+        >
+          {copied ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-primary" />
+              <span className="text-primary font-medium">Copied!</span>
+            </>
+          ) : (
+            <>
+              <Copy className="w-3.5 h-3.5" />
+              <span>Copy</span>
+            </>
+          )}
+        </button>
+      </div>
+      <div className="p-4 overflow-x-auto font-mono text-sm leading-relaxed text-foreground/90">
+        <pre className="!my-0 !bg-transparent !p-0">
+          <code>{children}</code>
+        </pre>
+      </div>
+    </div>
+  );
+}
+
 export default function BlogPost() {
   const navigate = useNavigate();
+  const { slug } = useParams();
   const [searchParams] = useSearchParams();
   const postId = searchParams.get("id");
+  const identifier = slug || postId;
   const { lang, t } = useLang();
   const dateLocale = lang === "fr" ? { locale: frLocale } : undefined;
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        setScrollProgress((window.scrollY / totalHeight) * 100);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const { data: post, isLoading, error } = useQuery({
-    queryKey: ["blogPost", postId],
+    queryKey: ["blogPost", identifier],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('blog_posts')
-        .select('*')
-        .eq('id', postId)
-        .single();
+      let query = supabase.from('blog_posts').select('*');
+      if (slug) {
+        query = query.eq('slug', slug);
+      } else {
+        query = query.eq('id', postId);
+      }
+      const { data, error } = await query.single();
       if (error) throw error;
       return data;
     },
-    enabled: !!postId,
+    enabled: !!identifier,
   });
 
   const shareUrl = window.location.href;
@@ -110,12 +177,19 @@ export default function BlogPost() {
     dateModified: post.updated_at || post.published_date,
     keywords: (post.tags || []).join(", "),
     articleSection: post.category,
-    mainEntityOfPage: `${SITE_URL}/blogpost?id=${post.id}`,
+    mainEntityOfPage: post.slug ? `${SITE_URL}/blog/${post.slug}` : `${SITE_URL}/blogpost?id=${post.id}`,
     author: { "@type": "Person", name: "Albert Tchaptchet Womga", url: SITE_URL },
   };
 
   return (
     <div className="pt-24 pb-20">
+      {/* Reading Progress Bar */}
+      <div className="fixed top-0 left-0 right-0 h-1 z-50 bg-transparent">
+        <div
+          className="h-full bg-gradient-to-r from-primary to-brand-blue transition-all duration-150"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
       <Seo
         title={text.title}
         description={text.excerpt}
@@ -291,18 +365,13 @@ export default function BlogPost() {
                 />
               ),
               table: ({ children }) => (
-                <div className="overflow-x-auto mb-6">
-                  <table className="w-full text-sm">{children}</table>
+                <div className="overflow-x-auto my-6 rounded-xl border border-border">
+                  <table className="w-full text-sm divide-y divide-border text-foreground">{children}</table>
                 </div>
               ),
-              code: ({ className, children }) =>
-                /language-/.test(className || "") ? (
-                  <code className="block bg-card text-foreground/80 p-4 rounded-lg overflow-x-auto mb-4">
-                    {children}
-                  </code>
-                ) : (
-                  <code className="bg-card text-primary px-1.5 py-0.5 rounded text-sm">{children}</code>
-                ),
+              th: ({ children }) => <th className="px-4 py-3 font-semibold text-left bg-muted/40 text-foreground">{children}</th>,
+              td: ({ children }) => <td className="px-4 py-3 border-t border-border/50 text-muted-foreground">{children}</td>,
+              code: CodeBlock,
               blockquote: ({ children }) => (
                 <blockquote className="border-l-4 border-primary pl-4 italic text-muted-foreground my-4">
                   {children}

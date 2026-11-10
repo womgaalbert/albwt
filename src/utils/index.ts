@@ -1,3 +1,4 @@
 export function createPageUrl(pageName: string) {
-    return '/' + pageName.replace(/ /g, '-');
+    if (pageName === "Home" || pageName.toLowerCase() === "home") return '/';
+    return '/' + pageName.toLowerCase().replace(/ /g, '-');
 }

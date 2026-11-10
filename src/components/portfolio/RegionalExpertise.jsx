@@ -18,10 +18,10 @@ export default function RegionalExpertise() {
           <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: "hsl(var(--primary))" }}>
             {t.regional.badge}
           </span>
-          <h2 className="text-2xl md:text-3xl font-black mt-2 text-foreground">
+          <h2 className="text-2xl md:text-3xl font-black mt-2 text-white">
             {t.regional.title}
           </h2>
-          <p className="text-muted-foreground mt-3 max-w-lg mx-auto text-sm">
+          <p className="text-footer-foreground/80 mt-3 max-w-lg mx-auto text-sm">
             {t.regional.subtitle}
           </p>
         </motion.div>

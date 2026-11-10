@@ -7,6 +7,7 @@ import ImageLightbox from "./ImageLightbox";
 import MembersGate from "./MembersGate";
 
 const PRIVATE_BUCKET = "private-media";
+const GATED_PLACEHOLDER = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60' fill='%23101b33'%3E%3Crect width='100' height='60' fill='%230f172a'/%3E%3C/svg%3E";
 
 function resolveText(value, lang) {
   if (!value) return "";
@@ -70,7 +71,8 @@ export default function InkImage({
     return () => { active = false; };
   }, [access, isAuthenticated, storagePath]);
 
-  const displaySrc = signedUrl || src;
+  // If gated with storagePath, do not leak or load any raw media until authenticated
+  const displaySrc = gated && storagePath ? GATED_PLACEHOLDER : (signedUrl || src);
   if (!displaySrc) return null;
 
   const imgProps = {

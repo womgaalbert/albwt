@@ -31,13 +31,19 @@ export default function InteractiveDataViz() {
     generateNodes();
   }, []);
 
-  // Mouse tracking
-  const handleMouseMove = (e) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    mouseX.set((e.clientX - rect.left) / rect.width);
-    mouseY.set((e.clientY - rect.top) / rect.height);
-  };
+  // Mouse tracking on window so pointer-events-none on the container doesn't block it
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        mouseX.set((e.clientX - rect.left) / rect.width);
+        mouseY.set((e.clientY - rect.top) / rect.height);
+      }
+    };
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
 
   // Scroll-based animation
   useEffect(() => {
@@ -55,7 +61,6 @@ export default function InteractiveDataViz() {
   return (
     <div
       ref={containerRef}
-      onMouseMove={handleMouseMove}
       className="absolute inset-0 pointer-events-none overflow-hidden"
       style={{ transition: "transform 0.1s ease-out" }}
     >

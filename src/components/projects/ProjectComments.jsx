@@ -9,7 +9,7 @@ export default function ProjectComments({ projectSlug, accentColor }) {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [form, setForm] = useState({ author_name: "", content: "" });
+  const [form, setForm] = useState({ author_name: "", content: "", website: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
 
@@ -21,9 +21,10 @@ export default function ProjectComments({ projectSlug, accentColor }) {
         .from('project_comments')
         .select('*')
         .eq('project_slug', projectSlug)
-        .order('created_at', { ascending: false });
+        .order('created_at', { ascending: false })
+        .limit(50);
       if (queryError) throw queryError;
-      setComments(data);
+      setComments(data || []);
     } catch (err) {
       setError("load");
       setComments([]);
@@ -41,15 +42,29 @@ export default function ProjectComments({ projectSlug, accentColor }) {
     setSubmitting(true);
     setSubmitError(null);
     try {
-      const { error: insertError } = await supabase
-        .from('project_comments')
-        .insert({
+      // 1. Preferred path: through Edge Function with honeypot & rate-limiting
+      const { error: fnError } = await supabase.functions.invoke("submit-comment", {
+        body: {
           project_slug: projectSlug,
           author_name: form.author_name.trim(),
           content: form.content.trim(),
-        });
-      if (insertError) throw insertError;
-      setForm({ author_name: "", content: "" });
+          website: form.website, // honeypot
+        },
+      });
+
+      if (fnError) {
+        // Fallback for environments where Edge Function is not yet deployed
+        const { error: insertError } = await supabase
+          .from('project_comments')
+          .insert({
+            project_slug: projectSlug,
+            author_name: form.author_name.trim(),
+            content: form.content.trim(),
+          });
+        if (insertError) throw insertError;
+      }
+
+      setForm({ author_name: "", content: "", website: "" });
       await loadComments();
     } catch (err) {
       setSubmitError("post");
@@ -71,6 +86,17 @@ export default function ProjectComments({ projectSlug, accentColor }) {
 
       {/* Comment form */}
       <form onSubmit={handleSubmit} className="mb-5 space-y-3">
+        {/* Honeypot — invisible to humans */}
+        <input
+          type="text"
+          name="website"
+          value={form.website}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          onChange={e => setForm({ ...form, website: e.target.value })}
+          className="absolute -left-[9999px] w-px h-px opacity-0"
+        />
         <label htmlFor={`comment-name-${projectSlug}`} className="sr-only">{t.projects.commentName}</label>
         <input
           id={`comment-name-${projectSlug}`}

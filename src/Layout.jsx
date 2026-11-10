@@ -61,7 +61,12 @@ export default function Layout({ children, currentPageName }) {
               <Link
                 key={link.page}
                 to={createPageUrl(link.page)}
-                className={`nav-link text-sm font-medium ${currentPageName === link.page ? "active" : "text-muted-foreground"}`}
+                title={link.page === "Sandbox" ? "Interactive AI Lab · Multi-Agent Architecture & Live Repo Analyzer" : undefined}
+                className={`nav-link text-sm font-medium px-3 py-1.5 rounded-full transition-all ${
+                  currentPageName === link.page
+                    ? "bg-primary/10 text-primary font-semibold shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
               >
                 {link.label}
               </Link>
@@ -71,7 +76,7 @@ export default function Layout({ children, currentPageName }) {
             <Link
               to={createPageUrl("Booking")}
               onClick={() => trackEvent("cta_click", { source: "nav" })}
-              className="btn-primary px-5 py-2 rounded-full text-sm font-semibold text-white"
+              className="btn-primary px-5 py-2 rounded-full text-sm font-semibold text-white whitespace-nowrap"
             >
               {t.nav.booking}
             </Link>
@@ -113,7 +118,7 @@ export default function Layout({ children, currentPageName }) {
                 setMenuOpen(false);
                 trackEvent("cta_click", { source: "nav" });
               }}
-              className="btn-primary px-5 py-2.5 rounded-full text-sm font-semibold text-white text-center"
+              className="btn-primary px-5 py-2.5 rounded-full text-sm font-semibold text-white text-center whitespace-nowrap"
             >
               {t.nav.booking}
             </Link>
@@ -132,9 +137,9 @@ export default function Layout({ children, currentPageName }) {
             <span className="font-bold text-footer-foreground">Albert Womga</span>
             <span className="text-footer-foreground/60 text-sm ml-2">— {t.footer.tagline}</span>
           </div>
-          <div className="flex gap-6 text-sm text-footer-foreground/60">
+          <div className="flex flex-wrap gap-4 md:gap-6 text-sm text-footer-foreground/60">
             {navLinks.map((link) => (
-              <Link key={link.page} to={createPageUrl(link.page)} className="hover:text-primary transition-colors" style={{color: "inherit"}}>
+              <Link key={link.page} to={createPageUrl(link.page)} className="hover:text-primary transition-colors whitespace-nowrap" style={{color: "inherit"}}>
                 {link.label}
               </Link>
             ))}

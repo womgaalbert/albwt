@@ -7,9 +7,9 @@ import { format } from "date-fns";
 import { fr as frLocale } from "date-fns/locale";
 import { supabase } from "@/lib/supabase";
 import { useLang } from "@/lib/LanguageContext";
-import InkImage from "@/components/media/InkImage";
+import BlogMotionMedia from "@/components/media/BlogMotionMedia";
 import Seo from "@/components/Seo";
-import { blogCoverSrc, blogCategoryLabel, localizePost, BLOG_CATEGORY_DB_VALUES as categoryDbValues } from "@/lib/blog";
+import { blogCategoryLabel, localizePost, BLOG_CATEGORY_DB_VALUES as categoryDbValues } from "@/lib/blog";
 
 const categoryKeys = Object.keys(categoryDbValues);
 
@@ -124,18 +124,15 @@ export default function Blog() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: i * 0.05 }}
               >
-                <Link to={`/BlogPost?id=${post.id}`} className="block h-full rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                <Link to={post.slug ? `/blog/${post.slug}` : `/BlogPost?id=${post.id}`} className="block h-full rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                   <div className="ink-reveal card-hover bg-card border border-border rounded-2xl overflow-hidden h-full flex flex-col">
-                    {post.cover_image && (
-                      <InkImage
-                        src={blogCoverSrc(post)}
-                        alt={text.coverAlt}
-                        width={800}
-                        height={400}
-                        priority={i < 3}
-                        className="h-52 bg-background"
-                      />
-                    )}
+                    <BlogMotionMedia
+                      post={post}
+                      title={text.title}
+                      alt={text.coverAlt}
+                      priority={i < 3}
+                      className="h-52 w-full"
+                    />
                     <div className="p-6 flex flex-col flex-1">
                       <div className="flex items-center gap-2 mb-3">
                         <span

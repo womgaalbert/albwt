@@ -53,18 +53,22 @@ import __Layout from './Layout.jsx';
 
 // Home is eager (landing page); the rest are split into their own chunks.
 const About = lazy(() => import('./pages/About'));
+const Blog = lazy(() => import('./pages/Blog'));
 const Booking = lazy(() => import('./pages/Booking'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Projects = lazy(() => import('./pages/Projects'));
+const Sandbox = lazy(() => import('./pages/Sandbox'));
 const Services = lazy(() => import('./pages/Services'));
 
 
 export const PAGES = {
     "About": About,
+    "Blog": Blog,
     "Booking": Booking,
     "Contact": Contact,
     "Home": Home,
     "Projects": Projects,
+    "Sandbox": Sandbox,
     "Services": Services,
 }
 

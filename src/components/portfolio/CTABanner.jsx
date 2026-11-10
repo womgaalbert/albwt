@@ -8,7 +8,7 @@ import { trackEvent } from "@/lib/analytics";
 export default function CTABanner() {
   const { t } = useLang();
   return (
-    <section className="py-20 bg-footer">
+    <section className="pt-8 pb-20 bg-footer">
       <div className="max-w-4xl mx-auto px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -28,13 +28,13 @@ export default function CTABanner() {
                 <Link
                   to={createPageUrl("Booking")}
                   onClick={() => trackEvent("cta_click", { source: "cta_banner" })}
-                  className="btn-primary flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-white"
+                  className="btn-primary flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-white whitespace-nowrap"
                 >
                   <CalendarDays className="w-4 h-4" /> {t.cta.bookCall} <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   to={createPageUrl("Contact")}
-                  className="flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-foreground/80 border border-border hover:border-primary hover:text-primary transition-colors"
+                  className="flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-foreground/80 border border-border hover:border-primary hover:text-primary transition-colors whitespace-nowrap"
                 >
                   <Mail className="w-4 h-4" /> {t.cta.getInTouch}
                 </Link>

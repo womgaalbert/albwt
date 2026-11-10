@@ -82,9 +82,6 @@ export default function Seo({ title, description, image, type = "website", jsonL
     upsertMeta("name", "twitter:description", desc);
     upsertMeta("name", "twitter:image", img);
     upsertLink("canonical", url);
-    upsertLink("alternate", url, "en");
-    upsertLink("alternate", url, "fr");
-    upsertLink("alternate", url, "x-default");
   }, [fullTitle, desc, type, url, img, lang, publishedTime]);
 
   useEffect(() => {

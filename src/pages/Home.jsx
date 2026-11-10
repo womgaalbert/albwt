@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronDown, BarChart2, Brain, Database, TrendingUp, Cpu } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import StatsBar from "@/components/portfolio/StatsBar";
 import ServicesPreview from "@/components/portfolio/ServicesPreview";
 import FeaturedProjects from "@/components/portfolio/FeaturedProjects";
+import HomeBlogPreview from "@/components/portfolio/HomeBlogPreview";
 import WhyChooseMe from "@/components/portfolio/WhyChooseMe";
 import CTABanner from "@/components/portfolio/CTABanner";
 import Testimonials from "@/components/portfolio/Testimonials";
@@ -93,45 +94,35 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Visual right side */}
+          {/* Visual right side: Looping Hero Video */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="hidden md:flex justify-center items-center"
+            className="flex justify-center items-center"
           >
-            <div className="relative w-80 h-80">
-              {/* Glow behind the visual */}
-              <div className="absolute inset-8 rounded-full blur-3xl" style={{background:"radial-gradient(circle, hsl(var(--primary) / 0.25), transparent 70%)"}} />
-              <div className="absolute inset-0 rounded-full border border-primary/20 animate-spin" style={{animationDuration:"20s", boxShadow:"0 0 24px hsl(var(--primary) / 0.15) inset"}} />
-              <div className="absolute inset-6 rounded-full border border-blue-500/15 animate-spin" style={{animationDuration:"15s", animationDirection:"reverse"}} />
-              <div className="absolute inset-12 rounded-full border border-primary/10" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-card border border-primary/30 rounded-2xl p-8 shadow-2xl" style={{boxShadow:"0 0 60px hsl(var(--primary) / 0.2)"}}>
-                  <Brain className="w-20 h-20" style={{color:"hsl(var(--primary))"}} />
-                </div>
+            <div className="relative w-full max-w-lg aspect-video rounded-3xl overflow-hidden border border-primary/30 shadow-2xl bg-card/60 backdrop-blur-md group">
+              {/* Glow backdrop */}
+              <div
+                className="absolute -inset-4 rounded-3xl blur-2xl opacity-40 -z-10"
+                style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.5), transparent 70%)" }}
+              />
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                poster="/images/hero-poster.jpg"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              >
+                <source src="/videos/hero-loop.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 pointer-events-none rounded-3xl ring-1 ring-inset ring-white/15" />
+              {/* Badge overlay */}
+              <div className="absolute bottom-3 right-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-xs font-mono text-white/90 shadow-lg">
+                <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
+                <span>18s · Production Loop</span>
               </div>
-              {/* Orbiting icons */}
-              {[
-                { Icon: BarChart2, angle: 0 },
-                { Icon: Database, angle: 90 },
-                { Icon: TrendingUp, angle: 180 },
-                { Icon: Cpu, angle: 270 },
-              ].map(({ Icon, angle }, i) => {
-                const rad = (angle * Math.PI) / 180;
-                const r = 130;
-                const x = 160 + r * Math.cos(rad) - 20;
-                const y = 160 + r * Math.sin(rad) - 20;
-                return (
-                  <div
-                    key={i}
-                    className="absolute w-10 h-10 bg-card border border-border rounded-xl flex items-center justify-center"
-                    style={{ left: x, top: y }}
-                  >
-                    <Icon className="w-5 h-5" style={{color:"hsl(var(--primary))"}} />
-                  </div>
-                );
-              })}
             </div>
           </motion.div>
         </div>
@@ -147,6 +138,7 @@ export default function Home() {
       <RegionalExpertise />
       <ServicesPreview />
       <FeaturedProjects />
+      <HomeBlogPreview />
       <WhyChooseMe />
       <Testimonials />
       <GoogleReviews />

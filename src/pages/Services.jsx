@@ -56,14 +56,28 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="card-hover bg-card border border-border rounded-2xl p-6">
+                className="card-hover bg-card border border-border rounded-2xl p-6 flex flex-col">
 
-                <div className="w-12 h-12 rounded-xl mb-5 flex items-center justify-center" style={{ background: `color-mix(in srgb, ${color} 8%, transparent)` }}>
-                  <Icon className="w-6 h-6" style={{ color }} />
+                <div className="flex items-center justify-between mb-5">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: `color-mix(in srgb, ${color} 8%, transparent)` }}>
+                    <Icon className="w-6 h-6" style={{ color }} />
+                  </div>
+                  {s.price && (
+                    <span
+                      className="text-xs font-mono font-semibold px-3 py-1 rounded-full border shadow-sm"
+                      style={{
+                        background: `color-mix(in srgb, ${color} 10%, transparent)`,
+                        color,
+                        borderColor: `color-mix(in srgb, ${color} 25%, transparent)`,
+                      }}
+                    >
+                      {s.price}
+                    </span>
+                  )}
                 </div>
                 <h3 className="text-foreground font-bold text-lg mb-3">{s.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-5">{s.desc}</p>
-                <ul className="space-y-2">
+                <ul className="space-y-2 mb-6 flex-1">
                   {s.features.map((f) => (
                     <li key={f} className="flex items-start gap-2 text-sm text-muted-foreground">
                       <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color }} />
@@ -71,6 +85,19 @@ export default function Services() {
                     </li>
                   ))}
                 </ul>
+                {s.callDeliverable && (
+                  <div
+                    className="p-3 rounded-xl border text-xs font-medium mt-auto"
+                    style={{
+                      background: `color-mix(in srgb, ${color} 6%, transparent)`,
+                      borderColor: `color-mix(in srgb, ${color} 20%, transparent)`,
+                      color: "hsl(var(--foreground))",
+                    }}
+                  >
+                    <span className="font-semibold" style={{ color }}>{s.callDeliverable.split(":")[0]}:</span>
+                    <span className="text-muted-foreground ml-1">{s.callDeliverable.split(":").slice(1).join(":")}</span>
+                  </div>
+                )}
               </motion.div>
             );
           })}
