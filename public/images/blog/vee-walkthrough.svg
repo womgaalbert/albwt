@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400" role="img" aria-labelledby="t"><title id="t">VEE walkthrough: a raw interval stream with six problems, the validate-estimate-edit decisions, and the corrected stream with audit stamps</title>
+  <defs>
+    <radialGradient id="g1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ef4444" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#10b981" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="400" fill="#101b33"/>
+  <rect width="800" height="400" fill="url(#grid)"/>
+  <ellipse cx="316" cy="130" rx="240" ry="170" fill="url(#g1)"/>
+  <ellipse cx="316" cy="222" rx="240" ry="170" fill="url(#g2)"/>
+  <ellipse cx="316" cy="314" rx="240" ry="170" fill="url(#g3)"/>
+  <text x="40" y="46" font-family="Consolas, ui-monospace, monospace" font-size="10" letter-spacing="2" fill="#64748b">VEE WALKTHROUGH — METER MTR-004712 · 2025-11-02 (DST FALL-BACK)</text>
+
+  <rect x="28" y="84" width="170" height="170" rx="10" fill="#1a2947" stroke="#64748b" stroke-width="1.5"/>
+  <text x="44" y="106" font-family="Consolas, ui-monospace, monospace" font-size="10" font-weight="bold" fill="#e2e8f0">RAW STREAM</text>
+  <g font-family="Consolas, ui-monospace, monospace" font-size="8.5" fill="#cbd5e1">
+    <text x="44" y="126">01:00 EDT · 0.88</text><text x="148" y="126" fill="#f87171">[!] dup</text>
+    <text x="44" y="141">01:00 EST · 0.83</text><text x="148" y="141" fill="#f87171">[!] dup</text>
+    <text x="44" y="156">04:00 · 0.62</text>
+    <text x="44" y="171">06:00 · —</text><text x="148" y="171" fill="#f87171">[!] missing</text>
+    <text x="44" y="186">09:00 · 0.00</text><text x="148" y="186" fill="#f87171">[!] zero</text>
+    <text x="44" y="201">13:00 · −1.24</text><text x="148" y="201" fill="#f87171">[!] neg</text>
+    <text x="44" y="216">17:00 · 42.10</text><text x="148" y="216" fill="#f87171">[!] spike</text>
+  </g>
+
+  <line x1="198" y1="126" x2="244" y2="112" stroke="#64748b" stroke-width="1.5"/>
+  <polygon points="246,110 237,110 240,118" fill="#64748b"/>
+
+  <rect x="246" y="84" width="140" height="52" rx="8" fill="#1a2947" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="316" y="106" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="11" font-weight="bold" fill="#f87171">1 · VALIDATE</text>
+  <text x="316" y="122" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="8" fill="#94a3b8">flag what can't be trusted</text>
+  <text x="316" y="148" text-anchor="middle" font-family="Consolas, ui-monospace, monospace" font-size="8" fill="#94a3b8">dup 01:00 · missing 06:00</text>
+  <text x="316" y="160" text-anchor="middle" font-family="Consolas, ui-monospace, monospace" font-size="8" fill="#94a3b8">zero 09:00 · negative 13:00 · spike 17:00</text>
+
+  <line x1="316" y1="136" x2="316" y2="174" stroke="#64748b" stroke-width="1.5"/>
+  <polygon points="316,176 312,169 320,169" fill="#64748b"/>
+
+  <rect x="246" y="176" width="140" height="52" rx="8" fill="#1a2947" stroke="#10b981" stroke-width="1.5"/>
+  <text x="316" y="198" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="11" font-weight="bold" fill="#34d399">2 · ESTIMATE</text>
+  <text x="316" y="214" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="8" fill="#94a3b8">profile · neighbours · weather</text>
+  <text x="316" y="240" text-anchor="middle" font-family="Consolas, ui-monospace, monospace" font-size="8" fill="#94a3b8">06:00 → 0.91 · 09:00 → 1.02</text>
+  <text x="316" y="252" text-anchor="middle" font-family="Consolas, ui-monospace, monospace" font-size="8" fill="#94a3b8">(same-hour, same-day profile)</text>
+
+  <line x1="316" y1="228" x2="316" y2="266" stroke="#64748b" stroke-width="1.5"/>
+  <polygon points="316,268 312,261 320,261" fill="#64748b"/>
+
+  <rect x="246" y="268" width="140" height="52" rx="8" fill="#1a2947" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="316" y="290" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="11" font-weight="bold" fill="#fbbf24">3 · EDIT</text>
+  <text x="316" y="306" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="8" fill="#94a3b8">merge · cap · audit stamps</text>
+  <text x="316" y="332" text-anchor="middle" font-family="Consolas, ui-monospace, monospace" font-size="8" fill="#94a3b8">01:00 → 1.71 (merge)</text>
+  <text x="316" y="344" text-anchor="middle" font-family="Consolas, ui-monospace, monospace" font-size="8" fill="#94a3b8">17:00 → 3.12 (cap)</text>
+
+  <line x1="386" y1="294" x2="448" y2="169" stroke="#64748b" stroke-width="1.5"/>
+  <polygon points="450,167 440,168 444,176" fill="#64748b"/>
+
+  <rect x="450" y="84" width="180" height="170" rx="10" fill="#1a2947" stroke="#10b981" stroke-width="1.5"/>
+  <text x="466" y="106" font-family="Consolas, ui-monospace, monospace" font-size="10" font-weight="bold" fill="#34d399">CORRECTED + AUDIT</text>
+  <g font-family="Consolas, ui-monospace, monospace" font-size="8.5" fill="#cbd5e1">
+    <text x="466" y="126">01:00 · 1.71 (merged)</text><text x="560" y="126" fill="#34d399">✓</text>
+    <text x="466" y="141">04:00 · 0.62</text><text x="560" y="141" fill="#34d399">✓</text>
+    <text x="466" y="156">06:00 · 0.91 (est)</text><text x="560" y="156" fill="#34d399">✓</text>
+    <text x="466" y="171">09:00 · 1.02 (est)</text><text x="560" y="171" fill="#34d399">✓</text>
+    <text x="466" y="186">13:00 · 0.00</text><text x="560" y="186" fill="#34d399">✓</text>
+    <text x="466" y="201">17:00 · 3.12 (cap)</text><text x="560" y="201" fill="#34d399">✓</text>
+  </g>
+  <text x="540" y="240" text-anchor="middle" font-family="Segoe UI, system-ui, sans-serif" font-size="8" fill="#64748b">every change traceable</text>
+
+  <rect x="28" y="366" width="602" height="28" rx="8" fill="#0f1a30" stroke="#0066ff" stroke-opacity="0.5" stroke-width="1"/>
+  <text x="329" y="384" text-anchor="middle" font-family="Consolas, ui-monospace, monospace" font-size="9.5" fill="#7dd3fc">MTR-004712 | 2025-11-02T06:00 | ESTIMATED (profile) | rule v4.2 | 0.91 kWh</text>
+</svg>

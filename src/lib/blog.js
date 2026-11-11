@@ -46,6 +46,10 @@ export const BLOG_LOOPS = {
     loop: "/videos/blog/nlp-document-classifier-distilbert-loop.mp4",
     poster: "/images/blog/nlp-document-classifier-distilbert-poster.webp",
   },
+  "smart-metering-etl-vee-ontario": {
+    loop: "/videos/blog/smart-metering-etl-vee-ontario-loop.mp4",
+    poster: "/images/blog/smart-metering-etl-vee-ontario-poster.webp",
+  },
 };
 
 /** The motion loop attached to a post, if any. */
